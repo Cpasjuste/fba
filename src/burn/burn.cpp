@@ -5,11 +5,13 @@
 #include "burn_sound.h"
 #include "driverlist.h"
 
+#ifndef __LIBRETRO__
 // filler function, used if the application is not printing debug messages
 static INT32 __cdecl BurnbprintfFiller(INT32, TCHAR* , ...) { return 0; }
 // pointer to burner printing function
 #ifndef bprintf
 INT32 (__cdecl *bprintf)(INT32 nStatus, TCHAR* szFormat, ...) = BurnbprintfFiller;
+#endif
 #endif
 
 INT32 nBurnVer = BURN_VERSION;		// Version number of the library
@@ -187,6 +189,7 @@ extern "C" TCHAR* BurnDrvGetText(UINT32 i)
 
 	if (!(i & DRV_ASCIIONLY)) {
 		switch (i & 0xFF) {
+#ifndef __LIBRETRO__
 			case DRV_FULLNAME:
 				pszStringW = pDriver[nBurnDrvActive]->szFullNameW;
 				
@@ -226,6 +229,7 @@ extern "C" TCHAR* BurnDrvGetText(UINT32 i)
 
 				}
 				break;
+#endif // __LIBRETRO__
 			case DRV_COMMENT:
 				pszStringW = pDriver[nBurnDrvActive]->szCommentW;
 				break;
@@ -616,8 +620,9 @@ extern "C" INT32 BurnDrvInit()
 
 	CheatInit();
 	HiscoreInit();
-	BurnStateInit();	
+	BurnStateInit();
 	BurnInitMemoryManager();
+	BurnRandomInit();
 
 	nReturnValue = pDriver[nBurnDrvActive]->Init();	// Forward to drivers function
 
@@ -849,6 +854,33 @@ INT32 BurnAreaScan(INT32 nAction, INT32* pnMin)
 }
 
 // ----------------------------------------------------------------------------
+// State-able random generator, based on early BSD LCG rand
+static UINT64 nBurnRandSeed = 0;
+
+UINT16 BurnRandom()
+{
+	if (!nBurnRandSeed) { // for the rare rollover-to-0 occurance
+		nBurnRandSeed = 0x2d1e0f;
+	}
+
+	nBurnRandSeed = nBurnRandSeed * 1103515245 + 12345;
+
+	return (UINT32)(nBurnRandSeed / 65536) % 0x10000;
+}
+
+void BurnRandomScan(INT32 nAction)
+{
+	if (nAction & ACB_DRIVER_DATA) {
+		SCAN_VAR(nBurnRandSeed);
+	}
+}
+
+void BurnRandomInit()
+{ // for states & input recordings - init before emulation starts
+	nBurnRandSeed = time(NULL);
+}
+
+// ----------------------------------------------------------------------------
 // Wrappers for MAME-specific function calls
 
 #include "driver.h"
@@ -886,7 +918,7 @@ static BurnPostloadFunction BurnPostload[8];
 static void BurnStateRegister(const char* module, INT32 instance, const char* name, void* val, UINT32 size)
 {
 	// Allocate new node
-	BurnStateEntry* pNewEntry = (BurnStateEntry*)malloc(sizeof(BurnStateEntry));
+	BurnStateEntry* pNewEntry = (BurnStateEntry*)BurnMalloc(sizeof(BurnStateEntry));
 	if (pNewEntry == NULL) {
 		return;
 	}
@@ -914,9 +946,7 @@ void BurnStateExit()
 
 		do {
 			pNextEntry = pCurrentEntry->pNext;
-			if (pCurrentEntry) {
-				free(pCurrentEntry);
-			}
+			BurnFree(pCurrentEntry);
 		} while ((pCurrentEntry = pNextEntry) != 0);
 	}
 

@@ -1,4 +1,5 @@
-// FB Alpha Asterix drier module
+// FB Alpha Asterix driver module
+// Based on MAME driver by Olivier Galibert
 
 #include "tiles_generic.h"
 #include "m68000_intf.h"
@@ -57,6 +58,7 @@ static struct BurnInputInfo AsterixInputList[] = {
 	{"P1 Button 2",		BIT_DIGITAL,	DrvJoy1 + 5,	"p1 fire 2"	},
 
 	{"P2 Coin",		BIT_DIGITAL,	DrvJoy1 + 9,	"p2 coin"	},
+	{"P2 Start",		BIT_DIGITAL,	DrvJoy2 + 7,	"p2 start"	},
 	{"P2 Up",		BIT_DIGITAL,	DrvJoy2 + 2,	"p2 up"		},
 	{"P2 Down",		BIT_DIGITAL,	DrvJoy2 + 3,	"p2 down"	},
 	{"P2 Left",		BIT_DIGITAL,	DrvJoy2 + 0,	"p2 left"	},
@@ -73,11 +75,11 @@ STDINPUTINFO(Asterix)
 
 static struct BurnDIPInfo AsterixDIPList[]=
 {
-	{0x11, 0xff, 0xff, 0x04, NULL		},
+	{0x12, 0xff, 0xff, 0x04, NULL		},
 
 	{0   , 0xfe, 0   ,    2, "Service Mode"	},
-	{0x11, 0x01, 0x04, 0x04, "Off"		},
-	{0x11, 0x01, 0x04, 0x00, "On"		},
+	{0x12, 0x01, 0x04, 0x04, "Off"		},
+	{0x12, 0x01, 0x04, 0x00, "On"		},
 };
 
 STDDIPINFO(Asterix)
@@ -132,7 +134,7 @@ static void reset_spritebank()
 	spritebanks[3] = (spritebank <<  3) & 0x7000;
 }
 
-static void _fastcall asterix_main_write_word(UINT32 address, UINT16 data)
+static void __fastcall asterix_main_write_word(UINT32 address, UINT16 data)
 {
 //bprintf (0, _T("WW %5.5x, %4.4x\n"), address, data);
 
@@ -184,7 +186,7 @@ static void _fastcall asterix_main_write_word(UINT32 address, UINT16 data)
 	}
 }
 
-static void _fastcall asterix_main_write_byte(UINT32 address, UINT8 data)
+static void __fastcall asterix_main_write_byte(UINT32 address, UINT8 data)
 {
 	if ((address & 0xfff000) == 0x400000) {
 		K056832HalfRamWriteByte(address & 0xfff, data);
@@ -236,7 +238,7 @@ static void _fastcall asterix_main_write_byte(UINT32 address, UINT8 data)
 	}
 }
 
-static UINT16 _fastcall asterix_main_read_word(UINT32 address)
+static UINT16 __fastcall asterix_main_read_word(UINT32 address)
 {
 	if ((address & 0xfffff0) == 0x200000) {
 		return (K053244Read(0, address & 0xe) << 8) | K053244Read(0, (address & 0xe) + 1);
@@ -266,7 +268,7 @@ static UINT16 _fastcall asterix_main_read_word(UINT32 address)
 	return 0;
 }
 
-static UINT8 _fastcall asterix_main_read_byte(UINT32 address)
+static UINT8 __fastcall asterix_main_read_byte(UINT32 address)
 {
 	if ((address & 0xfffff0) == 0x200000) {
 		return K053244Read(0, address & 0xf);

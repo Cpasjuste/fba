@@ -1,4 +1,5 @@
 // FB Alpha Irem M62 system driver
+// Based on MAME driver by smf and David Haywood
 
 #include "tiles_generic.h"
 #include "z80_intf.h"
@@ -1814,8 +1815,8 @@ static INT32 M62MemIndex()
 	
 	M62SpriteRam           = Next; Next += M62SpriteRamSize;
 	M62TileRam             = Next; Next += 0x12000;
-	if (M62CharRamSize)   M62CharRam   = Next; Next += M62CharRamSize;
-	if (M62ScrollRamSize) M62ScrollRam = Next; Next += M62ScrollRamSize;
+	if (M62CharRamSize)   { M62CharRam   = Next; Next += M62CharRamSize; }
+	if (M62ScrollRamSize) { M62ScrollRam = Next; Next += M62ScrollRamSize; }
 	M62Z80Ram              = Next; Next += 0x01000;
 	M62M6803Ram            = Next; Next += 0x00080;
 	pFMBuffer              = (INT16*)Next; Next += nBurnSoundLen * 6 * sizeof(INT16);
@@ -1824,7 +1825,7 @@ static INT32 M62MemIndex()
 
 	M62Tiles               = Next; Next += M62NumTiles * M62BgxTileDim * M62BgyTileDim;
 	M62Sprites             = Next; Next += M62NumSprites * 16 * 16;
-	if (M62NumChars) M62Chars = Next; Next += M62NumChars * M62CharxTileDim * M62CharyTileDim;
+	if (M62NumChars) { M62Chars = Next; Next += M62NumChars * M62CharxTileDim * M62CharyTileDim; }
 	M62Palette             = (UINT32*)Next; Next += M62PaletteEntries * sizeof(UINT32);
 	M62PromData            = Next; Next += M62PromSize;
 
@@ -5156,7 +5157,7 @@ struct BurnDriver BurnDrvSpelunkrj = {
 
 struct BurnDriver BurnDrvSpelunk2 = {
 	"spelunk2", NULL, NULL, "tr606drumkit", "1986",
-	"Spelunker II\0", NULL, "Irem (licensed from Broderbund)", "Irem M62",
+	"Spelunker II - 23 no Kagi (Japan)\0", NULL, "Irem (licensed from Broderbund)", "Irem M62",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 2, HARDWARE_IREM_M62, GBF_PLATFORM, 0,
 	NULL, Spelunk2RomInfo, Spelunk2RomName, M62SampleInfo, M62SampleName, M62InputInfo, Spelunk2DIPInfo,

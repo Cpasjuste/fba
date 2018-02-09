@@ -293,14 +293,13 @@ void BurnYM2612Exit()
 	if (!DebugSnd_YM2612Initted) bprintf(PRINT_ERROR, _T("BurnYM2612Exit called without init\n"));
 #endif
 
+	if (!DebugSnd_YM2612Initted) return;
+
 	YM2612Shutdown();
 
 	BurnTimerExit();
 
-	if (pBuffer) {
-		free(pBuffer);
-		pBuffer = NULL;
-	}
+	BurnFree(pBuffer);
 	
 	nNumChips = 0;
 	bYM2612AddSignal = 0;
@@ -350,7 +349,7 @@ INT32 BurnYM2612Init(INT32 num, INT32 nClockFrequency, FM_IRQHANDLER IRQCallback
 	
 	YM2612Init(num, nClockFrequency, nBurnYM2612SoundRate, &BurnOPNTimerCallback, IRQCallback);
 
-	pBuffer = (INT16*)malloc(4096 * 2 * num * sizeof(INT16));
+	pBuffer = (INT16*)BurnMalloc(4096 * 2 * num * sizeof(INT16));
 	memset(pBuffer, 0, 4096 * 2 * num * sizeof(INT16));
 	
 	nYM2612Position = 0;

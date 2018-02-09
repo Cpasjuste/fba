@@ -1,3 +1,5 @@
+// Based on MAME driver by Chris Moore, Nicola Salmoria
+
 #include "tiles_generic.h"
 #include "z80_intf.h"
 #include "m6800_intf.h"
@@ -1043,7 +1045,7 @@ static struct BurnRomInfo Bublcave11RomDesc[] = {
 	{ "bublcave-19.34",    	0x08000, 0x1ceeb1fa, BRF_GRA },	     	  // 15
 	{ "bublcave-20.35",    	0x08000, 0x64322e24, BRF_GRA },	     	  // 16
 	
-	{ "a71-25.41",         	0x00100, 0x2d0f8545, BRF_GRA },	     	  // 17	PROMs
+	{ "a71-25.41",			0x00100, 0x2d0f8545, BRF_GRA },	     	  // 17	PROMs
 };
 
 STD_ROM_PICK(Bublcave11)
@@ -1072,7 +1074,7 @@ static struct BurnRomInfo Bublcave10RomDesc[] = {
 	{ "bublcave-19.34",     0x08000, 0x1ceeb1fa, BRF_GRA },	     	  // 15
 	{ "bublcave-20.35",     0x08000, 0x64322e24, BRF_GRA },	     	  // 16
 	
-	{ "a71-25.41",          0x00100, 0x2d0f8545, BRF_GRA },	     	  // 17	PROMs
+	{ "a71-25.41",			0x00100, 0x2d0f8545, BRF_GRA },	     	  // 17	PROMs
 };
 
 STD_ROM_PICK(Bublcave10)
@@ -1108,7 +1110,7 @@ static struct BurnRomInfo tokioRomDesc[] = {
 
 	{ "a71-25.ic41",	0x0100, 0x2d0f8545, BRF_GRA },	         // 23 PROMs
 
-	{ "a71-24.ic57",	0x0800, 0x00000000, 6 | BRF_NODUMP },    // 24 Mcu Code
+	{ "a71__24.ic57",	0x0800, 0x0f4b25de, 6 | BRF_PRG},        // 24 Mcu Code
 
 	{ "a71-26.ic19",	0x0117, 0x4e1f119c, 7 | BRF_OPT },       // 25 PLDs
 };
@@ -1146,7 +1148,7 @@ static struct BurnRomInfo tokiooRomDesc[] = {
 
 	{ "a71-25.ic41",	0x0100, 0x2d0f8545, BRF_GRA },	         // 23 PROMs
 
-	{ "a71-24.ic57",	0x0800, 0x00000000, 6 | BRF_NODUMP },    // 24 Mcu Code
+	{ "a71__24.ic57",	0x0800, 0x0f4b25de, 6 | BRF_PRG},        // 24 Mcu Code
 
 	{ "a71-26.ic19",	0x0117, 0x4e1f119c, 7 | BRF_OPT },       // 25 PLDs
 };
@@ -1184,7 +1186,7 @@ static struct BurnRomInfo tokiouRomDesc[] = {
 
 	{ "a71-25.ic41",	0x0100, 0x2d0f8545, BRF_GRA },	         // 23 PROMs
 
-	{ "a71-24.ic57",	0x0800, 0x00000000, 6 | BRF_NODUMP },    // 24 Mcu Code
+	{ "a71__24.ic57",	0x0800, 0x0f4b25de, 6 | BRF_PRG},        // 24 Mcu Code
 
 	{ "a71-26.ic19",	0x0117, 0x4e1f119c, 7 | BRF_OPT },       // 25 PLDs
 };
@@ -1409,7 +1411,7 @@ UINT8 __fastcall BoblboblRead1(UINT16 a)
 		case 0xfe01:
 		case 0xfe02:
 		case 0xfe03: {
-			return rand() & 0xff;
+			return BurnRandom() & 0xff;
 		}
 		
 		case 0xfe80: {
@@ -1823,7 +1825,7 @@ void bublbobl_68705_portB_out(UINT8 *bytevalue)
 		ZetOpen(0);
 
 		/* hack to get random EXTEND letters (who is supposed to do this? 68705? PAL?) */
-		DrvZ80Ram1[0x7c] = (ZetTotalCycles() ^ ZetGetPC(-1)) % 6;
+		DrvZ80Ram1[0x7c] = BurnRandom() % 6;
 
 		ZetSetVector(DrvZ80Ram1[0]);
 		ZetSetIRQLine(0, CPU_IRQSTATUS_AUTO);
@@ -2859,6 +2861,8 @@ static INT32 DrvScan(INT32 nAction, INT32 *pnMin)
 		SCAN_VAR(port4_out);
 		SCAN_VAR(mcu_latch);
 		SCAN_VAR(mcu_address);
+
+		BurnRandomScan(nAction);
 	}
 	
 	if (nAction & ACB_WRITE) {

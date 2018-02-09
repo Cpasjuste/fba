@@ -80,12 +80,12 @@ void BurnYM2413Exit()
 #if defined FBA_DEBUG
 	if (!DebugSnd_YM2413Initted) bprintf(PRINT_ERROR, _T("BurnYM2413Exit called without init\n"));
 #endif
+
+	if (!DebugSnd_YM2413Initted) return;
+
 	YM2413Shutdown();
 
-	if (pBuffer) {
-		free(pBuffer);
-		pBuffer = NULL;
-	}
+	BurnFree(pBuffer);
 	
 	DebugSnd_YM2413Initted = 0;
 }
@@ -120,7 +120,7 @@ INT32 BurnYM2413Init(INT32 nClockFrequency)
 
 	YM2413Init(1, nClockFrequency, nBurnYM2413SoundRate);
 
-	pBuffer = (INT16*)malloc(65536 * 2 * sizeof(INT16));
+	pBuffer = (INT16*)BurnMalloc(65536 * 2 * sizeof(INT16));
 	memset(pBuffer, 0, 65536 * 2 * sizeof(INT16));
 
 	nSampleSize = (UINT32)nBurnYM2413SoundRate * (1 << 16) / nBurnSoundRate;

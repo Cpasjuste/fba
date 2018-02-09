@@ -91,7 +91,7 @@ static struct BurnDIPInfo FormatzDIPList[]=
 	{0x10, 0x01, 0x0c, 0x04, "70000"		},
 	{0x10, 0x01, 0x0c, 0x00, "100000"		},
 
-	{0   , 0xfe, 0   ,    0, "Demo Sounds"		},
+	{0   , 0xfe, 0   ,    2, "Demo Sounds"		},
 	{0x10, 0x01, 0x20, 0x00, "Off"			},
 	{0x10, 0x01, 0x20, 0x20, "On"			},
 
@@ -99,7 +99,7 @@ static struct BurnDIPInfo FormatzDIPList[]=
 	{0x10, 0x01, 0x40, 0x40, "Upright"		},
 	{0x10, 0x01, 0x40, 0x00, "Cocktail"		},
 
-	{0   , 0xfe, 0   ,    2, "Coinage"		},
+	{0   , 0xfe, 0   ,    8, "Coinage"		},
 	{0x11, 0x01, 0x07, 0x07, "5 Coins 1 Credits"	},
 	{0x11, 0x01, 0x07, 0x05, "4 Coins 1 Credits"	},
 	{0x11, 0x01, 0x07, 0x03, "3 Coins 1 Credits"	},
@@ -109,7 +109,7 @@ static struct BurnDIPInfo FormatzDIPList[]=
 	{0x11, 0x01, 0x07, 0x04, "1 Coin  3 Credits"	},
 	{0x11, 0x01, 0x07, 0x06, "1 Coin  4 Credits"	},
 
-	{0   , 0xfe, 0   ,    8, "Difficulty"		},
+	{0   , 0xfe, 0   ,    4, "Difficulty"		},
 	{0x11, 0x01, 0x18, 0x00, "Easy"			},
 	{0x11, 0x01, 0x18, 0x08, "Normal"		},
 	{0x11, 0x01, 0x18, 0x10, "Medium"		},
@@ -593,6 +593,7 @@ static INT32 DrvFrame()
 	INT32 nInterleave = 10;
 	INT32 nCyclesTotal[2] = { 1250000 / 60, 1250000 / 2 / 60 };
 	INT32 nCyclesDone[2] = { 0, 0 };
+	INT32 nSoundBufferPos = 0;
 
 	for (INT32 i = 0; i < nInterleave; i++)
 	{
@@ -615,10 +616,21 @@ static INT32 DrvFrame()
 		nCyclesDone[1] += M6809Run(nCyclesTotal[1] / nInterleave);
 		if (i == (nInterleave - 1)) M6809SetIRQLine(0, CPU_IRQSTATUS_AUTO);
 		M6809Close();
+
+		if (pBurnSoundOut) {
+			INT32 nSegmentLength = nBurnSoundLen / nInterleave;
+			INT16* pSoundBuf = pBurnSoundOut + (nSoundBufferPos << 1);
+			AY8910Render(&pAY8910Buffer[0], pSoundBuf, nSegmentLength, 0);
+			nSoundBufferPos += nSegmentLength;
+		}
 	}
 
 	if (pBurnSoundOut) {
-		AY8910Render(&pAY8910Buffer[0], pBurnSoundOut, nBurnSoundLen, 0);
+		INT32 nSegmentLength = nBurnSoundLen - nSoundBufferPos;
+		INT16* pSoundBuf = pBurnSoundOut + (nSoundBufferPos << 1);
+		if (nSegmentLength) {
+			AY8910Render(&pAY8910Buffer[0], pSoundBuf, nSegmentLength, 0);
+		}
 	}
 
 	if (pBurnDraw) {

@@ -6,7 +6,7 @@
 INT32 nM6809Count = 0;
 static INT32 nActiveCPU = 0;
 
-static M6809Ext *m6809CPUContext;
+static M6809Ext *m6809CPUContext = NULL;
 
 static INT32 nM6809CyclesDone[MAX_CPU];
 INT32 nM6809CyclesTotal;
@@ -38,6 +38,16 @@ void M6809Reset()
 #endif
 
 	m6809_reset();
+}
+
+UINT16 M6809GetPC()
+{
+#if defined FBA_DEBUG
+	if (!DebugCPU_M6809Initted) bprintf(PRINT_ERROR, _T("M6809GetPC called without init\n"));
+	if (nActiveCPU == -1) bprintf(PRINT_ERROR, _T("M6809GetPC called when no CPU open\n"));
+#endif
+
+	return m6809_get_pc();
 }
 
 void M6809NewFrame()
@@ -178,6 +188,10 @@ void M6809SetIRQLine(INT32 vector, INT32 status)
 	
 	if (status == CPU_IRQSTATUS_ACK) {
 		m6809_set_irq_line(vector, 1);
+	}
+
+	if (status == CPU_IRQSTATUS_HOLD) {
+		m6809_set_irq_line(vector, 2);
 	}
 	
 	if (status == CPU_IRQSTATUS_AUTO) {

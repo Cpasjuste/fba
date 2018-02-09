@@ -8,17 +8,17 @@
 int nIniVersion = 0;
 
 struct VidPresetData VidPreset[4] = {
-	{ 400, 300},
 	{ 640, 480},
 	{ 1024, 768},
 	{ 1280, 960},
+	// last one set at desktop resolution
 };
 
 struct VidPresetDataVer VidPresetVer[4] = {
-	{ 400, 300},
 	{ 640, 480},
 	{ 1024, 768},
 	{ 1280, 960},
+	// last one set at desktop resolution
 };
 
 static void CreateConfigName(TCHAR* szConfig)
@@ -106,10 +106,11 @@ int ConfigAppLoad()
 		VAR(bVidCorrectAspect);
 		
 		VAR(bVidAutoSwitchFull);
+		STR(HorScreen);
+		STR(VerScreen);
 
 		VAR(bVidTripleBuffer);
 		VAR(bVidVSync);
-		VAR(bVidDWMCore);
 
 		VAR(bVidScanlines);
 		VAR(nVidScanIntensity);
@@ -150,6 +151,7 @@ int ConfigAppLoad()
 		VAR(bVidDX9Bilinear);
 		VAR(bVidHardwareVertex);
 		VAR(bVidMotionBlur);
+		VAR(bVidForce16bitDx9Alt);
 
 		// Sound
 		VAR(nAudSelect);
@@ -189,6 +191,7 @@ int ConfigAppLoad()
 		VAR(nLoadMenuShowY);
 		VAR(nLoadMenuBoardTypeFilter);
 		VAR(nLoadMenuGenreFilter);
+		VAR(nLoadMenuFavoritesFilter);
 		VAR(nLoadMenuFamilyFilter);
 
 		STR(szAppRomPaths[0]);
@@ -234,6 +237,7 @@ int ConfigAppLoad()
 		STR(szAppCabinetsPath);
 		STR(szAppPCBsPath);
 		STR(szAppHistoryPath);
+		STR(szAppEEPROMPath);
 		
 		VAR(bNoChangeNumLock);
 		VAR(bAlwaysCreateSupportFolders);
@@ -242,7 +246,9 @@ int ConfigAppLoad()
 		
 		VAR(EnableHiscores);
 		VAR(bBurnUseBlend);
-		
+		VAR(BurnShiftEnabled);
+		VAR(bSkipStartupCheck);
+
 #ifdef INCLUDE_AVI_RECORDING
 		VAR(nAvi3x);
 #endif
@@ -390,6 +396,10 @@ int ConfigAppSave()
 	FLT(nGamma);
 	_ftprintf(h, _T("\n// If non-zero, auto-switch to fullscreen after loading game\n"));
 	VAR(bVidAutoSwitchFull);
+	_ftprintf(h, _T("\n// Monitor for Horizontal Games (GDI Identifier)\n"));
+	STR(HorScreen);
+	_ftprintf(h, _T("\n// Monitor for Vertical Games (GDI Identifier)\n"));
+	STR(VerScreen);
 	_ftprintf(h, _T("\n// If non-zero, allow stretching of the image to any size\n"));
 	VAR(bVidFullStretch);
 	_ftprintf(h, _T("\n// If non-zero, stretch the image to the largest size preserving aspect ratio\n"));
@@ -398,8 +408,6 @@ int ConfigAppSave()
 	VAR(bVidTripleBuffer);
 	_ftprintf(h, _T("\n// If non-zero, try to synchronise blits with the display\n"));
 	VAR(bVidVSync);
-	_ftprintf(h, _T("\n// If non-zero, try to enable custom DWM parameters on Windows 7, this fixes frame stuttering problems.\n"));
-	VAR(bVidDWMCore);
 	_ftprintf(h, _T("\n// Transfer method:  0 = blit from system memory / use driver/DirectX texture management;\n"));
 	_ftprintf(h, _T("//                   1 = copy to a video memory surface, then use bltfast();\n"));
 	_ftprintf(h, _T("//                  -1 = autodetect for DirectDraw, equals 1 for Direct3D\n"));
@@ -465,6 +473,8 @@ int ConfigAppSave()
 	VAR(bVidHardwareVertex);
 	_ftprintf(h, _T("\n// If non-zero, use motion blur to display the image\n"));
 	VAR(bVidMotionBlur);
+	_ftprintf(h, _T("\n// If non-zero, force 16 bit emulation even in 32-bit screenmodes\n"));
+	VAR(bVidForce16bitDx9Alt);
 
 	_ftprintf(h, _T("\n\n\n"));
 	_ftprintf(h, _T("// --- Sound ------------------------------------------------------------------\n"));
@@ -547,6 +557,9 @@ int ConfigAppSave()
 	
 	_ftprintf(h, _T("\n// Load game dialog genre filter options\n"));
 	VAR(nLoadMenuGenreFilter);
+
+	_ftprintf(h, _T("\n// Load game dialog favorites filter options\n"));
+	VAR(nLoadMenuFavoritesFilter);
 	
 	_ftprintf(h, _T("\n// Load game dialog family filter options\n"));
 	VAR(nLoadMenuFamilyFilter);
@@ -597,6 +610,7 @@ int ConfigAppSave()
 	STR(szAppCabinetsPath);
 	STR(szAppPCBsPath);
 	STR(szAppHistoryPath);
+	STR(szAppEEPROMPath);
 	
 	_ftprintf(h, _T("\n// The cartridges to use for emulation of an MVS system\n"));
 	DRV(nBurnDrvSelect[0]);
@@ -627,6 +641,12 @@ int ConfigAppSave()
 	
 	_ftprintf(h, _T("\n// If non-zero, enable alpha blending support.\n"));
 	VAR(bBurnUseBlend);
+
+	_ftprintf(h, _T("\n// If non-zero, enable gear shifter display support.\n"));
+	VAR(BurnShiftEnabled);
+
+	_ftprintf(h, _T("\n// If non-zero, DISABLE start-up rom scan (if needed).\n"));
+	VAR(bSkipStartupCheck);
 	
 #ifdef INCLUDE_AVI_RECORDING
 	_ftprintf(h, _T("\n// If non-zero, enable 1x - 3x pixel output for the AVI writer.\n"));

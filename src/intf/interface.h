@@ -200,6 +200,7 @@ extern INT32 nVidRotationAdjust;
 extern INT32 bVidUseHardwareGamma;
 extern INT32 bVidAutoSwitchFull;
 extern INT32 bVidForce16bit;
+extern INT32 bVidForce16bitDx9Alt;
 extern INT32 bVidForceFlip;
 extern INT32 nVidTransferMethod;
 extern float fVidScreenAngle;
@@ -213,6 +214,8 @@ extern double dVidCubicC;
 extern INT32 bVidDX9Bilinear;
 extern INT32 bVidHardwareVertex;
 extern INT32 bVidMotionBlur;
+extern wchar_t HorScreen[32];
+extern wchar_t VerScreen[32];
 extern INT32 nVidScrnWidth, nVidScrnHeight;
 extern INT32 nVidScrnDepth;
 
@@ -232,6 +235,7 @@ INT32 VidSNewTinyMsg(const TCHAR* pText, INT32 nRGB = 0, INT32 nDuration = 0, IN
 INT32 VidSNewJoystickMsg(const TCHAR* pText, INT32 nRGB = 0, INT32 nDuration = 0, INT32 nLineNo = 0);
 INT32 VidSNewShortMsg(const TCHAR* pText, INT32 nRGB = 0, INT32 nDuration = 0, INT32 nPriority = 5);
 void VidSKillShortMsg();
+void VidSKillTinyMsg();
 
 INT32 VidSAddChatMsg(const TCHAR* pID, INT32 nIDRGB, const TCHAR* pMain, INT32 nMainRGB);
 

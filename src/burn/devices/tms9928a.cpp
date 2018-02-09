@@ -1,3 +1,5 @@
+// Based on MAME sources by Sean Young, Nathan Woods, Aaron Giles, Wilbert Pol, and hap
+
 #include "tiles_generic.h"
 #include "tms9928a.h"
 
@@ -35,6 +37,7 @@ typedef struct {
 
 	UINT8 *vMem;
 	UINT16 *tmpbmp;
+	INT32 tmpbmpsize;
 	INT32 vramsize;
 	INT32 model;
 	INT32 revA;
@@ -48,6 +51,8 @@ typedef struct {
 } TMS9928A;
 
 static TMS9928A tms;
+
+static INT32 TMS9928A_initted = 0;
 
 static UINT32 Palette[16]; // high color support
 
@@ -66,25 +71,6 @@ static void check_interrupt()
 		if (tms.INTCallback) tms.INTCallback (tms.INT);
 	}
 }
-
-INT32 TMS9928AInterrupt()
-{
-	return 0;
-	tms.StatusReg |= 0x80;
-
-	check_interrupt();
-
-	return tms.INT;
-}
-
-#if 0
-static void update_backdrop()
-{
-	// update backdrop colour to transparent if EXTVID bit is set
-	//if ((tms.Regs[7] & 15) == 0)
-	//	tms.palette[0] = MAKE_ARGB(tms.Regs[0] & 1 ? 0 : 255,0,0,0);
-}
-#endif
 
 static void update_table_masks()
 {
@@ -167,6 +153,9 @@ void TMS9928AReset()
 	for (INT32 i = 0; i < 8; i++)
 		tms.Regs[i] = 0;
 
+	memset(tms.vMem, 0, tms.vramsize);
+	memset(tms.tmpbmp, 0, tms.tmpbmpsize);
+
 	tms.StatusReg = 0;
 	tms.FifthSprite = 31;
 	tms.nametbl = tms.pattern = tms.colour = 0;
@@ -175,10 +164,13 @@ void TMS9928AReset()
 	tms.Addr = tms.ReadAhead = tms.INT = 0;
 	tms.FirstByte = 0;
 	tms.latch = 0;
+	tms.mode = 0;
 }
 
 void TMS9928AInit(INT32 model, INT32 vram, INT32 borderx, INT32 bordery, void (*INTCallback)(int))
 {
+	TMS9928A_initted = 1;
+
 	GenericTilesInit();
 
 	memset(&tms, 0, sizeof(tms));
@@ -192,9 +184,10 @@ void TMS9928AInit(INT32 model, INT32 vram, INT32 borderx, INT32 bordery, void (*
 	tms.vertical_size   = TMS9928A_TOTAL_VERT_NTSC;
 
 	tms.vramsize = vram;
-	tms.vMem = (UINT8*)malloc(tms.vramsize);
+	tms.vMem = (UINT8*)BurnMalloc(tms.vramsize);
 
-	tms.tmpbmp = (UINT16*)malloc(TMS9928A_TOTAL_HORZ * TMS9928A_TOTAL_VERT_PAL * sizeof(short)*2);
+	tms.tmpbmpsize = TMS9928A_TOTAL_HORZ * TMS9928A_TOTAL_VERT_PAL * sizeof(short) * 2;
+	tms.tmpbmp = (UINT16*)BurnMalloc(tms.tmpbmpsize);
 
 	TMS9928AReset ();
 	tms.LimitSprites = 1;
@@ -202,12 +195,15 @@ void TMS9928AInit(INT32 model, INT32 vram, INT32 borderx, INT32 bordery, void (*
 
 void TMS9928AExit()
 {
+	if (!TMS9928A_initted) return;
+
+	TMS9928A_initted = 0;
 	TMS9928AReset();
 
 	GenericTilesExit();
 
-	free (tms.tmpbmp);
-	free (tms.vMem);
+	BurnFree (tms.tmpbmp);
+	BurnFree (tms.vMem);
 }
 
 void TMS9928APostLoad()
@@ -283,7 +279,7 @@ static void TMS9928AScanline_INT(INT32 vpos)
 
 	INT32 y = vpos - tms.top_border;
 
-	if ( y < 0 || y >= 192 || ! (tms.Regs[1] & 0x40) )
+	if ( y < 0 || y >= 192 || !(tms.Regs[1] & 0x40) )
 	{
 		/* Draw backdrop colour */
 		for ( INT32 i = 0; i < TMS9928A_TOTAL_HORZ; i++ )

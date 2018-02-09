@@ -102,7 +102,7 @@ static struct BurnDIPInfo DarksealDIPList[]=
 	{0x11, 0x01, 0x40, 0x40, "Off"			},
 	{0x11, 0x01, 0x40, 0x00, "On"			},
 
-	{0   , 0xfe, 0   ,    0, "Lives"		},
+	{0   , 0xfe, 0   ,    4, "Lives"		},
 	{0x12, 0x01, 0x03, 0x00, "1"			},
 	{0x12, 0x01, 0x03, 0x01, "2"			},
 	{0x12, 0x01, 0x03, 0x03, "3"			},
@@ -120,7 +120,7 @@ static struct BurnDIPInfo DarksealDIPList[]=
 	{0x12, 0x01, 0x30, 0x30, "3"			},
 	{0x12, 0x01, 0x30, 0x20, "4"			},
 
-	{0   , 0xfe, 0   ,    4, "Allow Continue"	},
+	{0   , 0xfe, 0   ,    2, "Allow Continue"	},
 	{0x12, 0x01, 0x40, 0x00, "No"			},
 	{0x12, 0x01, 0x40, 0x40, "Yes"			},
 
@@ -657,11 +657,13 @@ static INT32 DrvFrame()
 
 		if (i ==   7) vblank = 0;
 		if (i == 206) vblank = 8;
-		
-		INT32 nSegmentLength = nBurnSoundLen / nInterleave;
-		INT16* pSoundBuf = SoundBuffer + (nSoundBufferPos << 1);
-		deco16SoundUpdate(pSoundBuf, nSegmentLength);
-		nSoundBufferPos += nSegmentLength;
+
+		if (pBurnSoundOut) {
+			INT32 nSegmentLength = nBurnSoundLen / nInterleave;
+			INT16* pSoundBuf = SoundBuffer + (nSoundBufferPos << 1);
+			deco16SoundUpdate(pSoundBuf, nSegmentLength);
+			nSoundBufferPos += nSegmentLength;
+		}
 	}
 
 	SekSetIRQLine(6, CPU_IRQSTATUS_AUTO);

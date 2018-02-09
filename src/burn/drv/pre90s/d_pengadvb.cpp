@@ -215,12 +215,12 @@ static void sg1000_ppi8255_portA_write(UINT8 data)
 
 static UINT8 msx_input_mask = 0;
 
-static UINT8 ay8910portAread(UINT32 offset)
+static UINT8 ay8910portAread(UINT32 /*offset*/)
 {
 	return DrvInputs[0];
 }
 
-static void ay8910portBwrite(UINT32 offset, UINT32 data)
+static void ay8910portBwrite(UINT32 /*offset*/, UINT32 data)
 {
 	/* PSG reg 15, writes 0 at coin insert, 0xff at boot and game over */
 	msx_input_mask = data;
@@ -294,7 +294,7 @@ static void __fastcall msx_write(UINT16 address, UINT8 data)
 	//bprintf(0, _T("a[%X] d[%X],"), address, data);
 }
 
-static UINT8 __fastcall msx_read(UINT16 address)
+static UINT8 __fastcall msx_read(UINT16 /*address*/)
 {
 	//bprintf(0, _T("a[%X],"), address);
 	return 0;
@@ -312,13 +312,13 @@ static void pengadvb_decrypt(UINT8 *mem, INT32 memsize)
 	}
 
 	// address line swap
-	buf = (UINT8 *)malloc(memsize);
+	buf = (UINT8 *)BurnMalloc(memsize);
 	memcpy(buf, mem, memsize);
 	for ( i = 0; i < memsize; i++ )
 	{
 		mem[i] = buf[BITSWAP24(i,23,22,21,20,19,18,17,16,15,14,13,5,11,10,9,8,7,6,12,4,3,2,1,0)];
 	}
-	free(buf);
+	BurnFree(buf);
 }
 
 static INT32 DrvInit()

@@ -1,3 +1,29 @@
+// copyright-holders:Nicola Salmoria,Hiromitsu Shioya
+/*********************************************************/
+/*    Konami PCM controller                              */
+/*********************************************************/
+
+/*
+  Changelog, Hiromitsu Shioya 02/05/2002
+  fix start address decode timing. (sample loop bug.)
+
+    Changelog, Mish, August 1999:
+        Removed interface support for different memory regions per channel.
+        Removed interface support for differing channel volume.
+
+        Added bankswitching.
+        Added support for multiple chips.
+
+        (Nb:  Should different memory regions per channel be needed
+        the bankswitching function can set this up).
+
+NS990821
+support for the k007232_VOL() macro.
+added external port callback, and functions to set the volume of the channels
+
+*/
+
+
 #include "burnint.h"
 #include "burn_sound.h"
 #include "k007232.h"
@@ -235,11 +261,11 @@ void K007232Init(INT32 chip, INT32 clock, UINT8 *pPCMData, INT32 PCMDataSize)
 	memset(Ptr,	0, sizeof(kdacPointers));
 
 	if (Left == NULL) {
-		Left = (INT32*)malloc(nBurnSoundLen * sizeof(INT32));
+		Left = (INT32*)BurnMalloc(nBurnSoundLen * sizeof(INT32));
 	}
 
 	if (Right == NULL) {
-		Right = (INT32*)malloc(nBurnSoundLen * sizeof(INT32));
+		Right = (INT32*)BurnMalloc(nBurnSoundLen * sizeof(INT32));
 	}
 
 	Ptr->pcmbuf[0] = pPCMData;
@@ -294,15 +320,8 @@ void K007232Exit()
 	if (!DebugSnd_K007232Initted) bprintf(PRINT_ERROR, _T("K007232Exit called without init\n"));
 #endif
 
-	if (Left) {
-		free(Left);
-		Left = NULL;
-	}	
-
-	if (Right) {
-		free(Right);
-		Right = NULL;
-	}
+	BurnFree(Left);
+	BurnFree(Right);
 	
 	DebugSnd_K007232Initted = 0;
 	nNumChips = 0;

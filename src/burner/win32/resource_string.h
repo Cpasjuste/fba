@@ -127,6 +127,7 @@
 #define IDS_SPATH_CABINETS				(IDS_STRING +  468)
 #define IDS_SPATH_PCBS					(IDS_STRING +  470)
 #define IDS_SPATH_HISTORY				(IDS_STRING +  472)
+#define IDS_SPATH_EEPROM				(IDS_STRING +  474)
 
 #define IDS_ROMPATH_1					(IDS_STRING +  480)
 #define IDS_ROMPATH_2					(IDS_STRING +  482)
@@ -201,7 +202,7 @@
 #define IDS_SEL_SG1000					(IDS_STRING +  630)
 #define IDS_SEL_COLECO					(IDS_STRING +  632)
 #define IDS_SEL_GG						(IDS_STRING +  634)
-#define IDS_SEL_MSX						(IDS_STRING +  635)
+#define IDS_SEL_MSX						(IDS_STRING +  636)
 
 #define IDS_GENRE						(IDS_STRING +  650)
 #define IDS_GENRE_HORSHOOT				(IDS_STRING +  652)
@@ -236,6 +237,8 @@
 #define IDS_FAMILY_SONICWI				(IDS_STRING +  756)
 #define IDS_FAMILY_PWRINST				(IDS_STRING +  758)
 #define IDS_FAMILY_OTHER				(IDS_STRING +  760)
+
+#define IDS_FAVORITES   				(IDS_STRING +  790)
 
 #define IDS_IPSMANAGER_TITLE			(IDS_STRING +  800)
 
@@ -344,6 +347,7 @@
 #define IDS_ERR_UI_FULL_NOMODE			(IDS_ERROR  +   78)
 #define IDS_ERR_UI_FULL_PROBLEM			(IDS_ERROR  +   80)
 #define IDS_ERR_UI_FULL_CUSTRES			(IDS_ERROR  +   82)
+#define IDS_ERR_UI_VID_MODULE			(IDS_ERROR  +   84)
 
 #define IDS_ERR_DISK_CREATE				(IDS_ERROR  +   90)
 #define IDS_ERR_DISK_LOAD				(IDS_ERROR  +   92)

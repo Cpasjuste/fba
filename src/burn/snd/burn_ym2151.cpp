@@ -1,6 +1,12 @@
+// FBAlpha YM-2151 sound core interface
 #include "burnint.h"
 #include "burn_sound.h"
 #include "burn_ym2151.h"
+
+// Irq Callback timing notes..
+// Due to the way the internal timing of the ym2151 works, BurnYM2151Render()
+// should not be called more than ~65 times per frame.  See DrvFrame() in
+// drv/konami/d_surpratk.cpp for a simple and effective work-around.
 
 void (*BurnYM2151Render)(INT16* pSoundBuf, INT32 nSegmentLength);
 
@@ -157,15 +163,14 @@ void BurnYM2151Exit()
 	if (!DebugSnd_YM2151Initted) bprintf(PRINT_ERROR, _T("BurnYM2151Exit called without init\n"));
 #endif
 
+	if (!DebugSnd_YM2151Initted) return;
+
 	BurnYM2151SetIrqHandler(NULL);
 	BurnYM2151SetPortHandler(NULL);
 
 	YM2151Shutdown();
 
-	if (pBuffer) {
-		free(pBuffer);
-		pBuffer = NULL;
-	}
+	BurnFree(pBuffer);
 	
 	DebugSnd_YM2151Initted = 0;
 }
@@ -195,7 +200,7 @@ INT32 BurnYM2151Init(INT32 nClockFrequency)
 
 	YM2151Init(1, nClockFrequency, nBurnYM2151SoundRate);
 
-	pBuffer = (INT16*)malloc(65536 * 2 * sizeof(INT16));
+	pBuffer = (INT16*)BurnMalloc(65536 * 2 * sizeof(INT16));
 	memset(pBuffer, 0, 65536 * 2 * sizeof(INT16));
 
 	nSampleSize = (UINT32)nBurnYM2151SoundRate * (1 << 16) / nBurnSoundRate;
@@ -235,27 +240,8 @@ void BurnYM2151Scan(INT32 nAction)
 	}
 
 	{
-		// A long time ago these variables were mistakenly scanned for the savestates.
-		// Recently it was found that this causes crash situations if the samplerate or
-		// sample size had changed between machines loading the states.
-		// These dummy variables are to prevent the breaking all states for games that use the 2151.
-		double dummyYM2151Volumes[2];
-		INT32 dummyYM2151RouteDirs[2];
-		INT32 dummynBurnYM2151SoundRate;
-		INT32 dummynBurnPosition;
-		UINT32 dummynSampleSize;
-		UINT32 dummynFractionalPosition;
-		UINT32 dummynSamplesRendered;
-
 		SCAN_VAR(nBurnCurrentYM2151Register);
 		SCAN_VAR(BurnYM2151Registers);
-		SCAN_VAR(dummyYM2151Volumes);
-		SCAN_VAR(dummyYM2151RouteDirs);
-		SCAN_VAR(dummynBurnYM2151SoundRate);
-		SCAN_VAR(dummynBurnPosition);
-		SCAN_VAR(dummynSampleSize);
-		SCAN_VAR(dummynFractionalPosition);
-		SCAN_VAR(dummynSamplesRendered);
 	}
 
 	BurnYM2151Scan_int(nAction); // Scan the YM2151's internal registers

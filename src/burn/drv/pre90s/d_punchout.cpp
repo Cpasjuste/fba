@@ -117,11 +117,11 @@ static struct BurnDIPInfo PunchoutDIPList[]=
 	{0x09, 0x01, 0x0f, 0x07, "1 Coin  6 Credits"			},
 	{0x09, 0x01, 0x0f, 0x0f, "Free Play"				},
 
-	{0   , 0xfe, 0   ,    0, "Copyright"				},
+	{0   , 0xfe, 0   ,    2, "Copyright"				},
 	{0x09, 0x01, 0x80, 0x00, "Nintendo"				},
 	{0x09, 0x01, 0x80, 0x80, "Nintendo of America Inc."		},
 
-	{0   , 0xfe, 0   ,    2, "Difficulty"				},
+	{0   , 0xfe, 0   ,    4, "Difficulty"				},
 	{0x0a, 0x01, 0x03, 0x00, "Easy"					},
 	{0x0a, 0x01, 0x03, 0x01, "Medium"				},
 	{0x0a, 0x01, 0x03, 0x02, "Hard"					},
@@ -133,7 +133,7 @@ static struct BurnDIPInfo PunchoutDIPList[]=
 	{0x0a, 0x01, 0x0c, 0x08, "Short"				},
 	{0x0a, 0x01, 0x0c, 0x0c, "Shortest"				},
 
-	{0   , 0xfe, 0   ,    4, "Demo Sounds"				},
+	{0   , 0xfe, 0   ,    2, "Demo Sounds"				},
 	{0x0a, 0x01, 0x10, 0x00, "Off"					},
 	{0x0a, 0x01, 0x10, 0x10, "On"					},
 
@@ -169,27 +169,27 @@ static struct BurnDIPInfo SpnchoutDIPList[]=
 	{0x0a, 0x01, 0x0f, 0x07, "1 Coin  6 Credits"			},
 	{0x0a, 0x01, 0x0f, 0x0f, "Free Play"				},
 
-	{0   , 0xfe, 0   ,    0, "Copyright"				},
+	{0   , 0xfe, 0   ,    2, "Copyright"				},
 	{0x0a, 0x01, 0x80, 0x00, "Nintendo"				},
 	{0x0a, 0x01, 0x80, 0x80, "Nintendo of America Inc."		},
 
-	{0   , 0xfe, 0   ,    0, "Difficulty"				},
+	{0   , 0xfe, 0   ,    4, "Difficulty"				},
 	{0x0b, 0x01, 0x03, 0x00, "Easy"					},
 	{0x0b, 0x01, 0x03, 0x01, "Medium"				},
 	{0x0b, 0x01, 0x03, 0x02, "Hard"					},
 	{0x0b, 0x01, 0x03, 0x03, "Hardest"				},
 
-	{0   , 0xfe, 0   ,    2, "Time"					},
+	{0   , 0xfe, 0   ,    4, "Time"					},
 	{0x0b, 0x01, 0x0c, 0x00, "Longest"				},
 	{0x0b, 0x01, 0x0c, 0x04, "Long"					},
 	{0x0b, 0x01, 0x0c, 0x08, "Short"				},
 	{0x0b, 0x01, 0x0c, 0x0c, "Shortest"				},
 
-	{0   , 0xfe, 0   ,    4, "Demo Sounds"				},
+	{0   , 0xfe, 0   ,    2, "Demo Sounds"				},
 	{0x0b, 0x01, 0x10, 0x00, "Off"					},
 	{0x0b, 0x01, 0x10, 0x10, "On"					},
 
-	{0   , 0xfe, 0   ,    4, "Rematch At A Discount"		},
+	{0   , 0xfe, 0   ,    2, "Rematch At A Discount"		},
 	{0x0b, 0x01, 0x20, 0x00, "Off"					},
 	{0x0b, 0x01, 0x20, 0x20, "On"					},
 
@@ -227,13 +227,13 @@ static struct BurnDIPInfo ArmwrestDIPList[]=
 	{0x07, 0x01, 0x40, 0x40, "1"		},
 	{0x07, 0x01, 0x40, 0x00, "2"		},
 
-	{0   , 0xfe, 0   ,    0, "Difficulty"	},
+	{0   , 0xfe, 0   ,    4, "Difficulty"	},
 	{0x08, 0x01, 0x03, 0x00, "Easy"		},
 	{0x08, 0x01, 0x03, 0x01, "Medium"	},
 	{0x08, 0x01, 0x03, 0x02, "Hard"		},
 	{0x08, 0x01, 0x03, 0x03, "Hardest"	},
 
-	{0   , 0xfe, 0   ,    4, "Coinage 2"	},
+	{0   , 0xfe, 0   ,    16, "Coinage 2"	},
 	{0x08, 0x01, 0x3c, 0x00, "0000"		},
 	{0x08, 0x01, 0x3c, 0x04, "0001"		},
 	{0x08, 0x01, 0x3c, 0x08, "0010"		},
@@ -251,7 +251,7 @@ static struct BurnDIPInfo ArmwrestDIPList[]=
 	{0x08, 0x01, 0x3c, 0x38, "1110"		},
 	{0x08, 0x01, 0x3c, 0x3c, "1111"		},
 
-	{0   , 0xfe, 0   ,    16, "Rematches"	},
+	{0   , 0xfe, 0   ,    2, "Rematches"	},
 	{0x08, 0x01, 0x40, 0x40, "3"		},
 	{0x08, 0x01, 0x40, 0x00, "7"		},
 
@@ -560,7 +560,7 @@ static INT32 MemIndex()
 
 static void DrvGfxDecode(UINT8 *rom, INT32 len, UINT8 xor1, INT32 depth) // 0x100, 0, 0x100, 0 (mod 0x40 always)
 {
-	UINT8 *tmp = (UINT8*)malloc(len);
+	UINT8 *tmp = (UINT8*)BurnMalloc(len);
 	if (tmp == NULL || len == 0) return;
 
 	for (INT32 i = 0; i < len; i++) tmp[i] = rom[i] ^ xor1; // copy & invert
@@ -575,7 +575,7 @@ static void DrvGfxDecode(UINT8 *rom, INT32 len, UINT8 xor1, INT32 depth) // 0x10
 		rom[i] &= depth;
 	}
 
-	free (tmp);
+	BurnFree (tmp);
 }
 
 static void DrvPaletteInit(INT32 off, INT32 bank, INT32 reverse)
@@ -601,7 +601,7 @@ static INT32 CommonInit(INT32 (*pInitCallback)(), INT32 punchout, INT32 reverse_
 	AllMem = NULL;
 	MemIndex();
 	INT32 nLen = MemEnd - (UINT8 *)0;
-	if ((AllMem = (UINT8 *)malloc(nLen)) == NULL) return 1;
+	if ((AllMem = (UINT8 *)BurnMalloc(nLen)) == NULL) return 1;
 	memset(AllMem, 0, nLen);
 	MemIndex();
 
@@ -700,8 +700,7 @@ static INT32 DrvExit()
 	vlm5030Exit();
 	nesapuExit();
 
-	free (AllMem);
-	AllMem = NULL;
+	BurnFree (AllMem);
 
 	return 0;
 }

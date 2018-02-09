@@ -42,7 +42,9 @@ typedef struct
     UINT8 nmi_state;
     UINT8 irq_state[3];
 	UINT8 irq_pending;
-    int (*irq_callback)(int irqline);
+	INT32 irq_hold;
+
+    ALIGN_VAR(8) int (*irq_callback)(int irqline);
 
 	unsigned int h6280_iCycles;
 	unsigned int h6280_totalcycles;

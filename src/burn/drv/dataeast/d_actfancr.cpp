@@ -119,7 +119,7 @@ static struct BurnDIPInfo ActfancrDIPList[]=
 	{0x12, 0x01, 0x0c, 0x0c, "1 Coin  1 Credits"	},
 	{0x12, 0x01, 0x0c, 0x08, "1 Coin  2 Credits"	},
 
-	{0   , 0xfe, 0   ,    0, "Demo Sounds"		},
+	{0   , 0xfe, 0   ,    2, "Demo Sounds"		},
 	{0x12, 0x01, 0x20, 0x00, "Off"			},
 	{0x12, 0x01, 0x20, 0x20, "On"			},
 
@@ -133,7 +133,7 @@ static struct BurnDIPInfo ActfancrDIPList[]=
 	{0x12, 0x01, 0x80, 0x80, "Cocktail"		},
 #endif
 
-	{0   , 0xfe, 0   ,    2, "Lives"		},
+	{0   , 0xfe, 0   ,    4, "Lives"		},
 	{0x13, 0x01, 0x03, 0x03, "3"			},
 	{0x13, 0x01, 0x03, 0x02, "4"			},
 	{0x13, 0x01, 0x03, 0x01, "5"			},
@@ -145,7 +145,7 @@ static struct BurnDIPInfo ActfancrDIPList[]=
 	{0x13, 0x01, 0x0c, 0x08, "Hard"			},
 	{0x13, 0x01, 0x0c, 0x00, "Hardest"		},
 
-	{0   , 0xfe, 0   ,    4, "Bonus Life"		},
+	{0   , 0xfe, 0   ,    2, "Bonus Life"		},
 	{0x13, 0x01, 0x20, 0x20, "800000"		},
 	{0x13, 0x01, 0x20, 0x00, "None"			},
 };
@@ -169,7 +169,7 @@ static struct BurnDIPInfo TriothepDIPList[]=
 	{0x14, 0x01, 0x0c, 0x0c, "1 Coin  1 Credits"	},
 	{0x14, 0x01, 0x0c, 0x08, "1 Coin  2 Credits"	},
 
-	{0   , 0xfe, 0   ,    0, "Demo Sounds"		},
+	{0   , 0xfe, 0   ,    2, "Demo Sounds"		},
 	{0x14, 0x01, 0x20, 0x00, "Off"			},
 	{0x14, 0x01, 0x20, 0x20, "On"			},
 
@@ -476,7 +476,7 @@ static INT32 DrvGfxDecode()
 	INT32 XOffs[16] = { STEP8(16*8, 1), STEP8(0, 1) };
 	INT32 YOffs[16] = { STEP16(0, 8) };
 
-	UINT8 *tmp = (UINT8*)malloc(0x60000);
+	UINT8 *tmp = (UINT8*)BurnMalloc(0x60000);
 	if (tmp == NULL) {
 		return 1;
 	}
@@ -493,7 +493,7 @@ static INT32 DrvGfxDecode()
 
 	GfxDecode(0x0800, 4, 16, 16, Plane2, XOffs + 0, YOffs, 0x100, tmp, DrvGfxROM2);
 
-	free (tmp);
+	BurnFree (tmp);
 
 	return 0;
 }
@@ -528,7 +528,7 @@ static INT32 ActfanInit()
 	AllMem = NULL;
 	MemIndex();
 	INT32 nLen = MemEnd - (UINT8 *)0;
-	if ((AllMem = (UINT8 *)malloc(nLen)) == NULL) return 1;
+	if ((AllMem = (UINT8 *)BurnMalloc(nLen)) == NULL) return 1;
 	memset(AllMem, 0, nLen);
 	MemIndex();
 
@@ -592,7 +592,7 @@ static INT32 TriothepInit()
 	AllMem = NULL;
 	MemIndex();
 	INT32 nLen = MemEnd - (UINT8 *)0;
-	if ((AllMem = (UINT8 *)malloc(nLen)) == NULL) return 1;
+	if ((AllMem = (UINT8 *)BurnMalloc(nLen)) == NULL) return 1;
 	memset(AllMem, 0, nLen);
 	MemIndex();
 
@@ -664,8 +664,7 @@ static INT32 DrvExit()
 	h6280Exit();
 	M6502Exit();
 
-	free (AllMem);
-	AllMem = NULL;
+	BurnFree (AllMem);
 
 	return 0;
 }

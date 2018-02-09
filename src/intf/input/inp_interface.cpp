@@ -171,12 +171,13 @@ static INT32 nAutoFireCounter = 0;
 static bool bLastAF[1000];
 INT32 nAutoFireRate = 12;
 
-static inline int AutofirePick() {
-    int c = nAutoFireCounter % nAutoFireRate;
-    if (nAutoFireCounter <= 2)
-        return 1;
-    else
-	return (c>nAutoFireRate-4);
+static inline INT32 AutofirePick() {
+	INT32 c = nAutoFireCounter % nAutoFireRate;
+
+	if (nAutoFireCounter <= 2)
+		return 1;
+	else
+		return (c > nAutoFireRate-4);
 }
 
 // This will process all PC-side inputs and optionally update the emulated game side.
@@ -337,7 +338,7 @@ INT32 InputMake(bool bCopy)
 		}
 	}
 
-        nAutoFireCounter++;
+	nAutoFireCounter++;
 
 	for (i = 0; i < nMacroCount; i++, pgi++) {
 		if (pgi->Macro.nMode == 1 && pgi->Macro.nSysMacro == 0) { // Macro is defined
@@ -430,7 +431,7 @@ INT32 InputFind(const INT32 nFlags)
 				}
 
 				// While the movement is within the threshold, treat it as no movement
-				if (nJoyDelta > -0x0100 || nJoyDelta < 0x0100) {
+				if (nJoyDelta > -0x0100 && nJoyDelta < 0x0100) {
 					nDelay++;
 					if (nDelay > 64) {
 						return -1;

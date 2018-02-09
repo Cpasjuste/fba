@@ -1,3 +1,6 @@
+// FB Alpha Terra Cresta driver module
+// Based on MAME driver by Carlos A. Lozano
+
 #include "tiles_generic.h"
 #include "m68000_intf.h"
 #include "z80_intf.h"
@@ -820,7 +823,7 @@ void __fastcall Amazon68KWriteByte(UINT32 a, UINT8 d)
 {
 	switch (a) {
 		case 0x070001: {
-			if (AmazonProtCmd >= 32 && AmazonProtCmd <= 0x37) {
+			if (AmazonProtCmd >= 0x32 && AmazonProtCmd <= 0x37) {
 				AmazonProtReg[AmazonProtCmd - 0x32] = d;
 			}
 			return;

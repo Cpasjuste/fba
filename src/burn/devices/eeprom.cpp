@@ -1,3 +1,5 @@
+// MAME sources by ????
+
 #include "burnint.h"
 #include "eeprom.h"
 
@@ -17,6 +19,8 @@ static INT32 locked;
 static INT32 reset_delay;
 
 static INT32 neeprom_available = 0;
+
+static INT32 overrun_errmsg_ignore = 0;
 
 static INT32 eeprom_command_match(const char *buf, const char *cmd, INT32 len)
 {
@@ -89,14 +93,14 @@ void EEPROMInit(const eeprom_interface *interface)
 	if (intf->cmd_unlock) locked = 1;
 	else locked = 0;
 
-	char output[128];
-	sprintf (output, "config/games/%s.nv", BurnDrvGetTextA(DRV_NAME));
+	TCHAR output[MAX_PATH];
+	_stprintf (output, _T("%s%s.nv"), szAppEEPROMPath, BurnDrvGetText(DRV_NAME));
 
 	neeprom_available = 0;
 
 	INT32 len = ((1 << intf->address_bits) * (intf->data_bits >> 3)) & (MEMORY_SIZE-1);
 
-	FILE *fz = fopen(output, "rb");
+	FILE *fz = _tfopen(output, _T("rb"));
 	if (fz != NULL) {
 		neeprom_available = 1;
 		fread (eeprom_data, len, 1, fz);
@@ -110,27 +114,38 @@ void EEPROMExit()
 	if (!DebugDev_EEPROMInitted) bprintf(PRINT_ERROR, _T("EEPROMExit called without init\n"));
 #endif
 
-	char output[128];
-	sprintf (output, "config/games/%s.nv", BurnDrvGetTextA(DRV_NAME));
+	if (!DebugDev_EEPROMInitted) return;
+
+	TCHAR output[MAX_PATH];
+	_stprintf (output, _T("%s%s.nv"), szAppEEPROMPath, BurnDrvGetText(DRV_NAME));
 
 	neeprom_available = 0;
 
 	INT32 len = ((1 << intf->address_bits) * (intf->data_bits >> 3)) & (MEMORY_SIZE-1);
 
-	FILE *fz = fopen(output, "wb");
+	FILE *fz = _tfopen(output, _T("wb"));
 	if (fz) {
 		fwrite (eeprom_data, len, 1, fz);
 		fclose (fz);
 	}
-	
+
+	overrun_errmsg_ignore = 0;
+
 	DebugDev_EEPROMInitted = 0;
+}
+
+void EEPROMIgnoreErrMessage(INT32 onoff)
+{
+	overrun_errmsg_ignore = (onoff) ? 1 : 0;
 }
 
 static void eeprom_write(INT32 bit)
 {
 	if (serial_count >= SERIAL_BUFFER_LENGTH-1)
 	{
-		bprintf(0, _T("error: EEPROM serial buffer overflow\n"));
+		if (!overrun_errmsg_ignore) {
+			bprintf(0, _T("error: EEPROM serial buffer overflow\n"));
+		}
 		return;
 	}
 

@@ -253,7 +253,7 @@ void es8712Init(INT32 device, UINT8 *rom, INT32 sample_rate, INT32 addSignal)
 	chip->addSignal = addSignal;
 
 	if (tbuf[device] == NULL) {
-		tbuf[device] = (INT16*)malloc(sample_rate * sizeof(INT16));
+		tbuf[device] = (INT16*)BurnMalloc(sample_rate * sizeof(INT16));
 	}
 }
 
@@ -282,17 +282,16 @@ void es8712Exit(INT32 device)
 	if (!DebugSnd_ES8712Initted) bprintf(PRINT_ERROR, _T("es8712Exit called without init\n"));
 #endif
 
+	if (!DebugSnd_ES8712Initted) return;
+
 	if (device >= MAX_ES8712_CHIPS) return;
 
 	chip = &chips[device];
 
 	memset (chip, 0, sizeof(_es8712_state));
 
-	if (tbuf[device] != NULL) {
-		free (tbuf[device]);
-		tbuf[device] = NULL;
-	}
-	
+	BurnFree (tbuf[device]);
+		
 	DebugSnd_ES8712Initted = 0;
 }
 

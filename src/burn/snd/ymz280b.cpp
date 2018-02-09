@@ -1,4 +1,6 @@
 // Yamaha YMZ280B module
+// Emulation by Jan Klaassen
+
 #include <math.h>
 #include "burnint.h"
 #include "ymz280b.h"
@@ -62,7 +64,7 @@ struct sYMZ280BChannelInfo {
 };
 
 static INT32 nActiveChannel, nDelta, nSample, nCount, nRamReadAddress;
-static INT32* buf;
+static INT32* buf = NULL;
 
 sYMZ280BChannelInfo YMZ280BChannelInfo[8];
 static sYMZ280BChannelInfo* channelInfo;
@@ -146,14 +148,11 @@ INT32 YMZ280BInit(INT32 nClock, void (*IRQCallback)(INT32))
 
 	YMZ280BIRQCallback = IRQCallback;
 
-	if (pBuffer) {
-		free(pBuffer);
-		pBuffer = NULL;
-	}
-	pBuffer = (INT32*)malloc(nYMZ280BSampleRate *  2 * sizeof(INT32));
+	BurnFree(pBuffer);
+	pBuffer = (INT32*)BurnMalloc(nYMZ280BSampleRate *  2 * sizeof(INT32));
 
 	for (INT32 j = 0; j < 8; j++) {
-		YMZ280BChannelData[j] = (INT32*)malloc(0x1000 * sizeof(INT32));
+		YMZ280BChannelData[j] = (INT32*)BurnMalloc(0x1000 * sizeof(INT32));
 	}
 
 	// default routes
@@ -191,9 +190,12 @@ void YMZ280BExit()
 	if (!DebugSnd_YMZ280BInitted) bprintf(PRINT_ERROR, _T("YMZ280BExit called without init\n"));
 #endif
 
-	if (pBuffer) {
-		free(pBuffer);
-		pBuffer = NULL;
+	if (!DebugSnd_YMZ280BInitted) return;
+
+	BurnFree(pBuffer);
+
+	for (INT32 j = 0; j < 8; j++) {
+		BurnFree(YMZ280BChannelData[j]);
 	}
 
 	YMZ280BIRQCallback = NULL;
@@ -262,14 +264,14 @@ inline static void RampChannel()
 #endif
 }
 
-UINT8 ymz280b_read_memory(UINT32 offset)
+inline static UINT8 ymz280b_readmem(UINT32 offset)
 {
 	if (offset < YMZ280BROMSIZE) {
 		return YMZ280BROM[offset];
 	} else {
 		// Battle Bakraid, rom length 0xC00000 tries to read from 0xFFFF00 twice in level 5 at the first mid-boss.
-		// Possile protection?  Or just a bug?  Hmmm..
-		bprintf(0, _T("ymz280b bad offset: %d!! (max. size: %d)\n"), offset, YMZ280BROMSIZE);
+		// Possile protection?  Or just a bug?  Hmmm.. -dink
+		bprintf(0, _T("ymz280b: bad offset: %d!! (max. size: %d)\n"), offset, YMZ280BROMSIZE);
 		return 0;
 	}
 }
@@ -277,7 +279,7 @@ UINT8 ymz280b_read_memory(UINT32 offset)
 inline static void decode_adpcm()
 {
 	// Get next value & compute delta
-	nDelta = ymz280b_read_memory(channelInfo->nPosition >> 1);
+	nDelta = ymz280b_readmem(channelInfo->nPosition >> 1);
 	if (channelInfo->nPosition & 1) {
 		nDelta &= 0x0F;
 	} else {
@@ -308,7 +310,7 @@ inline static void decode_adpcm()
 
 inline static void decode_pcm8()
 {
-	nDelta = ymz280b_read_memory(channelInfo->nPosition >> 1);
+	nDelta = ymz280b_readmem(channelInfo->nPosition >> 1);
 
 	channelInfo->nSample = (INT8)nDelta * 256;
 	channelInfo->nPosition+=2;
@@ -316,7 +318,7 @@ inline static void decode_pcm8()
 
 inline static void decode_pcm16()
 {
-	nDelta = (INT16)((ymz280b_read_memory(channelInfo->nPosition / 2 + 1) << 8) + ymz280b_read_memory(channelInfo->nPosition / 2));
+	nDelta = (INT16)((ymz280b_readmem(channelInfo->nPosition / 2 + 1) << 8) + ymz280b_readmem(channelInfo->nPosition / 2));
 
 	channelInfo->nSample = nDelta;
 	channelInfo->nPosition+=4;

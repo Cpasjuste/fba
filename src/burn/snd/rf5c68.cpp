@@ -1,3 +1,8 @@
+// Based on MAME sources by Olivier Galibert,Aaron Giles
+/*********************************************************/
+/*    ricoh RF5C68(or clone) PCM controller              */
+/*********************************************************/
+
 #include "burnint.h"
 #include "rf5c68.h"
 #include "burn_sound.h"
@@ -120,14 +125,14 @@ void RF5C68PCMReset()
 
 void RF5C68PCMInit(INT32 clock)
 {
-	chip = (struct rf5c68pcm*)malloc(sizeof(struct rf5c68pcm));
+	chip = (struct rf5c68pcm*)BurnMalloc(sizeof(struct rf5c68pcm));
 	
 	INT32 Rate = clock / 384;
 	
 	nUpdateStep = (INT32)(((float)Rate / nBurnSoundRate) * 32768);
 	
-	left = (INT32*)malloc(nBurnSoundLen * sizeof(INT32));
-	right = (INT32*)malloc(nBurnSoundLen * sizeof(INT32));
+	left = (INT32*)BurnMalloc(nBurnSoundLen * sizeof(INT32));
+	right = (INT32*)BurnMalloc(nBurnSoundLen * sizeof(INT32));
 	
 	chip->volume[BURN_SND_RF5C68PCM_ROUTE_1] = 1.00;
 	chip->volume[BURN_SND_RF5C68PCM_ROUTE_2] = 1.00;
@@ -154,14 +159,9 @@ void RF5C68PCMExit()
 	if (!DebugSnd_RF5C68Initted) bprintf(PRINT_ERROR, _T("RF5C68PCMExit called without init\n"));
 #endif
 
-	if (left) {
-		free(left);
-		left = NULL;
-	}
-	if (right) {
-		free(right);
-		right = NULL;
-	}
+	BurnFree(left);
+	BurnFree(right);
+	BurnFree(chip);
 
 	DebugSnd_RF5C68Initted = 0;
 }

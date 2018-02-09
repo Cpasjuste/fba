@@ -358,7 +358,7 @@ static INT32 DrvInit()
 	AllMem = NULL;
 	MemIndex();
 	INT32 nLen = MemEnd - (UINT8 *)0;
-	if ((AllMem = (UINT8 *)malloc(nLen)) == NULL) return 1;
+	if ((AllMem = (UINT8 *)BurnMalloc(nLen)) == NULL) return 1;
 	memset(AllMem, 0, nLen);
 	MemIndex();
 
@@ -430,8 +430,7 @@ static INT32 DrvExit()
 	ZetExit();
 	SN76496Exit();
 
-	free (AllMem);
-	AllMem = NULL;
+	BurnFree (AllMem);
 
 	return 0;
 }
@@ -466,7 +465,7 @@ static INT32 DrvFrame()
 
 		TMS9928AScanline(i);
 
-		if ((i%5==5)) paddle_callback(); // 50x / frame (3000x / sec)
+		if ((i%5)==4) paddle_callback(); // 50x / frame (3000x / sec)
 	}
 
 	ZetClose();

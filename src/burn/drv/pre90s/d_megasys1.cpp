@@ -233,7 +233,7 @@ static struct BurnDIPInfo P47DIPList[]=
 	{0x13, 0x01, 0x40, 0x00, "Off"				},
 	{0x13, 0x01, 0x40, 0x40, "On"				},
 
-	{0   , 0xfe, 0   ,    8, "Invulnerability"		},
+	{0   , 0xfe, 0   ,    2, "Invulnerability"		},
 	{0x13, 0x01, 0x80, 0x80, "Off"				},
 	{0x13, 0x01, 0x80, 0x00, "On"				},
 };
@@ -261,7 +261,7 @@ static struct BurnDIPInfo KickoffDIPList[]=
 	{0x12, 0x01, 0x40, 0x40, "Trackball"			},
 	{0x12, 0x01, 0x40, 0x00, "Joystick"			},
 
-	{0   , 0xfe, 0   ,    4, "Flip Screen"			},
+	{0   , 0xfe, 0   ,    2, "Flip Screen"			},
 	{0x12, 0x01, 0x80, 0x80, "Off"				},
 	{0x12, 0x01, 0x80, 0x00, "On"				},
 
@@ -279,7 +279,7 @@ static struct BurnDIPInfo KickoffDIPList[]=
 	{0x13, 0x01, 0x20, 0x20, "Off"				},
 	{0x13, 0x01, 0x20, 0x00, "On"				},
 
-	{0   , 0xfe, 0   ,    8, "Demo Sounds"			},
+	{0   , 0xfe, 0   ,    2, "Demo Sounds"			},
 	{0x13, 0x01, 0x40, 0x40, "Off"				},
 	{0x13, 0x01, 0x40, 0x00, "On"				},
 
@@ -431,7 +431,7 @@ static struct BurnDIPInfo AstyanaxDIPList[]=
 	{0x14, 0x01, 0x20, 0x20, "Normal"			},
 	{0x14, 0x01, 0x20, 0x00, "Hard"				},
 
-	{0   , 0xfe, 0   ,    4, "Swap 1P/2P Controls"		},
+	{0   , 0xfe, 0   ,    2, "Swap 1P/2P Controls"		},
 	{0x14, 0x01, 0x40, 0x40, "Off"				},
 	{0x14, 0x01, 0x40, 0x00, "On"				},
 
@@ -1240,21 +1240,21 @@ static struct BurnDIPInfo LomakaiDIPList[]=
 	{0x12, 0x01, 0x03, 0x02, "4"				},
 	{0x12, 0x01, 0x03, 0x01, "5"				},
 
-	{0   , 0xfe, 0   ,    0, "Difficulty"			},
+	{0   , 0xfe, 0   ,    4, "Difficulty"			},
 	{0x12, 0x01, 0x30, 0x30, "Easy"				},
 	{0x12, 0x01, 0x30, 0x20, "Normal"			},
 	{0x12, 0x01, 0x30, 0x10, "Hard"				},
 	{0x12, 0x01, 0x30, 0x00, "Hardest"			},
 
-	{0   , 0xfe, 0   ,    0, "Cabinet"			},
+	{0   , 0xfe, 0   ,    2, "Cabinet"			},
 	{0x12, 0x01, 0x40, 0x00, "Upright"			},
 	{0x12, 0x01, 0x40, 0x40, "Cocktail"			},
 
-	{0   , 0xfe, 0   ,    4, "Flip Screen"			},
+	{0   , 0xfe, 0   ,    2, "Flip Screen"			},
 	{0x12, 0x01, 0x80, 0x80, "Off"				},
 	{0x12, 0x01, 0x80, 0x00, "On"				},
 
-	{0   , 0xfe, 0   ,    2, "Coin A"			},
+	{0   , 0xfe, 0   ,    8, "Coin A"			},
 	{0x13, 0x01, 0x07, 0x01, "4 Coins 1 Credits"		},
 	{0x13, 0x01, 0x07, 0x02, "3 Coins 1 Credits"		},
 	{0x13, 0x01, 0x07, 0x03, "2 Coins 1 Credits"		},
@@ -1264,7 +1264,7 @@ static struct BurnDIPInfo LomakaiDIPList[]=
 	{0x13, 0x01, 0x07, 0x04, "1 Coin  4 Credits"		},
 	{0x13, 0x01, 0x07, 0x00, "Free Play"			},
 
-	{0   , 0xfe, 0   ,    2, "Coin B"			},
+	{0   , 0xfe, 0   ,    8, "Coin B"			},
 	{0x13, 0x01, 0x38, 0x08, "4 Coins 1 Credits"		},
 	{0x13, 0x01, 0x38, 0x10, "3 Coins 1 Credits"		},
 	{0x13, 0x01, 0x38, 0x18, "2 Coins 1 Credits"		},
@@ -1274,11 +1274,11 @@ static struct BurnDIPInfo LomakaiDIPList[]=
 	{0x13, 0x01, 0x38, 0x20, "1 Coin  4 Credits"		},
 	{0x13, 0x01, 0x38, 0x00, "Free Play"			},
 
-	{0   , 0xfe, 0   ,    8, "Demo Sounds"			},
+	{0   , 0xfe, 0   ,    2, "Demo Sounds"			},
 	{0x13, 0x01, 0x40, 0x40, "Off"				},
 	{0x13, 0x01, 0x40, 0x00, "On"				},
 
-	{0   , 0xfe, 0   ,    8, "Invulnerability (Cheat)"	},
+	{0   , 0xfe, 0   ,    2, "Invulnerability (Cheat)"	},
 	{0x13, 0x01, 0x80, 0x80, "Off"				},
 	{0x13, 0x01, 0x80, 0x00, "On"				},
 };
@@ -2246,7 +2246,7 @@ static UINT8 __fastcall megasys1z_sound_read_port(UINT16 port)
 	{
 		case 0x00:
 		case 0x01:
-			return BurnYM2203Read(0, 0);
+			return BurnYM2203Read(0, port & 1);
 	}
 
 	return 0;
@@ -3252,10 +3252,8 @@ static INT32 System1ZFrame()
 		}
 	}
 
-	INT32 nSegment;
 	INT32 nInterleave = 256;
-	INT32 nSoundBufferPos = 0;
-	INT32 nCyclesTotal[2] = { 6000000 / 60, 3000000 / 60 };
+	INT32 nCyclesTotal[2] = { 6000000 / 56, 3000000 / 56 };
 	INT32 nCyclesDone[2] = { 0, 0 };
 
 	SekOpen(0);
@@ -3263,36 +3261,20 @@ static INT32 System1ZFrame()
 
 	for (INT32 i = 0; i < nInterleave; i++)
 	{
-		nSegment = (nCyclesTotal[0] * (i + 1)) / nInterleave;
+		INT32 nSegment = (nCyclesTotal[0] * (i + 1)) / nInterleave;
 		nCyclesDone[0] += SekRun(nSegment - nCyclesDone[0]);
 		if (i ==   0) SekSetIRQLine(1, CPU_IRQSTATUS_AUTO);
 		if (i == 128) SekSetIRQLine(3, CPU_IRQSTATUS_AUTO);
 		if (i == 240) SekSetIRQLine(2, CPU_IRQSTATUS_AUTO);
 
-		nSegment = (nCyclesTotal[1] * (i + 1)) / nInterleave;
-	//	if (sound_cpu_reset) {
-	//		nCyclesDone[1] += ZetIdle(nSegment - nCyclesDone[1]);
-	//	} else {
-			BurnTimerUpdate((nCyclesTotal[1] * (i + 1)) / nInterleave);
-			nCyclesDone[1] += nSegment - nCyclesDone[1];
-			ZetSetIRQLine(0, CPU_IRQSTATUS_HOLD); // fix music in Legend of Makai (lomakai).  why is this needed? are irq's getting lost? -dink
-
-	//	}
-
-	//	if (pBurnSoundOut) {
-	//		nSegment = nBurnSoundLen / nInterleave;
-	//		BurnYM2203Update(pBurnSoundOut + (nSoundBufferPos << 1), nSegment);
-	//		nSoundBufferPos += nSegment;
-	//	}
+		BurnTimerUpdate((nCyclesTotal[1] * (i + 1)) / nInterleave);
+		ZetSetIRQLine(0, CPU_IRQSTATUS_HOLD); // fix music in Legend of Makai (lomakai).  why is this needed? are irq's getting lost? -dink
 	}
 
 	BurnTimerEndFrame(nCyclesTotal[1]);
 
 	if (pBurnSoundOut) {
-		nSegment = nBurnSoundLen - nSoundBufferPos;
-		if (nSegment > 0) {
-			BurnYM2203Update(pBurnSoundOut + (nSoundBufferPos << 1), nSegment);
-		}
+		BurnYM2203Update(pBurnSoundOut, nBurnSoundLen);
 	}
 
 	ZetClose();
@@ -3346,8 +3328,8 @@ static INT32 System1AFrame()
 			nCyclesDone[1] += SekRun(nSegment - nCyclesDone[1]);
 		}
 
-		if (pBurnSoundOut) {
-			INT32 nSegmentLength = nBurnSoundLen / nInterleave;
+		if (pBurnSoundOut && i%8 == 7) {
+			INT32 nSegmentLength = nBurnSoundLen / (nInterleave / 8);
 			INT16* pSoundBuf = pBurnSoundOut + (nSoundBufferPos << 1);
 			BurnYM2151Render(pSoundBuf, nSegmentLength);
 			MSM6295Render(0, pSoundBuf, nSegmentLength);
@@ -3420,8 +3402,8 @@ static INT32 System1BFrame()
 			nCyclesDone[1] += SekRun(nSegment - nCyclesDone[1]);
 		}
 
-		if (pBurnSoundOut) {
-			INT32 nSegmentLength = nBurnSoundLen / nInterleave;
+		if (pBurnSoundOut && i%8 == 7) {
+			INT32 nSegmentLength = nBurnSoundLen / (nInterleave / 8);
 			INT16* pSoundBuf = pBurnSoundOut + (nSoundBufferPos << 1);
 			BurnYM2151Render(pSoundBuf, nSegmentLength);
 			MSM6295Render(0, pSoundBuf, nSegmentLength);
@@ -3494,8 +3476,8 @@ static INT32 System1CFrame()
 			nCyclesDone[1] += SekRun(nSegment - nCyclesDone[1]);
 		}
 
-		if (pBurnSoundOut) {
-			INT32 nSegmentLength = nBurnSoundLen / nInterleave;
+		if (pBurnSoundOut && i%8 == 7) {
+			INT32 nSegmentLength = nBurnSoundLen / (nInterleave / 8);
 			INT16* pSoundBuf = pBurnSoundOut + (nSoundBufferPos << 1);
 			BurnYM2151Render(pSoundBuf, nSegmentLength);
 			MSM6295Render(0, pSoundBuf, nSegmentLength);

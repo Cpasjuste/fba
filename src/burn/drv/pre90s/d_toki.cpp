@@ -35,7 +35,7 @@ static UINT8 *DrvScrollRAM;
 static UINT8 DrvReset;
 static UINT8 DrvJoy1[16];
 static UINT8 DrvJoy2[16];
-static UINT8 DrvJoy3[2];
+static UINT8 DrvJoy3[3];
 static UINT8 DrvDips[3];
 static UINT16 DrvInps[2];
 
@@ -507,48 +507,44 @@ static INT32 TokibDoReset()
 
 static void tokib_rom_decode()
 {
-	UINT8 *temp = (UINT8*)malloc(65536 * 2);
+	UINT8 *temp = (UINT8*)BurnMalloc(65536 * 2);
 	INT32 i, offs, len;
 	UINT8 *rom;
 
 	len = 0x100000;
 	rom = DrvGfxROM1;
-	for (i = 0; i < len; i++)
-		rom[i] ^= 0xff;
+	for (i = 0; i < len; i++) rom[i] ^= 0xff;
 
-		len = 0x080000;
-		rom = DrvGfxROM2;
-		for (offs = 0; offs < len; offs += 0x20000)
+	len = 0x080000;
+	rom = DrvGfxROM2;
+	for (offs = 0; offs < len; offs += 0x20000)
+	{
+		UINT8 *base = &rom[offs];
+		memcpy (temp, base, 65536 * 2);
+		for (i = 0; i < 16; i++)
 		{
-			UINT8 *base = &rom[offs];
-			memcpy (temp, base, 65536 * 2);
-			for (i = 0; i < 16; i++)
-			{
-				memcpy (&base[0x00000 + i * 0x800], &temp[0x0000 + i * 0x2000], 0x800);
-				memcpy (&base[0x10000 + i * 0x800], &temp[0x0800 + i * 0x2000], 0x800);
-				memcpy (&base[0x08000 + i * 0x800], &temp[0x1000 + i * 0x2000], 0x800);
-				memcpy (&base[0x18000 + i * 0x800], &temp[0x1800 + i * 0x2000], 0x800);
-			}
+			memcpy (&base[0x00000 + i * 0x800], &temp[0x0000 + i * 0x2000], 0x800);
+			memcpy (&base[0x10000 + i * 0x800], &temp[0x0800 + i * 0x2000], 0x800);
+			memcpy (&base[0x08000 + i * 0x800], &temp[0x1000 + i * 0x2000], 0x800);
+			memcpy (&base[0x18000 + i * 0x800], &temp[0x1800 + i * 0x2000], 0x800);
 		}
-		len = 0x080000;
-		rom = DrvGfxROM3;
-		for (offs = 0; offs < len; offs += 0x20000)
+	}
+	len = 0x080000;
+	rom = DrvGfxROM3;
+	for (offs = 0; offs < len; offs += 0x20000)
+	{
+		UINT8 *base = &rom[offs];
+		memcpy (temp, base, 65536 * 2);
+		for (i = 0; i < 16; i++)
 		{
-			UINT8 *base = &rom[offs];
-			memcpy (temp, base, 65536 * 2);
-			for (i = 0; i < 16; i++)
-			{
-				memcpy (&base[0x00000 + i * 0x800], &temp[0x0000 + i * 0x2000], 0x800);
-				memcpy (&base[0x10000 + i * 0x800], &temp[0x0800 + i * 0x2000], 0x800);
-				memcpy (&base[0x08000 + i * 0x800], &temp[0x1000 + i * 0x2000], 0x800);
-				memcpy (&base[0x18000 + i * 0x800], &temp[0x1800 + i * 0x2000], 0x800);
-			}
+			memcpy (&base[0x00000 + i * 0x800], &temp[0x0000 + i * 0x2000], 0x800);
+			memcpy (&base[0x10000 + i * 0x800], &temp[0x0800 + i * 0x2000], 0x800);
+			memcpy (&base[0x08000 + i * 0x800], &temp[0x1000 + i * 0x2000], 0x800);
+			memcpy (&base[0x18000 + i * 0x800], &temp[0x1800 + i * 0x2000], 0x800);
 		}
+	}
 
-		if (temp) {
-			free (temp);
-			temp = NULL;
-		}
+	BurnFree (temp);
 }
 
 
@@ -920,7 +916,7 @@ static INT32 TokibInit()
 	AllMem = NULL;
 	MemIndex();
 	INT32 nLen = MemEnd - (UINT8 *)0;
-	if ((AllMem = (UINT8 *)malloc(nLen)) == NULL) return 1;
+	if ((AllMem = (UINT8 *)BurnMalloc(nLen)) == NULL) return 1;
 	memset(AllMem, 0, nLen);
 	MemIndex();
 
@@ -1334,14 +1330,14 @@ static INT32 DrvFrame()
 			nCyclesDone[0] += SekRun(segment - SekTotalCycles());
 		}
 
-		BurnTimerUpdateYM3812(i * (nCyclesTotal[1] / nInterleave));
+		BurnTimerUpdateYM3812((i + 1) * (nCyclesTotal[1] / nInterleave));
 
 		if (pTransDraw && i >= 16 && i < 240) {
 			DrawByLine(i - 16);
 		}
 
 		// when the line clears, the timer starts counting for the scroll regs to be written!
-		if (i == 250) SekSetIRQLine(1, CPU_IRQSTATUS_AUTO);
+		if (i == nInterleave-1) SekSetIRQLine(1, CPU_IRQSTATUS_AUTO);
 	}
 	
 	BurnTimerEndFrameYM3812(nCyclesTotal[1]);
@@ -1392,7 +1388,7 @@ static INT32 TokibFrame()
 		SekClose();
 
 		ZetOpen(0);
-		BurnTimerUpdateYM3812(i * (nCyclesToDo[1] / nInterleave));
+		BurnTimerUpdateYM3812((i + 1) * (nCyclesToDo[1] / nInterleave));
 		MSM5205Update();
 		ZetClose();
 	}
@@ -1475,6 +1471,9 @@ static struct BurnRomInfo tokiRomDesc[] = {
 	{ "toki_bk2.ef8",		0x80000, 0xd86ac664, 6 | BRF_GRA },           // 11 Sprites
 
 	{ "9.m1",				0x20000, 0xae7a6b8b, 7 | BRF_SND },           // 12 MSM6295 Samples
+	
+	{ "PROM27.J3",			0x00100, 0xe616ae85, 0 | BRF_OPT },
+	{ "PROM26.B6",			0x00100, 0xea6312c6, 0 | BRF_OPT },
 };
 
 STD_ROM_PICK(toki)
@@ -1513,6 +1512,9 @@ static struct BurnRomInfo tokiaRomDesc[] = {
 	{ "toki_bk2.ef8",		0x80000, 0xd86ac664, 6 | BRF_GRA },           // 11 Sprites
 
 	{ "9.m1",				0x20000, 0xae7a6b8b, 7 | BRF_SND },           // 12 MSM6295 Samples
+	
+	{ "PROM27.J3",			0x00100, 0xe616ae85, 0 | BRF_OPT },
+	{ "PROM26.B6",			0x00100, 0xea6312c6, 0 | BRF_OPT },
 };
 
 STD_ROM_PICK(tokia)
@@ -1551,6 +1553,9 @@ static struct BurnRomInfo tokiuRomDesc[] = {
 	{ "toki_bk2.ef8",		0x80000, 0xd86ac664, 6 | BRF_GRA },           // 11 Sprites
 
 	{ "9.m1",				0x20000, 0xae7a6b8b, 7 | BRF_SND },           // 12 MSM6295 Samples
+	
+	{ "PROM27.J3",			0x00100, 0xe616ae85, 0 | BRF_OPT },
+	{ "PROM26.B6",			0x00100, 0xea6312c6, 0 | BRF_OPT },
 };
 
 STD_ROM_PICK(tokiu)
@@ -1589,6 +1594,9 @@ static struct BurnRomInfo tokiuaRomDesc[] = {
 	{ "toki_bk2.ef8",		0x80000, 0xd86ac664, 6 | BRF_GRA },           // 11 Sprites
 
 	{ "9.m1",				0x20000, 0xae7a6b8b, 7 | BRF_SND },           // 12 MSM6295 Samples
+	
+	{ "PROM27.J3",			0x00100, 0xe616ae85, 0 | BRF_OPT },
+	{ "PROM26.B6",			0x00100, 0xea6312c6, 0 | BRF_OPT },
 };
 
 STD_ROM_PICK(tokiua)
@@ -1639,6 +1647,9 @@ static struct BurnRomInfo tokipRomDesc[] = {
 	{ "BACK 2-3.ROM4",		0x20000, 0x6759571f, 6 | BRF_GRA },           // 23
 
 	{ "9 1-M",				0x20000, 0xae7a6b8b, 7 | BRF_SND },           // 24 MSM6295 Samples
+	
+	{ "PROM27.J3",			0x00100, 0xe616ae85, 0 | BRF_OPT },
+	{ "PROM26.B6",			0x00100, 0xea6312c6, 0 | BRF_OPT },
 };
 
 STD_ROM_PICK(tokip)
@@ -1677,6 +1688,9 @@ static struct BurnRomInfo jujuRomDesc[] = {
 	{ "toki_bk2.ef8",		0x80000, 0xd86ac664, 6 | BRF_GRA },           // 11 Sprites
 
 	{ "9.m1",				0x20000, 0xae7a6b8b, 7 | BRF_SND },           // 12 MSM6295 Samples
+	
+	{ "PROM27.J3",			0x00100, 0xe616ae85, 0 | BRF_OPT },
+	{ "PROM26.B6",			0x00100, 0xea6312c6, 0 | BRF_OPT },
 };
 
 STD_ROM_PICK(juju)

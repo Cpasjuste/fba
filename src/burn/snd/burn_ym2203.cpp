@@ -570,6 +570,8 @@ void BurnYM2203Exit()
 	if (!DebugSnd_YM2203Initted) bprintf(PRINT_ERROR, _T("BurnYM2203Exit called without init\n"));
 #endif
 
+	if (!DebugSnd_YM2203Initted) return;
+
 	YM2203Shutdown();
 	
 	for (INT32 i = 0; i < nNumChips; i++) {
@@ -578,10 +580,7 @@ void BurnYM2203Exit()
 
 	BurnTimerExit();
 
-	if (pBuffer) {
-		free(pBuffer);
-		pBuffer = NULL;
-	}
+	BurnFree(pBuffer);
 	
 	nNumChips = 0;
 	bYM2203AddSignal = 0;
@@ -636,7 +635,7 @@ INT32 BurnYM2203Init(INT32 num, INT32 nClockFrequency, FM_IRQHANDLER IRQCallback
 	
 	YM2203Init(num, nClockFrequency, nBurnYM2203SoundRate, &BurnOPNTimerCallback, IRQCallback);
 
-	pBuffer = (INT16*)malloc(4096 * 4 * num * sizeof(INT16));
+	pBuffer = (INT16*)BurnMalloc(4096 * 4 * num * sizeof(INT16));
 	memset(pBuffer, 0, 4096 * 4 * num * sizeof(INT16));
 
 	nYM2203Position = 0;

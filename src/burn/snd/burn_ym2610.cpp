@@ -380,19 +380,15 @@ void BurnYM2610Exit()
 	if (!DebugSnd_YM2610Initted) bprintf(PRINT_ERROR, _T("BurnYM2610Exit called without init\n"));
 #endif
 
+	if (!DebugSnd_YM2610Initted) return;
+
 	YM2610Shutdown();
 	AY8910Exit(0);
 
 	BurnTimerExit();
 	
-	if (pBuffer) {
-		free(pBuffer);
-		pBuffer = NULL;
-	}
-	if (pAYBuffer) {
-		free(pAYBuffer);
-		pAYBuffer = NULL;
-	}
+	BurnFree(pBuffer);
+	BurnFree(pAYBuffer);
 	
 	bYM2610AddSignal = 0;
 	bYM2610UseSeperateVolumes = 0;
@@ -447,10 +443,10 @@ INT32 BurnYM2610Init(INT32 nClockFrequency, UINT8* YM2610ADPCMAROM, INT32* nYM26
 	AY8910InitYM(0, nClockFrequency, nBurnYM2610SoundRate, NULL, NULL, NULL, NULL, BurnAY8910UpdateRequest);
 	YM2610Init(1, nClockFrequency, nBurnYM2610SoundRate, (void**)(&YM2610ADPCMAROM), nYM2610ADPCMASize, (void**)(&YM2610ADPCMBROM), nYM2610ADPCMBSize, &BurnOPNTimerCallback, IRQCallback);
 
-	pBuffer = (INT16*)malloc(4096 * 6 * sizeof(INT16));
+	pBuffer = (INT16*)BurnMalloc(4096 * 6 * sizeof(INT16));
 	memset(pBuffer, 0, 4096 * 6 * sizeof(INT16));
 
-	pAYBuffer = (INT32*)malloc(4096 * sizeof(INT32));
+	pAYBuffer = (INT32*)BurnMalloc(4096 * sizeof(INT32));
 	memset(pAYBuffer, 0, 4096 * sizeof(INT32));
 	
 	nYM2610Position = 0;

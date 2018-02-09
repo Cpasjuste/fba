@@ -48,6 +48,7 @@
 #define IDD_NCD_COVER_DLG					80
 #define IDD_GAMEINFO						81
 #define IDD_DOWNLOAD_LOCAL					82
+#define IDD_CHOOSEMONITOR					83
 
 #define IDR_MENU                        	100
 #define IDR_MENU_BLITTER_1					110
@@ -57,6 +58,7 @@
 #define IDR_MENU_BLITTER_5					114
 #define IDR_MENU_AUD_PLUGIN_1				130
 #define IDR_MENU_AUD_PLUGIN_2				131
+#define	IDR_MENU_GAMESEL					140
 #define IDR_ACCELERATOR                 	150
 
 #define IDD_REPLAYINP                   233
@@ -184,6 +186,11 @@
 #define IDC_SYSINFO_LOG_SAVE                20138
 #define IDC_LOCAL_DOWNLOAD_LANG				20139
 #define IDC_SEL_SEARCHTIMER                 20140
+#define IDC_CHOOSE_MONITOR_HOR				20141
+#define IDC_CHOOSE_MONITOR_HOR_LIST			20142
+#define IDC_CHOOSE_MONITOR_VER				20143
+#define IDC_CHOOSE_MONITOR_VER_LIST			20144
+#define IDC_CHOOSE_MONITOR_TEXT				20145
 
 #define IDC_DRVCOUNT						20200
 #define IDC_TREE2							20201
@@ -259,6 +266,7 @@
 #define IDRESCAN                        	20601
 #define IDGAMEINFO                       	20602
 #define IDRESCANSET                        	20603
+#define IDFAVORITESET                       20604
 
 #define IDC_MVS_CART1                 		20700
 #define IDC_MVS_CART2                   	20701
@@ -346,6 +354,7 @@
 #define IDC_SUPPORTDIR_EDIT20				20919
 #define IDC_SUPPORTDIR_EDIT21				20920
 #define IDC_SUPPORTDIR_EDIT22				20921
+#define IDC_SUPPORTDIR_EDIT23				20922
 
 #define IDC_SUPPORTDIR_BR1					20950
 #define IDC_SUPPORTDIR_BR2					20951
@@ -369,6 +378,7 @@
 #define IDC_SUPPORTDIR_BR20					20969
 #define IDC_SUPPORTDIR_BR21					20970
 #define IDC_SUPPORTDIR_BR22					20971
+#define IDC_SUPPORTDIR_BR23					20972
 
 #define ID_LICENSE                      	21000
 #define ID_DX9EFFECT                    	21001
@@ -442,7 +452,6 @@
 #define MENU_STATE_UNDO                         10037
 #define MENU_TRIPLE                     	10100
 #define MENU_FULL                       	10102
-#define MENU_DWMFIX							10103
 #define MENU_NOSTRETCH                  	10110
 #define MENU_STRETCH                    	10111
 #define MENU_ASPECT                     	10112
@@ -637,6 +646,9 @@
 #define MENU_AVI1X							10724
 #define MENU_AVI2X							10725
 #define MENU_AVI3X							10726
+#define MENU_GEARSHIFT						10727
+#define MENU_FULLSCREEN_MONITOR				10728
+#define MENU_CLRMAME_PRO_ALL_DATS			10729
 
 #define MENU_BASIC_NORMAL          	    	11001
 #define MENU_BASIC_SCAN                	    11002
@@ -791,6 +803,7 @@
 #define MENU_DX9_ALT_SOFT_4XBR_C			11434
 #define MENU_DX9_ALT_SOFT_DDT3X             11435
 #define MENU_DX9_ALT_SOFT_AUTOSIZE			11490
+#define MENU_DX9_ALT_FORCE_16BIT			11491
 
 #define MENU_DX9_POINT						11601
 #define MENU_DX9_LINEAR						11602
@@ -821,6 +834,11 @@
 #define MENU_AVISTART					    11827
 #define MENU_AVISTOP					    11828
 #define MENU_AVIINTAUD					    11829
+
+#define GAMESEL_MENU_PLAY					11900
+#define GAMESEL_MENU_GAMEINFO				11901
+#define GAMESEL_MENU_VIEWEMMA				11902
+#define GAMESEL_MENU_FAVORITE				11903
 
 // Next default values for new objects
 //

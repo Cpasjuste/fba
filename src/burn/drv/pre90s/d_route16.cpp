@@ -128,7 +128,7 @@ static struct BurnDIPInfo stratvoxDIPList[]=
 	{0x0f, 0x01, 0x0c, 0x08, "4"       		  },
 	{0x0f, 0x01, 0x0c, 0x0c, "5"       		  },
 
-	{0   , 0xfe, 0   , 3   , "Astronauts Kidnapped"   },
+	{0   , 0xfe, 0   , 2   , "Astronauts Kidnapped"   },
 	{0x0f, 0x01, 0x10, 0x00, "Less Often"     	  },
 	{0x0f, 0x01, 0x10, 0x10, "More Often"    	  },
 
@@ -164,7 +164,7 @@ static struct BurnDIPInfo speakresDIPList[]=
 	{0x0f, 0x01, 0x0c, 0x08, "4"       		  },
 	{0x0f, 0x01, 0x0c, 0x0c, "5"       		  },
 
-	{0   , 0xfe, 0   , 3   , "Bonus Life"  		  },
+	{0   , 0xfe, 0   , 2   , "Bonus Life"  		  },
 	{0x0f, 0x01, 0x10, 0x00, "5000"     		  },
 	{0x0f, 0x01, 0x10, 0x10, "8000"    		  },
 
@@ -635,7 +635,7 @@ static INT32 DrvFrame()
 		nNext = (i + 1) * nCyclesTotal[nCurrentCPU] / nInterleave;
 		nCyclesSegment = nNext - nCyclesDone[nCurrentCPU];
 		nCyclesDone[nCurrentCPU] += ZetRun(nCyclesSegment);
-		if (i+1 == nInterleave) ZetSetIRQLine(0, CPU_IRQSTATUS_AUTO);
+		if (i+1 == nInterleave) ZetSetIRQLine(0, CPU_IRQSTATUS_HOLD);
 		ZetClose();
 
 		// Run Z80 #1
@@ -648,7 +648,7 @@ static INT32 DrvFrame()
 		if (draw_type == 3) { // space echo
 			for (INT32 j = 0; j < 48; j++) {
 				if (i == DACIRQFireSlice[j]) {
-					ZetSetIRQLine(0, CPU_IRQSTATUS_AUTO);
+					ZetSetIRQLine(0, CPU_IRQSTATUS_HOLD);
 				}
 			}
 		}

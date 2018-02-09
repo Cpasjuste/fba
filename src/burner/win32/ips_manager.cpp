@@ -24,6 +24,8 @@ static HBRUSH hWhiteBGBrush;
 static HBITMAP hBmp			= NULL;
 static HBITMAP hPreview		= NULL;
 
+static TCHAR szDriverName[32];
+
 TCHAR szIpsActivePatches[MAX_ACTIVE_PATCHES][MAX_PATH];
 
 // GCC doesn't seem to define these correctly.....
@@ -45,8 +47,8 @@ TCHAR szIpsActivePatches[MAX_ACTIVE_PATCHES][MAX_PATH];
 static TCHAR* GameIpsConfigName()
 {
 	// Return the path of the config file for this game
-	static TCHAR szName[32];
-	_stprintf(szName, _T("config\\ips\\%s.ini"), BurnDrvGetText(DRV_NAME));
+	static TCHAR szName[64];
+	_stprintf(szName, _T("config\\ips\\%s.ini"), szDriverName);
 	return szName;
 }
 
@@ -80,7 +82,7 @@ static TCHAR* GetPatchDescByLangcode(FILE* fp, int nLang)
 {
 	TCHAR* result = NULL;
 	char* desc = NULL;
-	char langtag[8];
+	char langtag[10];
 
 	sprintf(langtag, "[%s]", TCHARToANSI(szLanguageCodes[nLang], NULL, 0));
 	
@@ -90,12 +92,12 @@ static TCHAR* GetPatchDescByLangcode(FILE* fp, int nLang)
 	{
 		char s[4096];
 
-		if (fgets(s, sizeof s, fp) != NULL)
+		if (fgets(s, sizeof(s), fp) != NULL)
 		{
 			if (strncmp(langtag, s, strlen(langtag)) != 0)
 				continue;
 
-			while (fgets(s, sizeof s, fp) != NULL)
+			while (fgets(s, sizeof(s), fp) != NULL)
 			{
 				char* p;
 
@@ -176,7 +178,7 @@ static void FillListBox()
 	TvItem.item.mask = TVIF_TEXT | TVIF_PARAM;
 	TvItem.hInsertAfter = TVI_LAST;
 
-	_stprintf(szFilePath, _T("%s%s\\"), szAppIpsPath, BurnDrvGetText(DRV_NAME));
+	_stprintf(szFilePath, _T("%s%s\\"), szAppIpsPath, szDriverName);
 	_stprintf(szFilePathSearch, _T("%s*.dat"), szFilePath);
 	
 	hSearch = FindFirstFile(szFilePathSearch, &wfd);
@@ -198,7 +200,9 @@ static void FillListBox()
 				if (PatchDesc == NULL) PatchDesc = GetPatchDescByLangcode(fp, 0);
 				// Simplified Chinese is the reference language (should always be available!!)
 				if (PatchDesc == NULL) PatchDesc = GetPatchDescByLangcode(fp, 1);
-				
+
+				bprintf(0, _T("PatchDesc [%s]\n"), PatchDesc);
+
 				for (unsigned int i = 0; i < _tcslen(PatchDesc); i++) {
 					if (PatchDesc[i] == '\r' || PatchDesc[i] == '\n') break;
 					PatchName[i] = PatchDesc[i];					
@@ -329,7 +333,7 @@ void LoadIpsActivePatches()
 			if (!_tcsnicmp(szLine, _T("//"), 2)) continue;
 			if (!_tcsicmp(szLine, _T(""))) continue;
 			
-			_stprintf(szIpsActivePatches[nActivePatches], _T("%s%s\\%s"), szAppIpsPath, BurnDrvGetText(DRV_NAME), szLine);
+			_stprintf(szIpsActivePatches[nActivePatches], _T("%s%s\\%s"), szAppIpsPath, szDriverName, szLine);
 			nActivePatches++;
 		}		
 		
@@ -410,6 +414,8 @@ static int IpsManagerInit()
 	SendDlgItemMessage(hIpsDlg, IDC_CHOOSE_LIST, CB_SETCURSEL, (WPARAM)nIpsSelectedLanguage, (LPARAM)0);
 	
 	hIpsList = GetDlgItem(hIpsDlg, IDC_TREE1);
+	
+	_tcscpy(szDriverName, BurnDrvGetText(DRV_NAME));
 	
 	FillListBox();
 	
@@ -494,7 +500,7 @@ static void SavePatches()
 	FILE* fp = _tfopen(GameIpsConfigName(), _T("wt"));
 	
 	if (fp) {
-		_ftprintf(fp, _T("// ") _T(APP_TITLE) _T(" v%s --- IPS Config File for %s (%s)\n\n"), szAppBurnVer, BurnDrvGetText(DRV_NAME), ANSIToTCHAR(BurnDrvGetTextA(DRV_FULLNAME), NULL, 0));
+		_ftprintf(fp, _T("// ") _T(APP_TITLE) _T(" v%s --- IPS Config File for %s (%s)\n\n"), szAppBurnVer, szDriverName, szFullName);
 		for (int i = 0; i < nActivePatches; i++) {
 			TCHAR *Tokens;
 			TCHAR szFileName[MAX_PATH];
@@ -701,15 +707,17 @@ static void PatchFile(const char* ips_path, UINT8* base)
 	if (NULL == (f = fopen(ips_path, "rb")))
 		return;
 
-	memset(buf, 0, sizeof buf);
+	memset(buf, 0, sizeof(buf));
 	fread(buf, 1, 5, f);
 	if (strcmp(buf, IPS_SIGNATURE)) {
+		bprintf(0, _T("IPS - Bad IPS-Signature in: %S.\n"), ips_path);
 		if (f)
 		{
 			fclose(f);
 		}
 		return;
 	} else {
+		bprintf(0, _T("IPS - Patching with: %S.\n"), ips_path);
 		UINT8 ch = 0;
 		int bRLE = 0;
 		while (!feof(f)) {
@@ -759,7 +767,7 @@ static void DoPatchGame(const char* patch_name, char* game_name, UINT8* base)
 		fseek(fp, 0, SEEK_SET);
 
 		while (!feof(fp)) {
-			if (fgets(s, sizeof s, fp) != NULL) {
+			if (fgets(s, sizeof(s), fp) != NULL) {
 				p = s;
 
 				// skip UTF-8 sig
@@ -770,6 +778,7 @@ static void DoPatchGame(const char* patch_name, char* game_name, UINT8* base)
 					break;
 
 				rom_name = strtok(p, " \t\r\n");
+
 				if (!rom_name)
 					continue;
 				if (*rom_name == '#')

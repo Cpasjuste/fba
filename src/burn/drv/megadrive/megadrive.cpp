@@ -109,7 +109,7 @@ static UINT8 *Mem = NULL, *MemEnd = NULL;
 static UINT8 *RamStart, *RamEnd;
 
 static UINT8 *RomMain;
-static UINT8 *OriginalRom;
+static UINT8 *OriginalRom = NULL;
 
 static UINT8 *Ram68K;
 static UINT8 *RamZ80;
@@ -3000,14 +3000,14 @@ INT32 MegadriveInit()
 	MemIndex();	
 
 	MegadriveLoadRoms(0);
-	MegadriveLoadRoms(1);
+	if (MegadriveLoadRoms(1)) return 1;
 
 	{
 		SekInit(0, 0x68000);										// Allocate 68000
 		SekOpen(0);
 
 		// Map 68000 memory:
-		SekMapMemory(RomMain,		0x000000, 0x3FFFFF, MAP_ROM);	// 68000 ROM
+		SekMapMemory(RomMain,		0x000000, 0x9FFFFF, MAP_ROM);	// 68000 ROM
 
 		// RAM and it's mirrors (Fix Xaio Monv: Magic Girl)
 		for (INT32 a = 0xe00000; a < 0x1000000; a += 0x010000) {
@@ -3112,8 +3112,15 @@ INT32 MegadriveExit()
 	BurnYM2612Exit();
 	SN76496Exit();
 	
-	BurnFree(Mem);
-	BurnFree(OriginalRom);
+	if (Mem) {
+		BurnFree(Mem);
+		Mem = NULL;
+	}
+
+	if (OriginalRom) {
+		BurnFree(OriginalRom);
+		OriginalRom = NULL;
+	}
 	
 	MegadriveCallback = NULL;
 	RomNoByteswap = 0;
@@ -3377,7 +3384,7 @@ static void DrawStrip(struct TileStrip *ts, INT32 sh)
 	*ts->hc = 0;
 }
 
-static void DrawStripVSRam(struct TileStrip *ts, INT32 plane)
+static void DrawStripVSRam(struct TileStrip *ts, INT32 plane, INT32 sh)
 {
 	INT32 tilex=0,dx=0,ty=0,code=0,addr=0,cell=0,nametabadd=0;
 	INT32 oldcode=-1,blank=-1; // The tile we know is blank
@@ -3425,7 +3432,7 @@ static void DrawStripVSRam(struct TileStrip *ts, INT32 plane)
 			// Get tile address/2:
 			addr=(code&0x7ff)<<4;
 			if (code&0x1000) addr+=14-ty; else addr+=ty; // Y-flip
-			pal=((code>>9)&0x30);
+			pal=((code>>9)&0x30)|(sh<<6);
 		}
 
 		if (code&0x0800) zero=TileFlip(dx,addr,pal);
@@ -3526,10 +3533,10 @@ static void DrawLayer(INT32 plane, INT32 *hcache, INT32 maxcells, INT32 sh)
 
 		DrawStripInterlace(&ts);
 	} else if( RamVReg->reg[11]&4) {
-		// e have 2-cell column based vscroll
+		// we have 2-cell column based vscroll
 		// luckily this doesn't happen too often
 		ts.line = ymask | (shift[width]<<24); // save some stuff instead of line
-		DrawStripVSRam(&ts, plane);
+		DrawStripVSRam(&ts, plane, sh);
 	} else {
 		vscroll = BURN_ENDIAN_SWAP_INT16(RamSVid[plane]); // Get vertical scroll value
 
@@ -3584,11 +3591,15 @@ static void DrawWindow(INT32 tstart, INT32 tend, INT32 prio, INT32 sh)
 			INT32 tmp, *zb = (INT32 *)(HighCol+8+(tilex<<3));
 			if(prio) {
 				tmp = *zb;
-				if(!(tmp&0x00000080)) tmp&=~0x000000c0; if(!(tmp&0x00008000)) tmp&=~0x0000c000;
-				if(!(tmp&0x00800000)) tmp&=~0x00c00000; if(!(tmp&0x80000000)) tmp&=~0xc0000000;
+				if(!(tmp&0x00000080)) tmp&=~0x000000c0;
+				if(!(tmp&0x00008000)) tmp&=~0x0000c000;
+				if(!(tmp&0x00800000)) tmp&=~0x00c00000;
+				if(!(tmp&0x80000000)) tmp&=~0xc0000000;
 				*zb++=tmp; tmp = *zb;
-				if(!(tmp&0x00000080)) tmp&=~0x000000c0; if(!(tmp&0x00008000)) tmp&=~0x0000c000;
-				if(!(tmp&0x00800000)) tmp&=~0x00c00000; if(!(tmp&0x80000000)) tmp&=~0xc0000000;
+				if(!(tmp&0x00000080)) tmp&=~0x000000c0;
+				if(!(tmp&0x00008000)) tmp&=~0x0000c000;
+				if(!(tmp&0x00800000)) tmp&=~0x00c00000;
+				if(!(tmp&0x80000000)) tmp&=~0xc0000000;
 				*zb++=tmp;
 			} else {
 				pal |= 0x40;
@@ -3625,10 +3636,22 @@ static void DrawTilesFromCache(INT32 *hc, INT32 sh)
 		dx=(code>>16)&0x1ff;
 		if(sh) {
 			UINT8 *zb = HighCol+dx;
-			if(!(*zb&0x80)) *zb&=0x3f; zb++; if(!(*zb&0x80)) *zb&=0x3f; zb++;
-			if(!(*zb&0x80)) *zb&=0x3f; zb++; if(!(*zb&0x80)) *zb&=0x3f; zb++;
-			if(!(*zb&0x80)) *zb&=0x3f; zb++; if(!(*zb&0x80)) *zb&=0x3f; zb++;
-			if(!(*zb&0x80)) *zb&=0x3f; zb++; if(!(*zb&0x80)) *zb&=0x3f; zb++;
+			if(!(*zb&0x80)) *zb&=0x3f;
+			zb++;
+			if(!(*zb&0x80)) *zb&=0x3f;
+			zb++;
+			if(!(*zb&0x80)) *zb&=0x3f;
+			zb++;
+			if(!(*zb&0x80)) *zb&=0x3f;
+			zb++;
+			if(!(*zb&0x80)) *zb&=0x3f;
+			zb++;
+			if(!(*zb&0x80)) *zb&=0x3f;
+			zb++;
+			if(!(*zb&0x80)) *zb&=0x3f;
+			zb++;
+			if(!(*zb&0x80)) *zb&=0x3f;
+			zb++;
 		}
 
 		pal=((code>>9)&0x30);

@@ -1,3 +1,7 @@
+// FB Alpha Double Dragon driver module
+// Based on MAME driver by Philip Bennett,Carlos A. Lozano, Rob Rosenbrock, 
+// Phil Stroffolino, Ernesto Corvi, David Haywood, and R. Belmont
+
 #include "tiles_generic.h"
 #include "z80_intf.h"
 #include "hd6309_intf.h"
@@ -1073,6 +1077,7 @@ UINT8 DrvDdragonHD6309ReadByte(UINT16 Address)
 			return DrvDip[1];
 		}
 		
+		case 0x380a:
 		case 0x380b: {
 			// ???
 			return 0;
@@ -1608,7 +1613,7 @@ static INT32 Drv2MemInit()
 	Mem = NULL;
 	Drv2MemIndex();
 	nLen = MemEnd - (UINT8 *)0;
-	if ((Mem = (UINT8 *)malloc(nLen)) == NULL) return 1;
+	if ((Mem = (UINT8 *)BurnMalloc(nLen)) == NULL) return 1;
 	memset(Mem, 0, nLen);
 	Drv2MemIndex();
 	
@@ -1623,7 +1628,7 @@ static INT32 DarktowrMemInit()
 	Mem = NULL;
 	DarktowrMemIndex();
 	nLen = MemEnd - (UINT8 *)0;
-	if ((Mem = (UINT8 *)malloc(nLen)) == NULL) return 1;
+	if ((Mem = (UINT8 *)BurnMalloc(nLen)) == NULL) return 1;
 	memset(Mem, 0, nLen);
 	DarktowrMemIndex();
 	

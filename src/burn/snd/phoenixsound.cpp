@@ -54,6 +54,8 @@ static int tone2_level;
 
 static UINT32 *poly18 = NULL;
 
+static INT32 phoenixsnd_initted = 0;
+
 static int tone1_vco1(int samplerate)
 {
     static int output, counter, level;
@@ -604,12 +606,12 @@ void phoenix_sound_init()
 	int i, j;
 	UINT32 shiftreg;
 
-	poly18 = (UINT32 *)malloc((1ul << (18-5)) * sizeof(UINT32));
+	poly18 = (UINT32 *)BurnMalloc((1ul << (18-5)) * sizeof(UINT32));
 
 	if( !poly18 )
 		return;
 
-    shiftreg = 0;
+	shiftreg = 0;
 	for( i = 0; i < (1ul << (18-5)); i++ )
 	{
 		UINT32 bits = 0;
@@ -628,14 +630,17 @@ void phoenix_sound_init()
 	tms36xx_init(372, MM6221AA, &decays[0], 0.21);
 
 	phoenix_sound_reset();
+
+	phoenixsnd_initted = 1;
 }
 
 void phoenix_sound_deinit()
 {
-	if (poly18) {
-		free(poly18);
-		poly18 = NULL;
-	}
+	if (!phoenixsnd_initted) return;
+
+	phoenixsnd_initted = 0;
+
+	BurnFree(poly18);
 
 	tms36xx_deinit();
 }

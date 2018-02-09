@@ -29,7 +29,6 @@
 #include <mmsystem.h>
 #include <shellapi.h>
 #include <shlwapi.h>
-#include "dwmapi_core.h"
 
 INT32 DSCore_Init();
 INT32 DICore_Init();
@@ -102,6 +101,8 @@ extern TCHAR szAppBurnVer[16];
 extern bool bCmdOptUsed;
 extern bool bAlwaysProcessKeyboardInput;
 extern bool bAlwaysCreateSupportFolders;
+
+extern bool bQuietLoading;
 
 extern bool bNoChangeNumLock;
 extern bool bMonitorAutoCheck;
@@ -196,6 +197,7 @@ int MediaExit();
 
 // misc_win32.cpp
 extern bool bIsWindowsXPorGreater; 
+extern bool bIsWindowsXP;
 BOOL DetectWindowsVersion();
 int AppDirectory();
 void UpdatePath(TCHAR* path);
@@ -203,6 +205,8 @@ void RegisterExtensions(bool bCreateKeys);
 int GetClientScreenRect(HWND hWnd, RECT* pRect);
 int WndInMid(HWND hMid, HWND hBase);
 char* DecorateGameName(unsigned int nBurnDrv);
+void EnableHighResolutionTiming();
+void DisableHighResolutionTiming();
 
 
 // drv.cpp
@@ -211,6 +215,9 @@ extern TCHAR szAppRomPaths[DIRS_MAX][MAX_PATH];
 int DrvInit(int nDrvNum, bool bRestore);
 int DrvInitCallback();								// Used when Burn library needs to load a game. DrvInit(nBurnSelect, false)
 int DrvExit();
+
+// burn_shift
+extern INT32 BurnShiftEnabled;
 
 // run.cpp
 extern int bRunPause;
@@ -221,14 +228,6 @@ int RunIdle();
 int RunMessageLoop();
 int RunReset();
 void ToggleLayer(unsigned char thisLayer);
-
-// mdi.cpp
-#define ID_MDI_START_CHILD		2990
-extern HWND hWndChildFrame;
-extern HWND hVideoWindow;
-BOOL RegNewMDIChild();
-int InitBurnerMDI(HWND hParentWnd);
-void DestroyBurnerMDI(int nAction);
 
 // scrn.cpp
 extern HWND hScrnWnd;								// Handle to the screen window
@@ -250,6 +249,7 @@ void SetPauseMode(bool bPause);
 int ActivateChat();
 void DeActivateChat();
 int BurnerLoadDriver(TCHAR *szDriverName);
+int StartFromReset(TCHAR *szDriverName);
 
 // menu.cpp
 #define UM_DISPLAYPOPUP (WM_USER + 0x0100)
@@ -289,6 +289,7 @@ extern int nLoadMenuShowX;
 extern int nLoadMenuShowY;
 extern int nLoadMenuBoardTypeFilter;
 extern int nLoadMenuGenreFilter;
+extern int nLoadMenuFavoritesFilter;
 extern int nLoadMenuFamilyFilter;
 extern int nSelDlgWidth;
 extern int nSelDlgHeight;
@@ -393,6 +394,7 @@ int SFactdCreate();
 // roms.cpp
 extern char* gameAv;
 extern bool avOk;
+extern bool bSkipStartupCheck;
 int RomsDirCreate(HWND hParentWND);
 int CreateROMInfo(HWND hParentWND);
 void FreeROMInfo();
@@ -420,6 +422,7 @@ int StartReplay(const TCHAR* szFileName = NULL);
 void StopReplay();
 int FreezeInput(unsigned char** buf, int* size);
 int UnfreezeInput(const unsigned char* buf, int size);
+void DisplayReplayProperties(HWND hDlg, bool bClear);
 
 // memcard.cpp
 extern int nMemoryCardStatus;						// & 1 = file selected, & 2 = inserted
@@ -437,6 +440,9 @@ int ProgressDestroy();
 
 // gameinfo.cpp
 int GameInfoDialogCreate(HWND hParentWND, int nDrvSel);
+void LoadFavorites();
+void AddFavorite_Ext(UINT8 addf);
+INT32 CheckFavorites(char *name);
 
 // ---------------------------------------------------------------------------
 // Debugger
@@ -461,14 +467,12 @@ void IpsPatchExit();
 // localise_download.cpp
 int LocaliseDownloadCreate(HWND hParentWND);
 
+// choose_monitor.cpp
+int ChooseMonitorCreate();
+
 // Misc
 #define _TtoA(a)	TCHARToANSI(a, NULL, 0)
 #define _AtoT(a)	ANSIToTCHAR(a, NULL, 0)
-
-// numpluscommas.cpp
-TCHAR* FormatCommasNumber(__int64);
-#define _uInt64ToCommaFormattedTCHAR(szOUT, nIN)	\
-	_stprintf(szOUT, _T("%s"), FormatCommasNumber(nIN));
 
 #ifdef INCLUDE_AVI_RECORDING
 // ----------------------------------------------------------------------------
