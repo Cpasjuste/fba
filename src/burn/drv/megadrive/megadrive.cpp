@@ -3944,6 +3944,9 @@ static void PrepareSprites(INT32 full)
 			if(!link) break; // End of sprites
 		}
 		SpriteBlocks |= sblocks;
+#ifdef __PFBA__
+		*pd = 0; // terminate
+#endif
 	} else {
 		for (; u < 80; u++) {
 			UINT32 *sprite;

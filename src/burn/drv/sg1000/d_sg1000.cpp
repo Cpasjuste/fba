@@ -42,6 +42,9 @@ static struct BurnInputInfo Sg1000InputList[] = {
 
 	{"Console Pause",		BIT_DIGITAL,	&DrvNMI,	"consolepause"	},
 	{"Reset",		BIT_DIGITAL,	&DrvReset,	"reset"		},
+#ifdef __PFBA__
+	{"Dip A",               BIT_DIPSWITCH,  DrvDips + 0,    "dip"},
+#endif
 };
 
 STDINPUTINFO(Sg1000)
@@ -394,6 +397,10 @@ INT32 SG1KGetZipName(char** pszName, UINT32 i)
 		return 1;
 	}
 
+#ifdef __PFBA__
+	*pszName = pszGameName;
+	return 0;
+#else
 	// remove the "SG1K_"
 	for (UINT32 j = 0; j < strlen(pszGameName); j++) {
 		szFilename[j] = pszGameName[j + 5];
@@ -402,6 +409,7 @@ INT32 SG1KGetZipName(char** pszName, UINT32 i)
 	*pszName = szFilename;
 
 	return 0;
+#endif
 }
 
 // Super UWOL SG-1000

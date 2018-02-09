@@ -420,6 +420,11 @@ INT32 SMSGetZipName(char** pszName, UINT32 i)
 		*pszName = NULL;
 		return 1;
 	}
+
+#ifdef __PFBA__
+	*pszName = pszGameName;
+	return 0;
+#else
    // remove sms_
 	for (UINT32 j = 0; j < strlen(pszGameName); j++) {
 		szFilename[j] = pszGameName[j+4];
@@ -428,6 +433,7 @@ INT32 SMSGetZipName(char** pszName, UINT32 i)
 	*pszName = szFilename;
 
 	return 0;
+#endif
 }
 
 INT32 GGGetZipName(char** pszName, UINT32 i)
@@ -449,6 +455,11 @@ INT32 GGGetZipName(char** pszName, UINT32 i)
 		*pszName = NULL;
 		return 1;
 	}
+
+#ifdef __PFBA__
+	*pszName = pszGameName;
+	return 0;
+#else
    // remove sms_
 	for (UINT32 j = 0; j < strlen(pszGameName); j++) {
 		szFilename[j] = pszGameName[j+3];
@@ -457,6 +468,7 @@ INT32 GGGetZipName(char** pszName, UINT32 i)
 	*pszName = szFilename;
 
 	return 0;
+#endif
 }
 
 // 4 PAK All Action (Aus)

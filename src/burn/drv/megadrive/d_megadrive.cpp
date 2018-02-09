@@ -178,6 +178,10 @@ INT32 MegadriveGetZipName(char** pszName, UINT32 i)
 		return 1;
 	}
 
+#ifdef __PFBA__
+	*pszName = pszGameName;
+	return 0;
+#else
 	// remove the "md_"
 	for (UINT32 j = 0; j < strlen(pszGameName); j++) {
 		szFilename[j] = pszGameName[j + 3];
@@ -186,6 +190,7 @@ INT32 MegadriveGetZipName(char** pszName, UINT32 i)
 	*pszName = szFilename;
 
 	return 0;
+#endif
 }
 
 // F-22 Interceptor (Euro, USA, 199109)

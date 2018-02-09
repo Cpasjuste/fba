@@ -83,6 +83,10 @@ INT32 PceGetZipName(char** pszName, UINT32 i)
 		return 1;
 	}
 
+#ifdef __PFBA__
+	*pszName = pszGameName;
+	return 0;
+#else
 	// remove the "pce_"
 	for (UINT32 j = 0; j < strlen(pszGameName); j++) {
 		szFilename[j] = pszGameName[j + 4];
@@ -91,6 +95,7 @@ INT32 PceGetZipName(char** pszName, UINT32 i)
 	*pszName = szFilename;
 
 	return 0;
+#endif
 }
 
 INT32 TgGetZipName(char** pszName, UINT32 i)
@@ -113,6 +118,10 @@ INT32 TgGetZipName(char** pszName, UINT32 i)
 		return 1;
 	}
 
+#ifdef __PFBA__
+	*pszName = pszGameName;
+	return 0;
+#else
 	// remove the "tg_"
 	for (UINT32 j = 0; j < strlen(pszGameName); j++) {
 		szFilename[j] = pszGameName[j + 3];
@@ -121,6 +130,7 @@ INT32 TgGetZipName(char** pszName, UINT32 i)
 	*pszName = szFilename;
 
 	return 0;
+#endif
 }
 
 INT32 SgxGetZipName(char** pszName, UINT32 i)
@@ -143,6 +153,10 @@ INT32 SgxGetZipName(char** pszName, UINT32 i)
 		return 1;
 	}
 
+#ifdef __PFBA__
+	*pszName = pszGameName;
+	return 0;
+#else
 	// remove the "sgx_"
 	for (UINT32 j = 0; j < strlen(pszGameName); j++) {
 		szFilename[j] = pszGameName[j + 4];
@@ -151,6 +165,7 @@ INT32 SgxGetZipName(char** pszName, UINT32 i)
 	*pszName = szFilename;
 
 	return 0;
+#endif
 }
 
 static void sf2_bankswitch(UINT8 offset)
