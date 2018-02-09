@@ -4199,6 +4199,45 @@ static INT32 PicoLine(INT32 /*scan*/)
 
 static void MegadriveDraw()
 {
+#ifdef __PFBA__
+	UINT8 *pDest = pBurnDraw;
+	UINT8 *pSrc = NULL;
+
+	if ((RamVReg->reg[12]&1) || !(MegadriveDIP[1] & 0x03)) {
+		for (INT32 j=0; j < 224*2; j++) {
+			pSrc = (UINT8 *)LineBuf + (j * 320);
+			for (INT32 i = 0; i < 320; i++) {
+				pDest[i] = pSrc[i];
+			}
+			pDest += 320;
+		}
+	} else {
+		if (( MegadriveDIP[1] & 0x03 ) == 0x01 ) {
+			// Center
+			for (INT32 j = 0; j < 224; j++) {
+				pSrc = (UINT8 *)LineBuf + (j * 320 *2);
+				memset(pDest, 0, 32+32);
+				memcpy(pDest+32+32, pSrc, (320-32-32)*2);
+				memset(pDest+((320*2)-32-32), 0, 32+32);
+				pDest += 320*2;
+			}
+		} else {
+			// Zoom
+			for (INT32 j = 0; j < 224; j++) {
+				UINT16 *ppSrc = LineBuf + (j * 320);
+				UINT32 delta = 0;
+				for (INT32 i = 0; i < 320; i++)
+				{
+					pDest[i] = ppSrc[delta >> 16];	///255	///TO BE TESTED !
+					delta += 0xCCCC;
+				}
+				pDest += 320;
+			}
+		}
+	}
+
+	memset(LineBuf, 0, 320 * 320 * sizeof(UINT16));
+#else
 	UINT16 *pDest = (UINT16 *)pBurnDraw;
 
 	if ((RamVReg->reg[12]&1) || !(MegadriveDIP[1] & 0x03)) {
@@ -4242,6 +4281,7 @@ static void MegadriveDraw()
 		
 	}
 	memset(LineBuf, 0, 320 * 320 * sizeof(UINT16));
+#endif
 }
 
 #define TOTAL_68K_CYCLES	((double)OSC_NTSC / 7) / 60
