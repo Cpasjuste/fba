@@ -9,7 +9,23 @@ void BurnYM2151SetRoute(INT32 nIndex, double nVolume, INT32 nRouteDir);
 void BurnYM2151Reset();
 void BurnYM2151Exit();
 extern void (*BurnYM2151Render)(INT16* pSoundBuf, INT32 nSegmentLength);
-void BurnYM2151Scan(INT32 nAction);
+void BurnYM2151Scan(INT32 nAction, INT32 *pnMin);
+void BurnYM2151SetInterleave(INT32 nInterleave);
+
+inline static void BurnYM2151Write(INT32 offset, const UINT8 nData)
+{
+#if defined FBA_DEBUG
+	if (!DebugSnd_YM2151Initted) bprintf(PRINT_ERROR, _T("BurnYM2151Write called without init\n"));
+#endif
+
+	extern UINT32 nBurnCurrentYM2151Register;
+
+	if (offset & 1) {
+		YM2151WriteReg(0, nBurnCurrentYM2151Register, nData);
+	} else {
+		nBurnCurrentYM2151Register = nData;
+	}
+}
 
 static inline void BurnYM2151SelectRegister(const UINT8 nRegister)
 {
@@ -29,16 +45,11 @@ static inline void BurnYM2151WriteRegister(const UINT8 nValue)
 #endif
 
 	extern UINT32 nBurnCurrentYM2151Register;
-	/*extern UINT8 BurnYM2151Registers[0x0100];
 
-        if (nBurnCurrentYM2151Register >= 0x20 && // this is no longer necessary. June 24, 2014 - dink
-            nBurnCurrentYM2151Register <= 0x3F) { // only(!) remember oper connections
-            BurnYM2151Registers[nBurnCurrentYM2151Register] = nValue;
-        }*/
 	YM2151WriteReg(0, nBurnCurrentYM2151Register, nValue);
 }
 
-#define BurnYM2151ReadStatus() YM2151ReadStatus(0)
+#define BurnYM2151Read() YM2151ReadStatus(0)
 
 #if defined FBA_DEBUG
 	#define BurnYM2151SetIrqHandler(h) if (!DebugSnd_YM2151Initted) bprintf(PRINT_ERROR, _T("BurnYM2151SetIrqHandler called without init\n")); YM2151SetIrqHandler(0, h)

@@ -31,10 +31,10 @@
 
 #include "burnint.h"
 #include "sh2_intf.h"
+#include <stddef.h>
 
 int has_sh2;
 INT32 cps3speedhack; // must be set _after_ Sh2Init();
-INT32 sh2_suprnova_speedhack;
 INT32 sh2_busyloop_speedhack_mode2;
 
 #define BUSY_LOOP_HACKS     1
@@ -67,8 +67,8 @@ INT32 sh2_busyloop_speedhack_mode2;
 
 typedef struct
 {
-	int irq_vector;
-	int irq_priority;
+	INT32 irq_vector;
+	INT32 irq_priority;
 } irq_entry;
 
 typedef struct
@@ -96,29 +96,29 @@ typedef struct
 	UINT16 	ocra, ocrb, icr;
 	UINT32 	frc_base;
 
-	int		frt_input;
-	int 	internal_irq_level;
-	int 	internal_irq_vector;
+	INT32	frt_input;
+	INT32 	internal_irq_level;
+	INT32 	internal_irq_vector;
 
 //	emu_timer *timer;
 	UINT32 	timer_cycles;
 	UINT32 	timer_base;
-	int     timer_active;
+	INT32   timer_active;
 	
 //	emu_timer *dma_timer[2];
 	UINT32 	dma_timer_cycles[2];
 	UINT32 	dma_timer_base[2];
-	int     dma_timer_active[2];
+	INT32   dma_timer_active[2];
 
 //	int     is_slave, cpu_number;
 	
 	UINT32	cycle_counts; // used internally for timers / sh2_GetTotalCycles()
 	UINT32	sh2_cycles_to_run;
 	INT32	sh2_icount;
-	int     sh2_total_cycles; // used externally (drivers/etc)
-	
-	ALIGN_VAR(8) int 	(*irq_callback)(int irqline);
+	INT32   sh2_total_cycles; // used externally (drivers/etc)
+	INT32   sh2_eat_cycles;
 
+	int 	(*irq_callback)(int irqline);
 } SH2;
 
 static SH2 * sh2;
@@ -480,8 +480,8 @@ int Sh2Init(int nCount)
 	DebugCPU_SH2Initted = 1;
 
 	has_sh2 = 1;
+
 	cps3speedhack = 0;
-	sh2_suprnova_speedhack = 0;
 	sh2_busyloop_speedhack_mode2 = 0;
 
 	Sh2Ext = (SH2EXT *)malloc(sizeof(SH2EXT) * nCount);
@@ -494,7 +494,9 @@ int Sh2Init(int nCount)
 	// init default memory handler
 	for (int i=0; i<nCount; i++) {
 		pSh2Ext = Sh2Ext + i;
-		//sh2 = & pSh2Ext->sh2;
+		sh2 = & (pSh2Ext->sh2);
+
+		sh2->sh2_eat_cycles = 1;
 
 		Sh2MapHandler(SH2_MAXHANDLER - 1, 0xE0000000, 0xFFFFFFFF, 0x07);
 		Sh2MapHandler(SH2_MAXHANDLER - 2, 0x40000000, 0xBFFFFFFF, 0x07);
@@ -537,6 +539,15 @@ void Sh2Close()
 #endif
 }
 
+void Sh2SetEatCycles(int i)
+{
+#if defined FBA_DEBUG
+	if (!DebugCPU_SH2Initted) bprintf(PRINT_ERROR, _T("Sh2SetEatCycles called without init\n"));
+#endif
+
+	sh2->sh2_eat_cycles = i;
+}
+
 int Sh2GetActive()
 {
 #if defined FBA_DEBUG
@@ -552,7 +563,13 @@ void Sh2Reset(unsigned int pc, unsigned r15)
 	if (!DebugCPU_SH2Initted) bprintf(PRINT_ERROR, _T("Sh2Reset called without init\n"));
 #endif
 
-	memset(sh2, 0, sizeof(SH2) - 4);
+	INT32 tmp_eat_cycles = sh2->sh2_eat_cycles;
+	int (*tmp_irq_callback)(int irqline) = sh2->irq_callback;
+
+	memset(sh2, 0, sizeof(SH2));
+
+	sh2->sh2_eat_cycles = tmp_eat_cycles; // save & restore init-time variables
+	sh2->irq_callback = tmp_irq_callback;
 
 	sh2->pc = pc;
 	sh2->r[15] = r15;
@@ -591,8 +608,6 @@ void program_write_word_32be(unsigned int /*A*/, unsigned short /*V*/)
 void program_write_dword_32be(unsigned int /*A*/, unsigned int /*V*/)
 {
 }
-
-//pSh2Ext->opbase
 
 #if FAST_OP_FETCH
 
@@ -2759,11 +2774,16 @@ SH2_INLINE void op1111(UINT16 /*opcode*/)
 static void sh2_timer_resync(void)
 {
 	int divider = div_tab[(sh2->m[5] >> 8) & 3];
-	UINT32 cur_time = sh2_GetTotalCycles();
+	UINT64 cur_time = sh2_GetTotalCycles();
+	UINT64 add = (cur_time - sh2->frc_base) >> divider;
 
-	if(divider)
-		sh2->frc += (cur_time - sh2->frc_base) >> divider;
-	sh2->frc_base = cur_time;
+	if (add > 0)
+	{
+		if(divider)
+			sh2->frc += add;
+
+		sh2->frc_base = cur_time;
+	}
 }
 
 static void sh2_timer_activate(void)
@@ -2862,7 +2882,8 @@ static void sh2_timer_callback()
 {
 	UINT16 frc;
 //	int cpunum = param;
-//	cpuintrf_push_context(cpunum);
+	//	cpuintrf_push_context(cpunum);
+	//bprintf(0, _T(" - timer callback\n"));
 	sh2_timer_resync();
 
 	frc = sh2->frc;
@@ -2943,7 +2964,8 @@ static void sh2_dmac_check(int dma)
 						src --;
 					if(incd == 2)
 						dst --;
-					program_write_byte_32be(dst, program_read_byte_32be(src));
+					//program_write_byte_32be(dst, program_read_byte_32be(src));
+					WB(dst, RB(src));
 					if(incs == 1)
 						src ++;
 					if(incd == 1)
@@ -2959,7 +2981,8 @@ static void sh2_dmac_check(int dma)
 						src -= 2;
 					if(incd == 2)
 						dst -= 2;
-					program_write_word_32be(dst, program_read_word_32be(src));
+					//program_write_word_32be(dst, program_read_word_32be(src));
+					WW(dst, RW(src));
 					if(incs == 1)
 						src += 2;
 					if(incd == 1)
@@ -2994,10 +3017,14 @@ static void sh2_dmac_check(int dma)
 				{
 					if(incd == 2)
 						dst -= 16;
-					program_write_dword_32be(dst, program_read_dword_32be(src));
-					program_write_dword_32be(dst+4, program_read_dword_32be(src+4));
-					program_write_dword_32be(dst+8, program_read_dword_32be(src+8));
-					program_write_dword_32be(dst+12, program_read_dword_32be(src+12));
+					WL(dst, RL(src));
+					WL(dst+4, RL(src+4));
+					WL(dst+8, RL(src+8));
+					WL(dst+12, RL(src+12));
+					//program_write_dword_32be(dst, program_read_dword_32be(src));
+					//program_write_dword_32be(dst+4, program_read_dword_32be(src+4));
+					//program_write_dword_32be(dst+8, program_read_dword_32be(src+8));
+					//program_write_dword_32be(dst+12, program_read_dword_32be(src+12));
 					src += 16;
 					if(incd == 1)
 						dst += 16;
@@ -3034,7 +3061,7 @@ static void sh2_internal_w(UINT32 offset, UINT32 data, UINT32 mem_mask)
 	case 0x04: // TIER, FTCSR, FRC
 		if((mem_mask & 0x00ffffff) != 0xffffff)
 			sh2_timer_resync();
-		//logerror("SH2.%d: TIER write %04x @ %04x\n", sh2->cpu_number, data >> 16, mem_mask>>16);
+		//bprintf(0, _T("SH2: TIER write %04x @ %04x\n"), data >> 16, mem_mask>>16);
 		sh2->m[4] = (sh2->m[4] & ~(ICF|OCFA|OCFB|OVF)) | (old & sh2->m[4] & (ICF|OCFA|OCFB|OVF));
 		COMBINE_DATA(&sh2->frc);
 		if((mem_mask & 0x00ffffff) != 0xffffff)
@@ -3042,7 +3069,7 @@ static void sh2_internal_w(UINT32 offset, UINT32 data, UINT32 mem_mask)
 		sh2_recalc_irq();
 		break;
 	case 0x05: // OCRx, TCR, TOCR
-		//logerror("SH2.%d: TCR write %08x @ %08x\n", sh2->cpu_number, data, mem_mask);
+		//bprintf(0, _T("SH2: TCR write %08x @ %08x\n"), data, mem_mask);
 		sh2_timer_resync();
 		if(sh2->m[5] & 0x10)
 			sh2->ocrb = (sh2->ocrb & (mem_mask >> 16)) | ((data & ~mem_mask) >> 16);
@@ -3211,8 +3238,8 @@ static UINT32 sh2_internal_r(UINT32 offset, UINT32 /*mem_mask*/)
 		return (sh2->m[0x38] & 0x7fffffff) | 0x80000000;
 
 	case 0x78: // BCR1
-//		return sh2->is_slave ? 0x00008000 : 0;
-		return 0;
+		return /*(m_is_slave ? 0x00008000 : 0)*/ 0 | (sh2->m[0x78] & 0x7fff);
+		//return 0;
 
 	case 0x41: // dvdntl mirrors
 	case 0x47:
@@ -3285,7 +3312,7 @@ int Sh2Run(int cycles)
 		}
 
 		sh2->sh2_total_cycles++;
-		sh2->sh2_icount -= (sh2_suprnova_speedhack) ? 4 : 1;
+		sh2->sh2_icount -= sh2->sh2_eat_cycles;
 		
 		// timer check 
 		
@@ -3465,26 +3492,24 @@ int Sh2Scan(int nAction)
 #endif
 
 	if (nAction & ACB_DRIVER_DATA) {
-	
 		char szText[] = "SH2 #0";
 
 		for (int i = 0; i < 1 /*nCPUCount*/; i++) {
-			szText[5] = '1' + i;
+			struct BurnArea ba;
 
-			int (*irq_callback)(int irqline);
-			irq_callback = Sh2Ext[i].sh2.irq_callback;
+			szText[5] = '0' + i;
 
-			ScanVar(& ( Sh2Ext[i].sh2 ), sizeof(SH2), szText);
+			memset(&ba, 0, sizeof(ba));
+			ba.Data	  = &Sh2Ext[i].sh2;
+			ba.nLen	  = STRUCT_SIZE_HELPER(SH2, sh2_eat_cycles);
+			ba.szName = szText;
+			BurnAcb(&ba);
 
-			Sh2Ext[i].sh2.irq_callback = irq_callback;
-			
 			SCAN_VAR (Sh2Ext[i].suspend);
-			SCAN_VAR (Sh2Ext[i].opbase);
-			
+
 #if FAST_OP_FETCH
-			//	Sh2Ext[i].opbase
 			if (nAction & ACB_WRITE) {
-				change_pc(sh2->pc & AM);
+				change_pc(sh2->pc & AM); // re-load the opbase
 			}
 #endif
 		}

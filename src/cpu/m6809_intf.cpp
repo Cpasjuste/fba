@@ -1,5 +1,6 @@
 #include "burnint.h"
 #include "m6809_intf.h"
+#include <stddef.h>
 
 #define MAX_CPU		8
 
@@ -56,7 +57,7 @@ void M6809NewFrame()
 	if (!DebugCPU_M6809Initted) bprintf(PRINT_ERROR, _T("M6809NewFrame called without init\n"));
 #endif
 
-	for (INT32 i = 0; i < nM6809Count; i++) {
+	for (INT32 i = 0; i < nM6809Count+1; i++) {
 		nM6809CyclesDone[i] = 0;
 	}
 	nM6809CyclesTotal = 0;
@@ -83,39 +84,50 @@ static cpu_core_config M6809CheatCpuConfig =
 	0
 };
 
-INT32 M6809Init(INT32 num)
+INT32 M6809Init(INT32 cpu)
 {
 	DebugCPU_M6809Initted = 1;
-	
+
 	nActiveCPU = -1;
-	nM6809Count = num % MAX_CPU;
-	
-	m6809CPUContext = (M6809Ext*)malloc(num * sizeof(M6809Ext));
+	nM6809Count = cpu;
+
+#if defined FBA_DEBUG
+	if (cpu >= MAX_CPU-1) bprintf (0, _T("M6809Init called with greater than maximum (%d) cpu number (%d)\n"), MAX_CPU-1, cpu);
+#endif
+
 	if (m6809CPUContext == NULL) {
-		return 1;
-	}
+		m6809CPUContext = (M6809Ext*)malloc(MAX_CPU * sizeof(M6809Ext));
 
-	memset(m6809CPUContext, 0, num * sizeof(M6809Ext));
-	
-	for (INT32 i = 0; i < num; i++) {
-		m6809CPUContext[i].ReadByte = M6809ReadByteDummyHandler;
-		m6809CPUContext[i].WriteByte = M6809WriteByteDummyHandler;
-		m6809CPUContext[i].ReadOp = M6809ReadOpDummyHandler;
-		m6809CPUContext[i].ReadOpArg = M6809ReadOpArgDummyHandler;
-		
-		nM6809CyclesDone[i] = 0;
-	
-		for (INT32 j = 0; j < (0x0100 * 3); j++) {
-			m6809CPUContext[i].pMemMap[j] = NULL;
+		if (m6809CPUContext == NULL) {
+#if defined FBA_DEBUG
+			if (cpu >= MAX_CPU-1) bprintf (0, _T("M6809Init failed to initialize context!\n"));
+#endif
+			return 1;
 		}
+		
+		memset(m6809CPUContext, 0, MAX_CPU * sizeof(M6809Ext));
+
+		for (INT32 i = 0; i < MAX_CPU; i++) {
+			m6809CPUContext[i].ReadByte = M6809ReadByteDummyHandler;
+			m6809CPUContext[i].WriteByte = M6809WriteByteDummyHandler;
+			m6809CPUContext[i].ReadOp = M6809ReadOpDummyHandler;
+			m6809CPUContext[i].ReadOpArg = M6809ReadOpArgDummyHandler;
+			nM6809CyclesDone[i] = 0;
+
+			for (INT32 j = 0; j < (0x0100 * 3); j++) {
+				m6809CPUContext[i].pMemMap[j] = NULL;
+			}
+		}
+
+		m6809_init(NULL);
 	}
 	
-	nM6809CyclesTotal = 0;
-	
-	m6809_init(NULL);
+	m6809CPUContext[cpu].ReadByte = M6809ReadByteDummyHandler;
+	m6809CPUContext[cpu].WriteByte = M6809WriteByteDummyHandler;
+	m6809CPUContext[cpu].ReadOp = M6809ReadOpDummyHandler;
+	m6809CPUContext[cpu].ReadOpArg = M6809ReadOpArgDummyHandler;
 
-	for (INT32 i = 0; i < num; i++)
-		CpuCheatRegister(i, &M6809CheatCpuConfig);
+	CpuCheatRegister(cpu, &M6809CheatCpuConfig);
 
 	return 0;
 }
@@ -140,7 +152,7 @@ void M6809Open(INT32 num)
 {
 #if defined FBA_DEBUG
 	if (!DebugCPU_M6809Initted) bprintf(PRINT_ERROR, _T("M6809Open called without init\n"));
-	if (num >= nM6809Count) bprintf(PRINT_ERROR, _T("M6809Open called with invalid index %x\n"), num);
+	if (num > nM6809Count) bprintf(PRINT_ERROR, _T("M6809Open called with invalid index %x\n"), num);
 	if (nActiveCPU != -1) bprintf(PRINT_ERROR, _T("M6809Open called when CPU already open with index %x\n"), num);
 #endif
 
@@ -421,19 +433,16 @@ INT32 M6809Scan(INT32 nAction)
 		return 1;
 	}
 
-	for (INT32 i = 0; i < nM6809Count; i++) {
+	for (INT32 i = 0; i < nM6809Count+1; i++) {
 
 		M6809Ext *ptr = &m6809CPUContext[i];
-
-		INT32 (*Callback)(INT32 irqline);
-
-		Callback = ptr->reg.irq_callback;
 
 		char szName[] = "M6809 #n";
 		szName[7] = '0' + i;
 
+		memset(&ba, 0, sizeof(ba));
 		ba.Data = &m6809CPUContext[i].reg;
-		ba.nLen = sizeof(m6809CPUContext[i].reg);
+		ba.nLen = STRUCT_SIZE_HELPER(m6809_Regs, nmi_state);
 		ba.szName = szName;
 		BurnAcb(&ba);
 
@@ -441,8 +450,6 @@ INT32 M6809Scan(INT32 nAction)
 		SCAN_VAR(ptr->nCyclesTotal);
 		SCAN_VAR(ptr->nCyclesSegment);
 		SCAN_VAR(ptr->nCyclesLeft);
-
-		ptr->reg.irq_callback = Callback;
 	}
 	
 	return 0;

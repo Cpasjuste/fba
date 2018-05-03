@@ -1,6 +1,7 @@
 // Z80 (Zed Eight-Ty) Interface
 #include "burnint.h"
 #include "z80_intf.h"
+#include <stddef.h>
 
 #define MAX_Z80		8
 static struct ZetExt * ZetCPUContext[MAX_Z80] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
@@ -664,13 +665,14 @@ INT32 ZetScan(INT32 nAction)
 	for (INT32 i = 0; i < nCPUCount; i++) {
 		szText[5] = '1' + i;
 
-		ScanVar(&ZetCPUContext[i]->reg, sizeof(Z80_Regs), szText);
+		ScanVar(&ZetCPUContext[i]->reg, STRUCT_SIZE_HELPER(Z80_Regs, hold_irq), szText);
 		SCAN_VAR(Z80EA[i]);
 		SCAN_VAR(nZ80ICount[i]);
 		SCAN_VAR(nZetCyclesDone[i]);
+		SCAN_VAR(ZetCPUContext[i]->BusReq);
 	}
 	
-	SCAN_VAR(nZetCyclesTotal);	
+	SCAN_VAR(nZetCyclesTotal);
 
 	return 0;
 }
@@ -709,7 +711,7 @@ void ZetSetVector(INT32 vector)
 	if (nOpenedCPU == -1) bprintf(PRINT_ERROR, _T("ZetSetVector called when no CPU open\n"));
 #endif
 
-	Z80Vector = vector;
+	ActiveZ80SetVector(vector);
 }
 
 UINT8 ZetGetVector()
@@ -718,7 +720,8 @@ UINT8 ZetGetVector()
 	if (!DebugCPU_ZetInitted) bprintf(PRINT_ERROR, _T("ZetGetVector called without init\n"));
 	if (nOpenedCPU == -1) bprintf(PRINT_ERROR, _T("ZetGetVector called when no CPU open\n"));
 #endif
-	return Z80Vector;
+
+	return ActiveZ80GetVector();
 }
 
 INT32 ZetNmi()

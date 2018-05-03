@@ -22,12 +22,8 @@ extern TCHAR szAppSamplesPath[MAX_PATH];
 extern TCHAR szAppBlendPath[MAX_PATH];
 extern TCHAR szAppEEPROMPath[MAX_PATH];
 
-// Alignment macro, to keep savestates compatible between 32/64bit platforms.
-#ifdef _MSC_VER
-#define ALIGN_VAR(x)  __declspec(align(x))
-#else
-#define ALIGN_VAR(x)  __attribute__((aligned(x)))
-#endif
+// Macro to determine the size of a struct up to and including "member"
+#define STRUCT_SIZE_HELPER(type, member) offsetof(type, member) + sizeof(((type*)0)->member)
 
 // Enable the MAME logerror() function in debug builds
 // #define MAME_USE_LOGERROR
@@ -288,6 +284,10 @@ void BurnLocalisationSetName(char *szName, TCHAR *szLongName);
 UINT16 BurnRandom();                                // State-able Random Number Generator (0-32767)
 void BurnRandomScan(INT32 nAction);                 // Must be called in driver's DrvScan() if BurnRandom() is used
 void BurnRandomInit();                              // Called automatically in BurnDrvInit() / Internal use only
+
+// Handy FM default callbacks
+INT32 BurnSynchroniseStream(INT32 nSoundRate);
+double BurnGetTime();
 
 // ---------------------------------------------------------------------------
 // Retrieve driver information
@@ -570,6 +570,9 @@ void IpsApplyPatches(UINT8* base, char* rom_name);
 #define HARDWARE_SEGA_MEGADRIVE_PCB_POKEMON				(40)
 #define HARDWARE_SEGA_MEGADRIVE_PCB_POKEMON2			(41)
 #define HARDWARE_SEGA_MEGADRIVE_PCB_MULAN				(42)
+#define HARDWARE_SEGA_MEGADRIVE_TEAMPLAYER              (43)
+#define HARDWARE_SEGA_MEGADRIVE_TEAMPLAYER_PORT2        (44)
+#define HARDWARE_SEGA_MEGADRIVE_FOURWAYPLAY             (45)
 
 #define HARDWARE_SEGA_MEGADRIVE_SRAM_00400				(0x0100)
 #define HARDWARE_SEGA_MEGADRIVE_SRAM_00800				(0x0200)

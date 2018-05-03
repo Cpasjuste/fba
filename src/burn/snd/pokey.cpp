@@ -36,6 +36,7 @@
 
 #include "burnint.h"
 #include "pokey.h"
+#include <stddef.h>
 
 /*
  * Defining this produces much more (about twice as much)
@@ -44,7 +45,7 @@
  */
 #define HEAVY_MACRO_USAGE   0
 
-#define SUPPRESS_INAUDIBLE	1
+#define SUPPRESS_INAUDIBLE  1
 
 /* Four channels with a range of 0..32767 and volume 0..15 */
 //#define POKEY_DEFAULT_GAIN (32767/15/4)
@@ -173,15 +174,8 @@ struct POKEYregisters {
     UINT32 r17;             /* rand17 index */
 	UINT32 clockmult;		/* clock multiplier */
     int channel;            /* streams channel */
-	void *timer[3]; 		/* timers for channel 1,2 and 4 events */
-    void *rtimer;           /* timer for calculating the random offset */
-	void *ptimer[8];		/* pot timers */
-	int (*pot_r[8])(int offs);
-	int (*allpot_r)(int offs);
-	int (*serin_r)(int offs);
-	void (*serout_w)(int offs, int data);
-	void (*interrupt_cb)(int mask);
-    UINT8 AUDF[4];          /* AUDFx (D200, D202, D204, D206) */
+
+	UINT8 AUDF[4];          /* AUDFx (D200, D202, D204, D206) */
 	UINT8 AUDC[4];			/* AUDCx (D201, D203, D205, D207) */
 	UINT8 POTx[8];			/* POTx   (R/D200-D207) */
 	UINT8 AUDCTL;			/* AUDCTL (W/D208) */
@@ -194,6 +188,16 @@ struct POKEYregisters {
 	UINT8 IRQEN;			/* IRQEN  (W/D20E) */
 	UINT8 SKSTAT;			/* SKSTAT (R/D20F) */
 	UINT8 SKCTL;			/* SKCTL  (W/D20F) */
+
+	void (*interrupt_cb)(int mask);
+	void *timer[3]; 		/* timers for channel 1,2 and 4 events */
+    INT64 rtimer;          /* timer for calculating the random offset */
+	void *ptimer[8];		/* pot timers */
+	UINT8 potgo_timer[8]; // dink
+	int (*pot_r[8])(int offs);
+	int (*allpot_r)(int offs);
+	int (*serin_r)(int offs);
+	void (*serout_w)(int offs, int data);
 };
 
 static struct POKEYinterface intf;
@@ -208,27 +212,13 @@ void pokey_scan(INT32 nAction, INT32* pnMin)
 	if (nAction & ACB_DRIVER_DATA) {
 		for (INT32 i = 0; i < MAXPOKEYS; i++)
 		{
-			// save pointers.
-			void *timer[3] = { pokey[i].timer[0], pokey[i].timer[1], pokey[i].timer[2] };
-			void *rtimer = pokey[i].rtimer;
-			void *ptimer[8] = { pokey[i].ptimer[0],pokey[i].ptimer[1],pokey[i].ptimer[2],pokey[i].ptimer[3],pokey[i].ptimer[4],pokey[i].ptimer[5],pokey[i].ptimer[6],pokey[i].ptimer[7] };
-			int (*pot_r[8])(int offs) = { pokey[i].pot_r[0], pokey[i].pot_r[1], pokey[i].pot_r[2], pokey[i].pot_r[3], pokey[i].pot_r[4], pokey[i].pot_r[5], pokey[i].pot_r[6], pokey[i].pot_r[7] };
-			int (*allpot_r)(int offs) = pokey[i].allpot_r;
-			int (*serin_r)(int offs) = pokey[i].serin_r;
-			void (*serout_w)(int offs, int data) = pokey[i].serout_w;
-			void (*interrupt_cb)(int mask) = pokey[i].interrupt_cb;
+			struct BurnArea ba;
 
-			SCAN_VAR(pokey[i]);
-
-			// restore pointers.
-			pokey[i].timer[0] = timer[0]; pokey[i].timer[1] = timer[1]; pokey[i].timer[2] = timer[2];
-			pokey[i].rtimer = rtimer;
-			pokey[i].ptimer[0] = ptimer[0]; pokey[i].ptimer[1] = ptimer[1]; pokey[i].ptimer[2] = ptimer[2]; pokey[i].ptimer[3] = ptimer[3]; pokey[i].ptimer[4] = ptimer[4]; pokey[i].ptimer[5] = ptimer[5]; pokey[i].ptimer[6] = ptimer[6]; pokey[i].ptimer[7] = ptimer[7];
-			pokey[i].pot_r[0] = pot_r[0]; pokey[i].pot_r[1] = pot_r[1]; pokey[i].pot_r[2] = pot_r[2]; pokey[i].pot_r[3] = pot_r[3]; pokey[i].pot_r[4] = pot_r[4]; pokey[i].pot_r[5] = pot_r[5]; pokey[i].pot_r[6] = pot_r[6]; pokey[i].pot_r[7] = pot_r[7];
-			pokey[i].allpot_r = allpot_r;
-			pokey[i].serin_r = serin_r;
-			pokey[i].serout_w = serout_w;
-			pokey[i].interrupt_cb = interrupt_cb;
+			memset(&ba, 0, sizeof(ba));
+			ba.Data	  = &pokey[i];
+			ba.nLen	  = STRUCT_SIZE_HELPER(struct POKEYregisters, SKCTL);
+			ba.szName = "Pokey Registers";
+			BurnAcb(&ba);
 		}
 
 		BurnRandomScan(nAction);
@@ -500,8 +490,8 @@ static UINT8 *rand17;
 			UINT32 event = pokey[chip].samplepos_whole; 				\
 			PROCESS_SAMPLE(chip);										\
 		}																\
-	}
-	//timer_reset(pokey[chip].rtimer, TIME_NEVER)
+	}                                                                   \
+	pokey[chip].rtimer = 0;//timer_reset(pokey[chip].rtimer, TIME_NEVER)
 
 void pokey0_update(int param, INT16 *buffer, int length) { PROCESS_POKEY(0); }
 void pokey1_update(int param, INT16 *buffer, int length) { PROCESS_POKEY(1); }
@@ -558,8 +548,8 @@ void (*update[MAXPOKEYS])(int,INT16*,int) =
 		{																\
 			PROCESS_CHANNEL(chip,channel);								\
 		}																\
-	}
-	//timer_reset(pokey[chip].rtimer, TIME_NEVER)
+	}                                                                   \
+	pokey[chip].rtimer = 0;//timer_reset(pokey[chip].rtimer, TIME_NEVER)
 
 void pokey_update(int num, INT16 *buffer, int length) {
 	if (!intf.addtostream && num == 0)
@@ -603,12 +593,22 @@ static void rand_init(UINT8 *rng, int size, int left, int right, int add)
 	LOG_RAND((errorlog,"rand %d\n", size));
     for( i = 0; i < mask; i++ )
 	{
-		*rng = x >> (size - 8);   /* use the upper 8 bits */
+		if (size == 17)
+			*rng = x >> 6;	/* use bits 6..13 */
+		else
+			*rng = x;		/* use bits 0..7 */
 		LOG_RAND((errorlog, "%05x: %02x\n", x, *rng));
         rng++;
         /* calculate next bit */
 		x = ((x << left) + (x >> right) + add) & mask;
 	}
+}
+
+void PokeyPotCallback(int chip, int potnum, int (*pot_cb)(int offs))
+{
+	struct POKEYregisters *p = &pokey[chip];
+
+	p->pot_r[potnum] = pot_cb;
 }
 
 int PokeyInit(int clock, int num, double vol, int addtostream)
@@ -636,12 +636,12 @@ int PokeyInit(int clock, int num, double vol, int addtostream)
 	/* initialize the poly counters */
 	poly_init(poly4,   4, 3, 1, 0x00004);
 	poly_init(poly5,   5, 3, 2, 0x00008);
-	poly_init(poly9,   9, 2, 7, 0x00080);
-	poly_init(poly17, 17, 7,10, 0x18000);
+	poly_init(poly9,   9, 8, 1, 0x00080);
+	poly_init(poly17, 17,16, 1, 0x1c000);
 
 	/* initialize the random arrays */
-	rand_init(rand9,   9, 2, 7, 0x00080);
-	rand_init(rand17, 17, 7,10, 0x18000);
+	rand_init(rand9,   9, 8, 1, 0x00180);
+	rand_init(rand17, 17,16, 1, 0x1c000);
 
 	for( chip = 0; chip < intf.num; chip++ )
 	{
@@ -658,7 +658,9 @@ int PokeyInit(int clock, int num, double vol, int addtostream)
 		p->clockmult = DIV_64;
 		p->KBCODE = 0x09;		 /* Atari 800 'no key' */
 		p->SKCTL = SK_RESET;	 /* let the RNG run after reset */
-		//p->rtimer = timer_set(TIME_NEVER, chip, NULL);
+		p->rtimer = 0; //timer_set(TIME_NEVER, chip, NULL);
+
+		memset(p->potgo_timer, 0, sizeof(p->potgo_timer));
 
 		p->pot_r[0] = intf.pot0_r[chip];
 		p->pot_r[1] = intf.pot1_r[chip];
@@ -833,15 +835,11 @@ static void pokey_potgo(int chip)
 
     for( pot = 0; pot < 8; pot++ )
 	{
-        if( p->ptimer[pot] )
-		{
-			//timer_remove(p->ptimer[pot]);
-			p->ptimer[pot] = NULL;
-			p->POTx[pot] = 0xff;
-		}
+		p->POTx[pot] = 0xff;
 		if( p->pot_r[pot] )
 		{
 			int r = (*p->pot_r[pot])(pot);
+			//bprintf(0, L"pokey #%X pot_r(%X) returned %X\n", chip, pot, r);
 			LOG((errorlog, "POKEY #%d pot_r(%d) returned $%02x\n", chip, pot, r));
 			if( r != -1 )
 			{
@@ -849,7 +847,11 @@ static void pokey_potgo(int chip)
                     r = 228;
                 /* final value */
                 p->POTx[pot] = r;
-				//p->ptimer[pot] = timer_set(TIME_IN_USEC(r * AD_TIME), (chip<<3)|pot, pokey_pot_trigger);
+
+				p->potgo_timer[pot] = 1;
+
+				//	p->ALLPOT &= ~(1 << pot);	// "all done"? can't happen right away
+
 			}
 		}
 	}
@@ -859,6 +861,7 @@ int pokey_register_r(int chip, int offs)
 {
 	struct POKEYregisters *p = &pokey[chip];
     int data = 0, pot;
+	UINT32 adjust = 0;
 
 #ifdef MAME_DEBUG
 	if( chip >= intf.num )
@@ -868,6 +871,21 @@ int pokey_register_r(int chip, int offs)
 	}
 #endif
 
+	{
+		for (pot = 0; pot < 8; pot++) { // simple hacky timer impl. -dink
+			if (p->potgo_timer[pot]) {
+				p->potgo_timer[pot]--;
+				if (p->potgo_timer[pot] == 0) {
+					p->ALLPOT &= ~(1 << pot);
+				}
+			}
+		}
+
+		if (p->rtimer != -1) {
+			p->rtimer++;
+		}
+	}
+
     switch (offs & 15)
 	{
 	case POT0_C: case POT1_C: case POT2_C: case POT3_C:
@@ -875,13 +893,16 @@ int pokey_register_r(int chip, int offs)
 		pot = offs & 7;
 		if( p->pot_r[pot] )
 		{
+			data = p->POTx[pot];
 			/*
 			 * If the conversion is not yet finished (ptimer running),
 			 * get the current value by the linear interpolation of
 			 * the final value using the elapsed time.
 			 */
+
 			if( p->ALLPOT & (1 << pot) )
 			{
+				data = 0xff;
 				data = (UINT8)(/*timer_timeelapsed(p->ptimer[pot])*/1234 / AD_TIME);
 				LOG((errorlog,"POKEY #%d read POT%d (interpolated) $%02x\n", chip, pot, data));
             }
@@ -891,11 +912,20 @@ int pokey_register_r(int chip, int offs)
 				LOG((errorlog,"POKEY #%d read POT%d (final value)  $%02x\n", chip, pot, data));
 			}
 		}
-		else
+
 		break;
 
     case ALLPOT_C:
-		if( p->allpot_r )
+		/****************************************************************
+         * If the 2 least significant bits of SKCTL are 0, the ALLPOTs
+         * are disabled (SKRESET). Thanks to MikeJ for pointing this out.
+         ****************************************************************/
+    	if( (p->SKCTL & SK_RESET) == 0)
+    	{
+    		data = 0;
+			LOG((errorlog,"POKEY #%d ALLPOT internal $%02x (reset)\n", chip, data));
+		}
+		else if( p->allpot_r )
 		{
 			data = (*p->allpot_r)(offs);
 			LOG((errorlog,"POKEY #%d ALLPOT callback $%02x\n", chip, data));
@@ -922,26 +952,30 @@ int pokey_register_r(int chip, int offs)
 		 ****************************************************************/
 		if( p->SKCTL & SK_RESET )
 		{
-			UINT32 adjust = (UINT32)(/*timer_timeelapsed(p->rtimer)*/BurnRandom() /*dink*/ * intf.baseclock);
+			adjust = (UINT32)(p->rtimer * intf.baseclock + 0.5);
 			p->r9 = (p->r9 + adjust) % 0x001ff;
 			p->r17 = (p->r17 + adjust) % 0x1ffff;
-			if( p->AUDCTL & POLY9 )
-			{
-				p->RANDOM = rand9[p->r9];
-				LOG_RAND((errorlog, "POKEY #%d adjust %u rand9[$%05x]: $%02x\n", chip, adjust, p->r9, p->RANDOM));
-			}
-            else
-			{
-				p->RANDOM = rand17[p->r17];
-				LOG_RAND((errorlog, "POKEY #%d adjust %u rand17[$%05x]: $%02x\n", chip, adjust, p->r17, p->RANDOM));
-			}
 		}
 		else
 		{
-			LOG_RAND((errorlog, "POKEY #%d rand17 freezed (SKCTL): $%02x\n", chip, p->RANDOM));
+			adjust = 1;
+			p->r9 = 0;
+			p->r17 = 0;
+            LOG_RAND(("POKEY #%d rand17 freezed (SKCTL): $%02x\n", chip, p->RANDOM));
 		}
-		//timer_reset(p->rtimer, TIME_NEVER);
-		data = p->RANDOM;
+		if( p->AUDCTL & POLY9 )
+		{
+			p->RANDOM = rand9[p->r9];
+			LOG_RAND(("POKEY #%d adjust %u rand9[$%05x]: $%02x\n", chip, adjust, p->r9, p->RANDOM));
+		}
+		else
+		{
+			p->RANDOM = rand17[p->r17];
+			LOG_RAND(("POKEY #%d adjust %u rand17[$%05x]: $%02x\n", chip, adjust, p->r17, p->RANDOM));
+		}
+		if (adjust > 0)
+        	p->rtimer = -1;
+		data = p->RANDOM ^ 0xff;
 		break;
 
 	case SERIN_C:
@@ -1004,7 +1038,7 @@ int quad_pokey_r (int offset)
 void pokey_register_w(int chip, int offs, int data)
 {
 	struct POKEYregisters *p = &pokey[chip];
-	int ch_mask = 0, new_val;
+	int ch_mask = 0, new_val = 0;
 
 #ifdef MAME_DEBUG
 	if( chip >= intf.num )
@@ -1100,6 +1134,7 @@ void pokey_register_w(int chip, int offs, int data)
     case STIMER_C:
         /* first remove any existing timers */
 		LOG_TIMER((errorlog, "POKEY #%d STIMER $%02x\n", chip, data));
+		//bprintf(0, L"no timers!! (STIMER_C)\n");
 		/*if( p->timer[TIMER1] )
 			timer_remove(p->timer[TIMER1]);
 		if( p->timer[TIMER2] )

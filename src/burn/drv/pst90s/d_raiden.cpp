@@ -356,6 +356,8 @@ static INT32 DrvDoReset()
 
 	DrvLayerEnable = 0;
 
+	HiscoreReset();
+
 	return 0;
 }
 
@@ -910,7 +912,7 @@ static INT32 DrvFrame()
 	return 0;
 }
 
-static INT32 DrvScan(INT32 nAction,INT32 *pnMin)
+static INT32 DrvScan(INT32 nAction, INT32 *pnMin)
 {
 	if ( pnMin ) *pnMin =  0x029671;
 
@@ -918,20 +920,16 @@ static INT32 DrvScan(INT32 nAction,INT32 *pnMin)
 
 	if (nAction & ACB_MEMORY_RAM) {
 		memset(&ba, 0, sizeof(ba));
-			ba.Data   = RamStart;
+		ba.Data   = RamStart;
 		ba.nLen   = RamEnd-RamStart;
 		ba.szName = "All Ram";
 		BurnAcb(&ba);
 	}
 
-	if (nAction & ACB_WRITE) {
-		bRecalcPalette = 1;
-	}
-
 	if (nAction & ACB_DRIVER_DATA) {
 		VezScan(nAction);
 
-		seibu_sound_scan(pnMin, nAction);
+		seibu_sound_scan(nAction, pnMin);
 
 		SCAN_VAR(DrvLayerEnable);
 	}
@@ -975,7 +973,7 @@ struct BurnDriver BurnDrvRaiden = {
 	"raiden", NULL, NULL, NULL, "1990",
 	"Raiden (set 1)\0", NULL, "Seibu Kaihatsu", "Miscellaneous",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
 	NULL, raidenRomInfo, raidenRomName, NULL, NULL, raidenInputInfo, raidenDIPInfo,
 	RaidenInit, DrvExit, DrvFrame, DrvDraw, DrvScan, &bRecalcPalette, 0x800,
 	224, 256, 3, 4
@@ -1014,7 +1012,7 @@ struct BurnDriver BurnDrvRaidena = {
 	"raidena", "raiden", NULL, NULL, "1990",
 	"Raiden (set 2)\0", NULL, "Seibu Kaihatsu", "Miscellaneous",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
 	NULL, raidenaRomInfo, raidenaRomName, NULL, NULL, raidenInputInfo, raidenDIPInfo,
 	RaidenInit, DrvExit, DrvFrame, DrvDraw, DrvScan, &bRecalcPalette, 0x800,
 	224, 256, 3, 4
@@ -1053,7 +1051,7 @@ struct BurnDriver BurnDrvRaident = {
 	"raident", "raiden", NULL, NULL, "1990",
 	"Raiden (Taiwan)\0", NULL, "Seibu Kaihatsu (Liang HWA Electronics license)", "Miscellaneous",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
 	NULL, raidentRomInfo, raidentRomName, NULL, NULL, raidenInputInfo, raidenDIPInfo,
 	RaidenInit, DrvExit, DrvFrame, DrvDraw, DrvScan, &bRecalcPalette, 0x800,
 	224, 256, 3, 4
@@ -1092,7 +1090,7 @@ struct BurnDriver BurnDrvRaidenu = {
 	"raidenu", "raiden", NULL, NULL, "1990",
 	"Raiden (US, set 1)\0", NULL, "Seibu Kaihatsu (Fabtek license)", "Miscellaneous",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
 	NULL, raidenuRomInfo, raidenuRomName, NULL, NULL, raidenInputInfo, raidenDIPInfo,
 	RaidenInit, DrvExit, DrvFrame, DrvDraw, DrvScan, &bRecalcPalette, 0x800,
 	224, 256, 3, 4
@@ -1135,7 +1133,7 @@ struct BurnDriver BurnDrvRaidenk = {
 	"raidenk", "raiden", NULL, NULL, "1990",
 	"Raiden (Korea)\0", NULL, "Seibu Kaihatsu (IBL Corporation license)", "Miscellaneous",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
 	NULL, raidenkRomInfo, raidenkRomName, NULL, NULL, raidenInputInfo, raidenDIPInfo,
 	RaidenkInit, DrvExit, DrvFrame, DrvDraw, DrvScan, &bRecalcPalette, 0x800,
 	224, 256, 3, 4
@@ -1182,7 +1180,7 @@ struct BurnDriver BurnDrvRaidenkb = {
 	"raidenkb", "raiden", NULL, NULL, "1990",
 	"Raiden (Korea, bootleg)\0", NULL, "bootleg", "Miscellaneous",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
 	NULL, raidenkbRomInfo, raidenkbRomName, NULL, NULL, raidenInputInfo, raidenDIPInfo,
 	RaidenkInit, DrvExit, DrvFrame, DrvDraw, DrvScan, &bRecalcPalette, 0x800,
 	224, 256, 3, 4
@@ -1193,11 +1191,11 @@ struct BurnDriver BurnDrvRaidenkb = {
 static struct BurnRomInfo raidenbRomDesc[] = {
 	{ "1.u0253",        	0x010000, 0xa4b12785, BRF_ESS | BRF_PRG },  // CPU 0, V30
 	{ "2.u0252",        	0x010000, 0x17640bd5, BRF_ESS | BRF_PRG },
-	{ "3__(raidenb).u022",  0x020000, 0x9d735bf5, BRF_ESS | BRF_PRG },
-	{ "4__(raidenb).u023",  0x020000, 0x8d184b99, BRF_ESS | BRF_PRG },
+	{ "3__,raidenb.u022",   0x020000, 0x9d735bf5, BRF_ESS | BRF_PRG },
+	{ "4__,raidenb.u023",   0x020000, 0x8d184b99, BRF_ESS | BRF_PRG },
 
-	{ "5__(raidenb).u042",  0x020000, 0x7aca6d61, BRF_ESS | BRF_PRG },  // CPU 1, V30
-	{ "6__(raidenb).u043",  0x020000, 0xe3d35cc2, BRF_ESS | BRF_PRG },
+	{ "5__,raidenb.u042",   0x020000, 0x7aca6d61, BRF_ESS | BRF_PRG },  // CPU 1, V30
+	{ "6__,raidenb.u043",   0x020000, 0xe3d35cc2, BRF_ESS | BRF_PRG },
 
 	{ "rai6.u212",      	0x010000, 0x723a483b, BRF_ESS | BRF_PRG },  // CPU 2, Z80
 
@@ -1224,7 +1222,7 @@ struct BurnDriver BurnDrvRaidenb = {
 	"raidenb", "raiden", NULL, NULL, "1990",
 	"Raiden (set 3, Alternate hardware)\0", NULL, "Seibu Kaihatsu", "Miscellaneous",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
 	NULL, raidenbRomInfo, raidenbRomName, NULL, NULL, raidenInputInfo, raidenDIPInfo,
 	RaidenbInit, DrvExit, DrvFrame, DrvDrawAlt, DrvScan, &bRecalcPalette, 0x800,
 	224, 256, 3, 4
@@ -1268,7 +1266,7 @@ struct BurnDriver BurnDrvRaidenua = {
 	"raidenua", "raiden", NULL, NULL, "1990",
 	"Raiden (US, set 2, SEI8904 + SEI9008 PCBs)\0", NULL, "Seibu Kaihatsu (Fabtek license)", "Miscellaneous",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_MISC_POST90S, GBF_VERSHOOT, 0,
 	NULL, raidenuaRomInfo, raidenuaRomName, NULL, NULL, raidenInputInfo, raidenDIPInfo,
 	RaidenuInit, DrvExit, DrvFrame, DrvDraw, DrvScan, &bRecalcPalette, 0x800,
 	224, 256, 3, 4

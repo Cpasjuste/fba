@@ -325,8 +325,8 @@ static struct BurnInputInfo DdsomInputList[] = {
 	{"P1 Right"         , BIT_DIGITAL  , CpsInp001+0, "p1 right"  },
 	{"P1 Attack"        , BIT_DIGITAL  , CpsInp001+4, "p1 fire 1" },
 	{"P1 Jump"          , BIT_DIGITAL  , CpsInp001+5, "p1 fire 2" },
-	{"P1 Select"        , BIT_DIGITAL  , CpsInp001+6, "p1 fire 3" },
-	{"P1 Use"           , BIT_DIGITAL  , CpsInp001+7, "p1 fire 4" },
+	{"P1 Select"        , BIT_DIGITAL  , CpsInp001+7, "p1 fire 3" },
+	{"P1 Use"           , BIT_DIGITAL  , CpsInp001+6, "p1 fire 4" },
 
 	{"P2 Coin"          , BIT_DIGITAL  , CpsInp020+5, "p2 coin"   },
 	{"P2 Start"         , BIT_DIGITAL  , CpsInp020+1, "p2 start"  },
@@ -336,8 +336,8 @@ static struct BurnInputInfo DdsomInputList[] = {
 	{"P2 Right"         , BIT_DIGITAL  , CpsInp000+0, "p2 right"  },
 	{"P2 Attack"        , BIT_DIGITAL  , CpsInp000+4, "p2 fire 1" },
 	{"P2 Jump"          , BIT_DIGITAL  , CpsInp000+5, "p2 fire 2" },
-	{"P2 Select"        , BIT_DIGITAL  , CpsInp000+6, "p2 fire 3" },
-	{"P2 Use"           , BIT_DIGITAL  , CpsInp000+7, "p2 fire 4" },
+	{"P2 Select"        , BIT_DIGITAL  , CpsInp000+7, "p2 fire 3" },
+	{"P2 Use"           , BIT_DIGITAL  , CpsInp000+6, "p2 fire 4" },
 
 	{"P3 Coin"          , BIT_DIGITAL  , CpsInp020+6, "p3 coin"   },
 	{"P3 Start"         , BIT_DIGITAL  , CpsInp020+2, "p3 start"  },
@@ -347,8 +347,8 @@ static struct BurnInputInfo DdsomInputList[] = {
 	{"P3 Right"         , BIT_DIGITAL  , CpsInp011+0, "p3 right"  },
 	{"P3 Attack"        , BIT_DIGITAL  , CpsInp011+4, "p3 fire 1" },
 	{"P3 Jump"          , BIT_DIGITAL  , CpsInp011+5, "p3 fire 2" },
-	{"P3 Select"        , BIT_DIGITAL  , CpsInp011+6, "p3 fire 3" },
-	{"P3 Use"           , BIT_DIGITAL  , CpsInp011+7, "p3 fire 4" },
+	{"P3 Select"        , BIT_DIGITAL  , CpsInp011+7, "p3 fire 3" },
+	{"P3 Use"           , BIT_DIGITAL  , CpsInp011+6, "p3 fire 4" },
 
 	{"P4 Coin"          , BIT_DIGITAL  , CpsInp020+7, "p4 coin"   },
 	{"P4 Start"         , BIT_DIGITAL  , CpsInp020+3, "p4 start"  },
@@ -358,8 +358,8 @@ static struct BurnInputInfo DdsomInputList[] = {
 	{"P4 Right"         , BIT_DIGITAL  , CpsInp010+0, "p4 right"  },
 	{"P4 Attack"        , BIT_DIGITAL  , CpsInp010+4, "p4 fire 1" },
 	{"P4 Jump"          , BIT_DIGITAL  , CpsInp010+5, "p4 fire 2" },
-	{"P4 Select"        , BIT_DIGITAL  , CpsInp010+6, "p4 fire 3" },
-	{"P4 Use"           , BIT_DIGITAL  , CpsInp010+7, "p4 fire 4" },
+	{"P4 Select"        , BIT_DIGITAL  , CpsInp010+7, "p4 fire 3" },
+	{"P4 Use"           , BIT_DIGITAL  , CpsInp010+6, "p4 fire 4" },
 
 	{"Reset"            , BIT_DIGITAL  , &CpsReset  , "reset"     },
 	{"Diagnostic"       , BIT_DIGITAL  , CpsInp021+1, "diag"      },
@@ -7634,6 +7634,37 @@ static struct BurnRomInfo Xmcotaar1RomDesc[] = {
 STD_ROM_PICK(Xmcotaar1)
 STD_ROM_FN(Xmcotaar1)
 
+static struct BurnRomInfo XmcotabRomDesc[] = {
+	{ "xmnb.03c",      0x080000, 0xab48bcb0, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xmnb.04c",      0x080000, 0x8d8fcbb1, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xmne.05b",      0x080000, 0x87b0ed0f, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xmn.06a",       0x080000, 0x1b86a328, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xmn.07a",       0x080000, 0x2c142a44, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xmn.08a",       0x080000, 0xf712d44f, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xmn.09a",       0x080000, 0x9241cae8, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xmne.10b",      0x080000, 0xcb36b0a4, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+
+	{ "xmn.13m",       0x400000, 0xbf4df073, CPS2_GFX | BRF_GRA },
+	{ "xmn.15m",       0x400000, 0x4d7e4cef, CPS2_GFX | BRF_GRA },
+	{ "xmn.17m",       0x400000, 0x513eea17, CPS2_GFX | BRF_GRA },
+	{ "xmn.19m",       0x400000, 0xd23897fc, CPS2_GFX | BRF_GRA },
+	{ "xmn.14m",       0x400000, 0x778237b7, CPS2_GFX | BRF_GRA },
+	{ "xmn.16m",       0x400000, 0x67b36948, CPS2_GFX | BRF_GRA },
+	{ "xmn.18m",       0x400000, 0x015a7c4c, CPS2_GFX | BRF_GRA },
+	{ "xmn.20m",       0x400000, 0x9dde2758, CPS2_GFX | BRF_GRA },
+
+	{ "xmn.01a",       0x020000, 0x40f479ea, CPS2_PRG_Z80 | BRF_ESS | BRF_PRG },
+	{ "xmn.02a",       0x020000, 0x39d9b5ad, CPS2_PRG_Z80 | BRF_ESS | BRF_PRG },
+
+	{ "xmn.11m",       0x200000, 0xc848a6bc, CPS2_QSND | BRF_SND },
+	{ "xmn.12m",       0x200000, 0x729c188f, CPS2_QSND | BRF_SND },
+	
+	{ "xmcotab.key",   0x000014, 0xbb70f10f, CPS2_ENCRYPTION_KEY },
+};
+
+STD_ROM_PICK(Xmcotab)
+STD_ROM_FN(Xmcotab)
+
 static struct BurnRomInfo XmcotahRomDesc[] = {
 	{ "xmnh.03f",      0x080000, 0xe4b85a90, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
 	{ "xmnh.04f",      0x080000, 0x7dfe1406, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
@@ -8272,18 +8303,8 @@ STD_ROM_PICK(Xmvsfu)
 STD_ROM_FN(Xmvsfu)
 
 static struct BurnRomInfo Xmvsfur1RomDesc[] = {
-	// US version "I" of Xmen vs Street Fighters has been dumped.
-	// It is identical to US version "H" but with different labels.
-//	{ "xvsu.03i",      0x080000, 0x5481155a, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
-//	{ "xvsu.04i",      0x080000, 0x1e236388, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
-//	{ "xvs.05a",       0x080000, 0x7db6025d, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
-//	{ "xvs.06a",       0x080000, 0xe8e2c75c, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
-//	{ "xvs.07",        0x080000, 0x08f0abed, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
-//	{ "xvs.08",        0x080000, 0x81929675, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
-//	{ "xvs.09",        0x080000, 0x9641f36b, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
-	
-	{ "xvsu.03h",      0x080000, 0x5481155a, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
-	{ "xvsu.04h",      0x080000, 0x1e236388, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xvsu.03i",      0x080000, 0x5481155a, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
+	{ "xvsu.04i",      0x080000, 0x1e236388, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
 	{ "xvs.05a",       0x080000, 0x7db6025d, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
 	{ "xvs.06a",       0x080000, 0xe8e2c75c, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
 	{ "xvs.07",        0x080000, 0x08f0abed, CPS2_PRG_68K | BRF_ESS | BRF_PRG },
@@ -10778,6 +10799,16 @@ struct BurnDriver BurnDrvCpsXmcotaar1 = {
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS2, GBF_VSFIGHT, 0,
 	NULL, Xmcotaar1RomInfo, Xmcotaar1RomName, NULL, NULL, Cps2FightingInputInfo, NULL,
+	XmcotaInit, DrvExit, Cps2Frame, CpsRedraw, CpsAreaScan,
+	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
+};
+
+struct BurnDriver BurnDrvCpsXmcotab = {
+	"xmcotab", "xmcota", NULL, NULL, "1995",
+	"X-Men - children of the atom (950331 Brazil)\0", NULL, "Capcom", "CPS2",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS2, GBF_VSFIGHT, 0,
+	NULL, XmcotabRomInfo, XmcotabRomName, NULL, NULL, Cps2FightingInputInfo, NULL,
 	XmcotaInit, DrvExit, Cps2Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
 };

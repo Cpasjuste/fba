@@ -7,6 +7,7 @@
 #include "nec_intf.h"
 #include "irem_cpu.h"
 #include "iremga20.h"
+#include "stddef.h"
 
 static UINT8 *Mem;
 static UINT8 *MemEnd;
@@ -530,7 +531,7 @@ static UINT8 __fastcall m107SndReadByte(UINT32 address)
 	switch (address)
 	{
 		case 0xa8042:
-			return BurnYM2151ReadStatus();
+			return BurnYM2151Read();
 
 		case 0xa8044:
 			return sound_latch[0];
@@ -641,12 +642,13 @@ static INT32 MemIndex(INT32 gfxlen1, INT32 gfxlen2)
 	pf_control[2]	= Next; Next += 0x000008;
 	pf_control[3]	= Next; Next += 0x000008;
 
+	RamEnd		= Next;
+
+	// scanned separately from ram due to pointers in structs
 	m107_layers[0]	= (struct _m107_layer*)Next; Next += sizeof(struct _m107_layer);
 	m107_layers[1]	= (struct _m107_layer*)Next; Next += sizeof(struct _m107_layer);
 	m107_layers[2]	= (struct _m107_layer*)Next; Next += sizeof(struct _m107_layer);
 	m107_layers[3]	= (struct _m107_layer*)Next; Next += sizeof(struct _m107_layer);
-
-	RamEnd		= Next;
 
 	DrvPalette	= (UINT32 *) Next; Next += 0x0800 * sizeof(UINT32);
 
@@ -1151,14 +1153,19 @@ static INT32 DrvScan(INT32 nAction,INT32 *pnMin)
 		ba.nLen	  = RamEnd-RamStart;
 		ba.szName = "All Ram";
 		BurnAcb(&ba);
+
+		ScanVar(m107_layers[0], STRUCT_SIZE_HELPER(_m107_layer, scrolly), "m107 pf0");
+		ScanVar(m107_layers[1], STRUCT_SIZE_HELPER(_m107_layer, scrolly), "m107 pf1");
+		ScanVar(m107_layers[2], STRUCT_SIZE_HELPER(_m107_layer, scrolly), "m107 pf2");
+		ScanVar(m107_layers[3], STRUCT_SIZE_HELPER(_m107_layer, scrolly), "m107 pf3");
 	}
 
 	if (nAction & ACB_DRIVER_DATA)
 	{
 		VezScan(nAction);
 
-		iremga20_scan(0, nAction, pnMin);
-		BurnYM2151Scan(nAction);
+		iremga20_scan(nAction, pnMin);
+		BurnYM2151Scan(nAction, pnMin);
 
 		SCAN_VAR(raster_irq_position);
 		SCAN_VAR(sound_cpu_reset);
@@ -1167,8 +1174,6 @@ static INT32 DrvScan(INT32 nAction,INT32 *pnMin)
 	}
 
 	if (nAction & ACB_WRITE) {
-		bRecalcPalette = 1;
-
 		for (INT32 i = 0; i < 4; i++) {
 			set_pf_scroll(i);
 			set_pf_info(i);
@@ -1254,7 +1259,7 @@ static INT32 airassInit()
 
 struct BurnDriver BurnDrvAirass = {
 	"airass", NULL, NULL, NULL, "1993",
-	"Air Assault (World)\0", NULL, "Irem", "M107",
+	"Air Assault (World)\0", NULL, "Irem", "Irem M107",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_IREM_MISC, GBF_VERSHOOT, 0,
 	NULL, airassRomInfo, airassRomName, NULL, NULL, FirebarrInputInfo, FirebarrDIPInfo,
@@ -1338,7 +1343,7 @@ static INT32 firebarrInit()
 
 struct BurnDriver BurnDrvFirebarr = {
 	"firebarr", "airass", NULL, NULL, "1993",
-	"Fire Barrel (Japan)\0", NULL, "Irem", "M107",
+	"Fire Barrel (Japan)\0", NULL, "Irem", "Irem M107",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_IREM_MISC, GBF_VERSHOOT, 0,
 	NULL, firebarrRomInfo, firebarrRomName, NULL, NULL, FirebarrInputInfo, FirebarrDIPInfo,
@@ -1409,7 +1414,7 @@ static INT32 dsoccr94Init()
 
 struct BurnDriver BurnDrvDsoccr94 = {
 	"dsoccr94", NULL, NULL, NULL, "1994",
-	"Dream Soccer '94 (World, M107 hardware)\0", NULL, "Irem (Data East Corporation license)", "M107",
+	"Dream Soccer '94 (World, M107 hardware)\0", NULL, "Irem (Data East Corporation license)", "Irem M107",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING, 4, HARDWARE_IREM_MISC, GBF_SPORTSFOOTBALL, 0,
 	NULL, dsoccr94RomInfo, dsoccr94RomName, NULL, NULL, Dsoccr94InputInfo, Dsoccr94DIPInfo,
@@ -1448,7 +1453,7 @@ STD_ROM_FN(dsoccr94k)
 
 struct BurnDriver BurnDrvDsoccr94k = {
 	"dsoccr94k", "dsoccr94", NULL, NULL, "1994",
-	"Dream Soccer '94 (Korea, M107 hardware)\0", NULL, "Irem (Data East Corporation license)", "M107",
+	"Dream Soccer '94 (Korea, M107 hardware)\0", NULL, "Irem (Data East Corporation license)", "Irem M107",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING | BDF_CLONE, 4, HARDWARE_IREM_MISC, GBF_SPORTSFOOTBALL, 0,
 	NULL, dsoccr94kRomInfo, dsoccr94kRomName, NULL, NULL, Dsoccr94InputInfo, Dsoccr94DIPInfo,
@@ -1523,7 +1528,7 @@ static INT32 wpksocInit()
 
 struct BurnDriverD BurnDrvWpksoc = {
 	"wpksoc", NULL, NULL, NULL, "1995",
-	"World PK Soccer\0", NULL, "Jaleco", "M107",
+	"World PK Soccer\0", NULL, "Jaleco", "Irem M107",
 	NULL, NULL, NULL, NULL,
 	0, 4, HARDWARE_IREM_MISC, GBF_SPORTSFOOTBALL, 0,
 	NULL, wpksocRomInfo, wpksocRomName, NULL, NULL, Dsoccr94InputInfo, Dsoccr94DIPInfo,
@@ -1564,7 +1569,7 @@ STD_ROM_FN(kftgoal)
 
 struct BurnDriverD BurnDrvKftgoal = {
 	"kftgoal", "wpksoc", NULL, NULL, "1995",
-	"Kick for the Goal\0", NULL, "Jaleco", "M107",
+	"Kick for the Goal\0", NULL, "Jaleco", "Irem M107",
 	NULL, NULL, NULL, NULL,
 	BDF_CLONE, 4, HARDWARE_IREM_MISC, GBF_SPORTSFOOTBALL, 0,
 	NULL, kftgoalRomInfo, kftgoalRomName, NULL, NULL, Dsoccr94InputInfo, Dsoccr94DIPInfo,

@@ -218,7 +218,7 @@ void K051649Reset()
 	}
 }
 
-INT32 K051649Scan(INT32 nAction, INT32 *pnMin)
+void K051649Scan(INT32 nAction, INT32 *pnMin)
 {
 #if defined FBA_DEBUG
 	if (!DebugSnd_K051649Initted) bprintf(PRINT_ERROR, _T("K051649Scan called without init\n"));
@@ -227,20 +227,19 @@ INT32 K051649Scan(INT32 nAction, INT32 *pnMin)
 	struct BurnArea ba;
 
 	if ((nAction & ACB_DRIVER_DATA) == 0) {
-		return 1;
+		return;
 	}
 	
 	if (pnMin != NULL) {
 		*pnMin = 0x029705;
 	}
 
+	memset(&ba, 0, sizeof(ba));
 	ba.Data		= &info->channel_list;
 	ba.nLen		= sizeof(k051649_sound_channel) * 5;
 	ba.nAddress = 0;
 	ba.szName	= "K051649 Channel list";
 	BurnAcb(&ba);
-
-	return 0;
 }
 
 /********************************************************************************/

@@ -764,14 +764,14 @@ void MSM5232Update(INT16 *buffer, INT32 samples)
 	
 			sample = BURN_SND_CLIP(sample);
 	
-			buffer[0] += BURN_SND_CLIP(buffer[0]+sample);
-			buffer[1] += BURN_SND_CLIP(buffer[1]+sample);
+			buffer[0] = BURN_SND_CLIP(buffer[0]+sample);
+			buffer[1] = BURN_SND_CLIP(buffer[1]+sample);
 			buffer += 2;
 		}
 	}
 }
 
-INT32 MSM5232Scan(INT32 nAction, INT32 *)
+void MSM5232Scan(INT32 nAction, INT32 *)
 {
 #if defined FBA_DEBUG
 	if (!DebugSnd_MSM5232Initted) bprintf(PRINT_ERROR, _T("MSM5232Scan called without init\n"));
@@ -779,7 +779,7 @@ INT32 MSM5232Scan(INT32 nAction, INT32 *)
 
 	struct BurnArea ba;
 
-	if (nAction & ACB_DRIVER_DATA) {		
+	if (nAction & ACB_DRIVER_DATA) {
 		memset(&ba, 0, sizeof(ba));
 
 		ba.Data	  = m_voi;
@@ -787,14 +787,11 @@ INT32 MSM5232Scan(INT32 nAction, INT32 *)
 		ba.szName = "Voice data";
 		BurnAcb(&ba);
 
-		SCAN_VAR(m_EN_out16[0]);
-		SCAN_VAR(m_EN_out16[1]);
-		SCAN_VAR(m_EN_out8[0]);
-		SCAN_VAR(m_EN_out8[1]);
-		SCAN_VAR(m_EN_out4[0]);
-		SCAN_VAR(m_EN_out4[1]);
-		SCAN_VAR(m_EN_out2[0]);
-		SCAN_VAR(m_EN_out2[1]);
+		SCAN_VAR(m_EN_out16);
+		SCAN_VAR(m_EN_out8);
+		SCAN_VAR(m_EN_out4);
+		SCAN_VAR(m_EN_out2);
+		SCAN_VAR(m_voi);
 		SCAN_VAR(m_noise_cnt);
 		SCAN_VAR(m_noise_step);
 		SCAN_VAR(m_noise_rng);
@@ -809,6 +806,4 @@ INT32 MSM5232Scan(INT32 nAction, INT32 *)
 	if (nAction & ACB_WRITE) {
 		init_tables();
 	}
-
-	return 0;
 }

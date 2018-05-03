@@ -96,6 +96,7 @@
 #include "burnint.h"
 #include "z80.h"
 #include "z80daisy.h"
+#include <stddef.h>
 
 #define	FALSE			0
 #define TRUE			1
@@ -109,7 +110,7 @@ static Z80WriteProgHandler Z80ProgramWrite;
 static Z80ReadOpHandler Z80CPUReadOp;
 static Z80ReadOpArgHandler Z80CPUReadOpArg;
 
-unsigned char Z80Vector = 0xff;
+#define Z80Vector Z80.vector
 
 #define VERBOSE 0
 
@@ -3575,9 +3576,11 @@ int Z80Execute(int cycles)
 		EXEC_INLINE(op,ROP());
 	} while( z80_ICount > 0 && !end_run );
 
-	if (!end_run) Z80.cycles_left = 0;
+	cycles = cycles - z80_ICount;
 
-	return cycles - z80_ICount;
+	Z80.cycles_left = z80_ICount = 0;
+
+	return cycles;
 }
 
 void Z80StopExecute()
@@ -3640,7 +3643,13 @@ int Z80Scan(int nAction)
 		return 0;
 	}
 
-	SCAN_VAR(Z80);
+	struct BurnArea ba;
+
+	memset(&ba, 0, sizeof(ba));
+	ba.Data	  = &Z80;
+	ba.nLen	  = STRUCT_SIZE_HELPER(Z80_Regs, hold_irq);
+	ba.szName = "Z80 Registers";
+	BurnAcb(&ba);
 
 	return 0;
 }
@@ -3713,6 +3722,16 @@ int ActiveZ80GetPrevPC()
 void ActiveZ80SetIRQHold()
 {
 	Z80.hold_irq = 1;
+}
+
+void ActiveZ80SetVector(INT32 vector)
+{
+	Z80Vector = vector;
+}
+
+int ActiveZ80GetVector()
+{
+	return Z80Vector;
 }
 
 #if 0

@@ -988,15 +988,31 @@ static struct BurnRomInfo pzlbowlRomDesc[] = {
 STD_ROM_PICK(pzlbowl)
 STD_ROM_FN(pzlbowl)
 
+static struct BurnRomInfo ablastRomDesc[] = {
+	// Genuine P0-142A PCB
+	{ "a-blast_twn_u06.u06",	  0x080000, 0xe62156d7, BRF_ESS | BRF_PRG },	// 68000 code
+	{ "a-blast_twn_u07.u07",	  0x080000, 0xd4ddc16b, BRF_ESS | BRF_PRG },
+
+	{ "a-blast_twn_u38.u38",	  0x400000, 0x090923da,	BRF_GRA },				// GFX
+	{ "a-blast_twn_u39.u39",	  0x400000, 0x6bb17d83,	BRF_GRA },
+	{ "a-blast_twn_u40.u40",	  0x400000, 0xdb94847d,	BRF_GRA },
+
+	{ "a-blast_twn_u18.u18",	  0x200000, 0xde4e65e2, BRF_SND },				// PCM
+};
+
+STD_ROM_PICK(ablast)
+STD_ROM_FN(ablast)
+
 static struct BurnRomInfo penbrosRomDesc[] = {
-	{ "u06.bin",	  0x080000, 0x7bbdffac, BRF_ESS | BRF_PRG },	// 68000 code
-	{ "u07.bin",	  0x080000, 0xd50cda5f, BRF_ESS | BRF_PRG },
+	// Genuine P0-142A PCB - Original or hack?
+	{ "a-blast_jpn_u06.u06",	  0x080000, 0x7bbdffac, BRF_ESS | BRF_PRG },	// 68000 code
+	{ "a-blast_jpn_u07.u07",	  0x080000, 0xd50cda5f, BRF_ESS | BRF_PRG },
 
-	{ "u38.bin",	  0x400000, 0x4247b39e,	BRF_GRA },				// GFX
-	{ "u39.bin",	  0x400000, 0xf9f07faf,	BRF_GRA },
-	{ "u40.bin",	  0x400000, 0xdc9e0a96,	BRF_GRA },
+	{ "a-blast_jpn_u38.u38",	  0x400000, 0x4247b39e,	BRF_GRA },				// GFX
+	{ "a-blast_jpn_u39.u39",	  0x400000, 0xf9f07faf,	BRF_GRA },
+	{ "a-blast_jpn_u40.u40",	  0x400000, 0xdc9e0a96,	BRF_GRA },
 
-	{ "u18.bin",	  0x200000, 0xde4e65e2, BRF_SND },				// PCM
+	{ "a-blast_jpn_u18.u18",	  0x200000, 0xde4e65e2, BRF_SND },				// PCM
 };
 
 STD_ROM_PICK(penbros)
@@ -3353,6 +3369,16 @@ struct BurnDriver BurnDrvPenbros = {
 	L"\u30DA\u30F3\u30AE\u30F3 \u30D6\u30E9\u30B6\u30FC\u30BA (Japan)\0Penguin Brothers\0", NULL, NULL, NULL,
 	BDF_GAME_WORKING, 2, HARDWARE_SETA2, GBF_PLATFORM, 0,
 	NULL, penbrosRomInfo, penbrosRomName, NULL, NULL, penbrosInputInfo, penbrosDIPInfo,
+	penbrosInit, grdiansExit, grdiansFrame, NULL, grdiansScan, &bRecalcPalette, 0x8000,
+	320, 224, 4, 3
+};
+
+struct BurnDriver BurnDrvAblast = {
+	"ablast", "penbros", NULL, NULL, "2000",
+	"A-Blast (Japan)\0", NULL, "Subsino", "Newer Seta",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_SETA2, GBF_PLATFORM, 0,
+	NULL, ablastRomInfo, ablastRomName, NULL, NULL, penbrosInputInfo, penbrosDIPInfo,
 	penbrosInit, grdiansExit, grdiansFrame, NULL, grdiansScan, &bRecalcPalette, 0x8000,
 	320, 224, 4, 3
 };

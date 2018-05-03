@@ -8,6 +8,7 @@
 
 #include "burnint.h"
 #include "wiping.h"
+#include <stddef.h>
 
 static const INT32 samplerate = 48000;
 static const INT32 defgain = 48;
@@ -21,9 +22,9 @@ struct sound_channel
 	INT32 frequency;
 	INT32 counter;
 	INT32 volume;
-	const UINT8 *wave;
 	INT32 oneshot;
 	INT32 oneshotplaying;
+	const UINT8 *wave;
 };
 
 /* data about the sound system */
@@ -46,9 +47,20 @@ static UINT8 m_soundregs[0x4000];
 
 static void make_mixer_table(INT32 voices, INT32 gain);
 
-void wipingsnd_scan()
+void wipingsnd_scan(INT32 , INT32 *)
 {
-	SCAN_VAR(m_channel_list);
+	for (INT32 i = 0; i < MAX_VOICES; i++) {
+		struct BurnArea ba;
+		char szName[16];
+		sprintf(szName, "Wiping Ch#%d", i);
+
+		memset(&ba, 0, sizeof(ba));
+		ba.Data	  = &m_channel_list[i];
+		ba.nLen	  = STRUCT_SIZE_HELPER(struct sound_channel, oneshotplaying);
+		ba.szName = szName;
+		BurnAcb(&ba);
+	}
+
 	SCAN_VAR(m_soundregs);
 }
 
@@ -110,7 +122,7 @@ static void make_mixer_table(INT32 voices, INT32 gain)
 	/* fill in the table - 16 bit case */
 	for (INT32 i = 0; i < count; i++)
 	{
-		int val = i * gain * 16 / voices;
+		INT32 val = i * gain * 16 / voices;
 		if (val > 32767) val = 32767;
 		m_mixer_lookup[ i] = val;
 		m_mixer_lookup[-i] = -val;
@@ -142,7 +154,7 @@ void wipingsnd_write(INT32 offset, UINT8 data)
 			{
 				// hack :)
 				if (128 * (16 * (m_soundregs[0x5 + base] & 0x0f) + (m_soundregs[0x2005 + base] & 0x0f)) == 0x1800
-					&& game_is_wiping) voice->volume = 0x06;
+					&& game_is_wiping) voice->volume /= 3;
 				// end of hack
 
 				voice->wave = &m_sound_rom[128 * (16 * (m_soundregs[0x5 + base] & 0x0f)
@@ -241,7 +253,7 @@ void wipingsnd_update(INT16 *outputs, INT32 samples_len)
 	// resample native (48khz) -> our rate
 	for (INT32 j = 0; j < samples_len; j++)
 	{
-		INT32 k = (((((samplerate*1000) / nBurnFPS) * (j & ~2)) / nBurnSoundLen)) / 10;
+		INT32 k = (((((samplerate*1000) / nBurnFPS) * j) / nBurnSoundLen)) / 10;
 
 		INT32 lr = (INT32)(m_mixer_lookup[m_mixer_buffer[k]] * 0.50);
 

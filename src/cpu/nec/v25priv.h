@@ -70,7 +70,7 @@ typedef struct _v25_state_t v25_state_t;
 struct _v25_state_t
 {
 	internalram ram;
-	offs_t	fetch_xor;
+	UINT32	fetch_xor;
 
 	UINT16	ip;
 
@@ -99,21 +99,18 @@ struct _v25_state_t
 	UINT16	TM0, MD0, TM1, MD1;
 	UINT8	TMC0, TMC1;
 //	emu_timer *timers[4];
-	int timer_param[4];
-	int timer_cycles_period[4];
-	int timer_cycles_until_trigger[4];
-	unsigned char timer_enabled[4];
-	unsigned char timer_flags[4];
-	unsigned int clock; // unscaled!
+	INT32 timer_param[4];
+	INT32 timer_cycles_period[4];
+	INT32 timer_cycles_until_trigger[4];
+	UINT8 timer_enabled[4];
+	UINT8 timer_flags[4];
+	UINT32 clock; // unscaled!
 
 	/* system control */
 	UINT8	RAMEN, TB, PCK;	/* PRC register */
 	UINT32	IDB;
 
-	int		icount;
-
-	//const nec_config *config;
-	unsigned char *decode;
+	INT32		icount;
 
 	UINT8	prefetch_size;
 	UINT8	prefetch_cycles;
@@ -127,6 +124,8 @@ struct _v25_state_t
 	UINT32 cycles_total;
 	UINT32 cycles_remaining;
 	INT8	stop_run;
+
+	unsigned char *decode;
 };
 
 enum {

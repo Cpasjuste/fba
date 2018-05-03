@@ -225,6 +225,8 @@ static UINT32 nSoundStatus;
 static INT32 nSoundPrevReply;
 #endif
 
+INT32 s1945pmode = 0;
+
 static INT32 nInputSelect;
 static UINT8* NeoInputBank;
 static UINT32 nAnalogAxis[2];
@@ -642,6 +644,7 @@ static INT32 LoadRoms()
 	if (!strcmp("kotm2p", BurnDrvGetTextA(DRV_NAME))) nYM2610ADPCMASize[nNeoActiveSlot] = 0x300000;
 	if (!strcmp("sbp", BurnDrvGetTextA(DRV_NAME))) nYM2610ADPCMASize[nNeoActiveSlot] = 0x800000;
 	if (!strcmp("lasthope", BurnDrvGetTextA(DRV_NAME))) nYM2610ADPCMASize[nNeoActiveSlot] = 0x600000;
+	if (!strcmp("mslug5w", BurnDrvGetTextA(DRV_NAME))) nYM2610ADPCMASize[nNeoActiveSlot] = 0x10002f0;
 	
 //	bprintf(PRINT_NORMAL, _T("%x\n"), nYM2610ADPCMASize[nNeoActiveSlot]);
 	
@@ -984,16 +987,6 @@ static void neogeoFMIRQHandler(INT32, INT32 nStatus)
 	} else {
 		ZetSetIRQLine(0,    CPU_IRQSTATUS_NONE);
 	}
-}
-
-static INT32 neogeoSynchroniseStream(INT32 nSoundRate)
-{
-	return (INT64)ZetTotalCycles() * nSoundRate / nZ80Clockspeed;
-}
-
-static double neogeoGetTime()
-{
-	return (double)ZetTotalCycles() / nZ80Clockspeed;
 }
 
 // ----------------------------------------------------------------------------
@@ -1640,9 +1633,9 @@ void __fastcall neogeoZ80Out(UINT16 nAddress, UINT8 nValue)
 
 			if (ZetTotalCycles() > nCycles68KSync) {
 
-//				bprintf(PRINT_NORMAL, _T("    %i\n"), ZetTotalCycles());
+				//				bprintf(PRINT_NORMAL, _T("    %i\n"), ZetTotalCycles());
 				BurnTimerUpdateEnd();
-//				bprintf(PRINT_NORMAL, _T("    %i - %i\n"), ZetTotalCycles(), nCycles68KSync);
+				//				bprintf(PRINT_NORMAL, _T("    %i - %i\n"), ZetTotalCycles(), nCycles68KSync);
 			}
 #endif
 
@@ -1745,7 +1738,7 @@ static inline void SendSoundCommand(const UINT8 nCommand)
 	ZetNmi();
 
 #if 1 && defined USE_SPEEDHACKS
-	neogeoSynchroniseZ80(0x0200);
+	neogeoSynchroniseZ80((s1945pmode) ? 0x60 : 0x0200);
 #endif
 }
 
@@ -1807,7 +1800,7 @@ UINT8 __fastcall neogeoReadByte(UINT32 sekAddress)
 #if 1 && defined USE_SPEEDHACKS
 				// nSoundStatus: &1 = sound latch read, &2 = response written
 				if (nSoundStatus != 3) {
-					neogeoSynchroniseZ80(0x0100);
+					neogeoSynchroniseZ80((s1945pmode) ? 0x60 : 0x0100);
 				}
 #else
 				neogeoSynchroniseZ80(0);
@@ -3703,6 +3696,8 @@ static INT32 neogeoReset()
 	nNeoWatchdog = 0;
 #endif
 
+	HiscoreReset();
+
 	nIRQCycles = NO_IRQ_PENDING;
 	
 	nNeoCDIRQVector = 0;
@@ -3943,9 +3938,9 @@ static INT32 NeoInitCommon()
 #endif
 
 	if (nNeoSystemType & NEO_SYS_CART) {
-		BurnYM2610Init(8000000, YM2610ADPCMAROM[0], &nYM2610ADPCMASize[0], YM2610ADPCMBROM[0], &nYM2610ADPCMBSize[0], &neogeoFMIRQHandler, neogeoSynchroniseStream, neogeoGetTime, 0);
+		BurnYM2610Init(8000000, YM2610ADPCMAROM[0], &nYM2610ADPCMASize[0], YM2610ADPCMBROM[0], &nYM2610ADPCMBSize[0], &neogeoFMIRQHandler, 0);
 	} else {
-		BurnYM2610Init(8000000, YM2610ADPCMBROM[0], &nYM2610ADPCMBSize[0], YM2610ADPCMBROM[0], &nYM2610ADPCMBSize[0], &neogeoFMIRQHandler, neogeoSynchroniseStream, neogeoGetTime, 0);
+		BurnYM2610Init(8000000, YM2610ADPCMBROM[0], &nYM2610ADPCMBSize[0], YM2610ADPCMBROM[0], &nYM2610ADPCMBSize[0], &neogeoFMIRQHandler, 0);
 	}
 	
 	BurnYM2610SetRoute(BURN_SND_YM2610_YM2610_ROUTE_1, 1.00, BURN_SND_ROUTE_LEFT);
@@ -4280,6 +4275,8 @@ INT32 NeoExit()
 
 	// release the NeoGeo CD information object if needed
 	NeoCDInfo_Exit();
+
+	s1945pmode = 0;
 
 	return 0;
 }

@@ -215,6 +215,13 @@ inline static void Cps3ClearOpposites(UINT16* nJoystickInputs)
 	if ((*nJoystickInputs & 0x0c) == 0x0c) {
 		*nJoystickInputs &= ~0x0c;
 	}
+
+	if ((*nJoystickInputs & 0x0300) == 0x0300) {
+		*nJoystickInputs &= ~0x0300;
+	}
+	if ((*nJoystickInputs & 0x0c00) == 0x0c00) {
+		*nJoystickInputs &= ~0x0c00;
+	}
 }
 
 // ------------------------------------------------------------------------
@@ -1058,9 +1065,12 @@ static INT32 Cps3Reset()
 		EEPROM[0x29] = 0x000 + (EEPROM[0x29] & 0xff);
 	}
 
-	cps3_current_eeprom_read = 0;	
-	cps3SndReset();	
-	cps3_reset = 0;	
+	cps3_current_eeprom_read = 0;
+	cps3SndReset();
+	cps3_reset = 0;
+
+	HiscoreReset();
+
 	return 0;
 }
 
@@ -2011,7 +2021,6 @@ INT32 cps3Frame()
 
 	// Clear Opposites
 	Cps3ClearOpposites(&Cps3Input[0]);
-	Cps3ClearOpposites(&Cps3Input[1]);
 
 	for (INT32 i=0; i<4; i++) {
 
