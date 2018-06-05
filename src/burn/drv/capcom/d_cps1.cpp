@@ -18086,7 +18086,7 @@ struct BurnDriver BurnDrvCps1941 = {
 	"1941", NULL, NULL, NULL, "1990",
 	"1941 - Counter Attack (900227 World)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, FBF_19XX,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, FBF_19XX,
 	NULL, NTFODrvRomInfo, NTFODrvRomName, NULL, NULL, NTFOInputInfo, NTFODIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -18096,7 +18096,7 @@ struct BurnDriver BurnDrvCps1941r1 = {
 	"1941r1", "1941", NULL, NULL, "1990",
 	"1941 - Counter Attack (World)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, FBF_19XX,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, FBF_19XX,
 	NULL, NTFOR1DrvRomInfo, NTFOR1DrvRomName, NULL, NULL, NTFOInputInfo, NTFODIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -18106,7 +18106,7 @@ struct BurnDriver BurnDrvCps1941u = {
 	"1941u", "1941", NULL, NULL, "1990",
 	"1941 - Counter Attack (900227 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, FBF_19XX,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, FBF_19XX,
 	NULL, NTFOUDrvRomInfo, NTFOUDrvRomName, NULL, NULL, NTFOInputInfo, NTFODIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -18116,7 +18116,7 @@ struct BurnDriver BurnDrvCps1941j = {
 	"1941j", "1941", NULL, NULL, "1990",
 	"1941 - Counter Attack (Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, FBF_19XX,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, FBF_19XX,
 	NULL, NTFOJDrvRomInfo, NTFOJDrvRomName, NULL, NULL, NTFOInputInfo, NTFODIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -18126,7 +18126,7 @@ struct BurnDriver BurnDrvCps3wonders = {
 	"3wonders", NULL, NULL, NULL, "1991",
 	"Three Wonders (wonder 3 910520 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
 	NULL, ThreeWondersRomInfo, ThreeWondersRomName, NULL, NULL, ThreeWondersInputInfo, ThreeWondersDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18136,7 +18136,7 @@ struct BurnDriver BurnDrvCps3wondersr1 = {
 	"3wondersr1", "3wonders", NULL, NULL, "1991",
 	"Three Wonders (wonder 3 910513 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
 	NULL, ThreeWondersr1RomInfo, ThreeWondersr1RomName, NULL, NULL, ThreeWondersInputInfo, ThreeWondersDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18146,7 +18146,7 @@ struct BurnDriver BurnDrvCps3wondersu = {
 	"3wondersu", "3wonders", NULL, NULL, "1991",
 	"Three Wonders (wonder 3 910520 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
 	NULL, Wonder3uRomInfo, Wonder3uRomName, NULL, NULL, ThreeWondersInputInfo, ThreeWondersDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18156,7 +18156,7 @@ struct BurnDriver BurnDrvCpsWonder3 = {
 	"wonder3", "3wonders", NULL, NULL, "1991",
 	"Wonder 3 (910520 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
 	NULL, Wonder3RomInfo, Wonder3RomName, NULL, NULL, ThreeWondersInputInfo, ThreeWondersDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18166,7 +18166,7 @@ struct BurnDriver BurnDrvCps3wondersh = {
 	"3wondersh", "3wonders", NULL, NULL, "1991",
 	"Three Wonders (bootleg set 1, wonder 3 910520 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
 	NULL, Wonder3hRomInfo, Wonder3hRomName, NULL, NULL, ThreeWondersInputInfo, ThreeWondersDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18186,7 +18186,7 @@ struct BurnDriver BurnDrvCps3wondersb = {
 	"3wondersb", "3wonders", NULL, NULL, "1991",
 	"Three Wonders (bootleg set 2, wonder 3 910520 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_MINIGAMES, 0,
 	NULL, Wonder3bRomInfo, Wonder3bRomName, NULL, NULL, ThreeWondersInputInfo, ThreeWondersDIPInfo,
 	Wonder3bInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18196,7 +18196,7 @@ struct BurnDriver BurnDrvCpsCaptcomm = {
 	"captcomm", NULL, NULL, NULL, "1991",
 	"Captain Commando (911202 other country)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, CaptcommRomInfo, CaptcommRomName, NULL, NULL, CaptcommInputInfo, CaptcommDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18206,7 +18206,7 @@ struct BurnDriver BurnDrvCpsCaptcommr1 = {
 	"captcommr1", "captcomm", NULL, NULL, "1991",
 	"Captain Commando (911014 other country)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, Captcommr1RomInfo, Captcommr1RomName, NULL, NULL, CaptcommInputInfo, CaptcommDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18216,7 +18216,7 @@ struct BurnDriver BurnDrvCpsCaptcommu = {
 	"captcommu", "captcomm", NULL, NULL, "1991",
 	"Captain Commando (910928 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, CaptcommuRomInfo, CaptcommuRomName, NULL, NULL, CaptcommInputInfo, CaptcommDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18226,7 +18226,7 @@ struct BurnDriver BurnDrvCpsCaptcommj = {
 	"captcommj", "captcomm", NULL, NULL, "1991",
 	"Captain Commando (911202 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, CaptcommjRomInfo, CaptcommjRomName, NULL, NULL, CaptcommInputInfo, CaptcommDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18236,7 +18236,7 @@ struct BurnDriver BurnDrvCpsCaptcommjr1 = {
 	"captcommjr1", "captcomm", NULL, NULL, "1991",
 	"Captain Commando (910928 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, Captcommjr1RomInfo, Captcommjr1RomName, NULL, NULL, CaptcommInputInfo, CaptcommDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18246,7 +18246,7 @@ struct BurnDriver BurnDrvCpsCaptcommb = {
 	"captcommb", "captcomm", NULL, NULL, "1991",
 	"Captain Commando (bootleg set 1, 911014 other country)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, CaptcommbRomInfo, CaptcommbRomName, NULL, NULL, CaptcommInputInfo, CaptcommDIPInfo,
 	CaptcommbInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18266,7 +18266,7 @@ struct BurnDriver BurnDrvCpsCawing = {
 	"cawing", NULL, NULL, NULL, "1990",
 	"Carrier Air Wing (U.S. navy 901012 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, CawingRomInfo, CawingRomName, NULL, NULL, CawingInputInfo, CawingDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18276,7 +18276,7 @@ struct BurnDriver BurnDrvCpsCawingr1 = {
 	"cawingr1", "cawing", NULL, NULL, "1990",
 	"Carrier Air Wing (U.S. navy 901009 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, Cawingr1RomInfo, Cawingr1RomName, NULL, NULL, CawingInputInfo, CawingDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18286,7 +18286,7 @@ struct BurnDriver BurnDrvCpsCawingu = {
 	"cawingu", "cawing", NULL, NULL, "1990",
 	"Carrier Air Wing (U.S. navy 901130 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, CawinguRomInfo, CawinguRomName, NULL, NULL, CawingInputInfo, CawingDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18296,7 +18296,7 @@ struct BurnDriver BurnDrvCpsCawingur1 = {
 	"cawingur1", "cawing", NULL, NULL, "1990",
 	"Carrier Air Wing (U.S. navy 901012 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, Cawingur1RomInfo, Cawingur1RomName, NULL, NULL, CawingInputInfo, CawingDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18306,7 +18306,7 @@ struct BurnDriver BurnDrvCpsCawingj = {
 	"cawingj", "cawing", NULL, NULL, "1990",
 	"U.S. Navy (901012 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, CawingjRomInfo, CawingjRomName, NULL, NULL, CawingInputInfo, CawingDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18316,7 +18316,7 @@ struct BurnDriver BurnDrvCpsCawingbl = {
 	"cawingbl", "cawing", NULL, NULL, "1990",
 	"Carrier Air Wing (bootleg set 1 (with 2xYM2203 + 2xMSM5205), U.S. navy 901012 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, CawingblRomInfo, CawingblRomName, NULL, NULL, CawingInputInfo, CawingDIPInfo,
 	CawingblInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18326,7 +18326,7 @@ struct BurnDriver BurnDrvCpsCawingb2 = {
 	"cawingb2", "cawing", NULL, NULL, "1990",
 	"Carrier Air Wing (bootleg set 2 (with 2xYM2203 + 2xMSM5205), U.S. navy 901012 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, Cawingb2RomInfo, Cawingb2RomName, NULL, NULL, CawingInputInfo, CawingDIPInfo,
 	Cawingb2Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18346,7 +18346,7 @@ struct BurnDriver BurnDrvCpsCworld2j = {
 	"cworld2j", NULL, NULL, NULL, "1992",
 	"Adventure Quiz Capcom World 2 (920611 Japan)\0", NULL, "Capcom", "CPS1",
 	L"Adventure Quiz Capcom World 2 (\u30AF\u30A4\u30BA\uFF15 \u3042\u3069\u3079\u3093\u3061\u3083\u30FC\u304F\u3044\u305A \u304B\u3077\u3053\u3093\u308F\u30FC\u308B\u3069\uFF12 920611 Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_PUZZLE, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PUZZLE, 0,
 	NULL, Cworld2jRomInfo, Cworld2jRomName, NULL, NULL, Cworld2jInputInfo, Cworld2jDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18376,7 +18376,7 @@ struct BurnDriver BurnDrvCpsDino = {
 	"dino", NULL, NULL, NULL, "1993",
 	"Cadillacs & Dinosaurs (930201 etc)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, DinoRomInfo, DinoRomName, NULL, NULL, DinoInputInfo, DinoDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18386,7 +18386,7 @@ struct BurnDriver BurnDrvCpsDinoa = {
 	"dinoa", "dino", NULL, NULL, "1993",
 	"Cadillacs & Dinosaurs (930223 Asia TW)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, DinoaRomInfo, DinoaRomName, NULL, NULL, DinoInputInfo, DinoDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18396,7 +18396,7 @@ struct BurnDriver BurnDrvCpsDinoj = {
 	"dinoj", "dino", NULL, NULL, "1993",
 	"Cadillacs Kyouryuu-Shinseiki (Cadillacs 930201 Japan)\0", NULL, "Capcom", "CPS1 / QSound",
 	L"Cadillacs \u6050\u7ADC\u65B0\u4E16\u7D00\0Cadillacs Kyouryuu-Shinseiki (Cadillacs 930201 Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, DinojRomInfo, DinojRomName, NULL, NULL, DinoInputInfo, DinoDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18406,7 +18406,7 @@ struct BurnDriver BurnDrvCpsDinou = {
 	"dinou", "dino", NULL, NULL, "1993",
 	"Cadillacs & Dinosaurs (930201 USA)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, DinouRomInfo, DinouRomName, NULL, NULL, DinoInputInfo, DinoDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18486,7 +18486,7 @@ struct BurnDriver BurnDrvCpsDinohunt = {
 	"dinohunt", "dino", NULL, NULL, "1993",
 	"Dinosaur Hunter (Chinese bootleg, 930223 Asia TW)\0", NULL, "bootleg", "CPS1",
 	L"Dinosaur Hunter \u6050\u9F8D\u7375\u4EBA (Chinese bootleg, 930223 Asia TW)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, DinohuntRomInfo, DinohuntRomName, NULL, NULL, DinoInputInfo, DinoDIPInfo,
 	DinohuntInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18516,7 +18516,7 @@ struct BurnDriver BurnDrvCpsDynwar = {
 	"dynwar", NULL, NULL, NULL, "1989",
 	"Dynasty Wars (US set 1)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, DynwarRomInfo, DynwarRomName, NULL, NULL, DynwarInputInfo, DynwarDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18526,7 +18526,7 @@ struct BurnDriver BurnDrvCpsDynwara = {
 	"dynwara", "dynwar", NULL, NULL, "1989",
 	"Dynasty Wars (US set 2)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, DynwaraRomInfo, DynwaraRomName, NULL, NULL, DynwarInputInfo, DynwarDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18536,7 +18536,7 @@ struct BurnDriver BurnDrvCpsDynwarj = {
 	"dynwarj", "dynwar", NULL, NULL, "1989",
 	"Tenchi wo Kurau (Japan)\0", NULL, "Capcom", "CPS1",
 	L"\u5929\u5730\u3092\u55B0\u3089\u3046\0Tenchi wo Kurau (Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, DynwarjRomInfo, DynwarjRomName, NULL, NULL, DynwarInputInfo, DynwarDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18546,7 +18546,7 @@ struct BurnDriver BurnDrvCpsDynwarjr = {
 	"dynwarjr", "dynwar", NULL, NULL, "1989",
 	"Tenchi wo Kurau (Japan Resale Ver.)\0", NULL, "Capcom", "CPS1",
 	L"\u5929\u5730\u3092\u55B0\u3089\u3046\0Tenchi wo Kurau (Japan Resale Ver.)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, DynwarjrRomInfo, DynwarjrRomName, NULL, NULL, DynwarInputInfo, DynwarDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18556,7 +18556,7 @@ struct BurnDriver BurnDrvCpsFfight = {
 	"ffight", NULL, NULL, NULL, "1989",
 	"Final Fight (World, set 1)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FfightRomInfo, FfightRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18566,7 +18566,7 @@ struct BurnDriver BurnDrvCpsFfighta = {
 	"ffighta", "ffight", NULL, NULL, "1989",
 	"Final Fight (World, set 2)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FfightaRomInfo, FfightaRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18576,7 +18576,7 @@ struct BurnDriver BurnDrvCpsFfightu = {
 	"ffightu", "ffight", NULL, NULL, "1989",
 	"Final Fight (USA, set 1)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FfightuRomInfo, FfightuRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18586,7 +18586,7 @@ struct BurnDriver BurnDrvCpsFfightu1 = {
 	"ffightu1", "ffight", NULL, NULL, "1989",
 	"Final Fight (USA, set 2)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, Ffightu1RomInfo, Ffightu1RomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18606,7 +18606,7 @@ struct BurnDriver BurnDrvCpsFfightua = {
 	"ffightua", "ffight", NULL, NULL, "1989",
 	"Final Fight (900112 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FfightuaRomInfo, FfightuaRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18616,7 +18616,7 @@ struct BurnDriver BurnDrvCpsFfightub = {
 	"ffightub", "ffight", NULL, NULL, "1989",
 	"Final Fight (900424 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FfightubRomInfo, FfightubRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18636,7 +18636,7 @@ struct BurnDriver BurnDrvCpsFfightj = {
 	"ffightj", "ffight", NULL, NULL, "1989",
 	"Final Fight (Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FfightjRomInfo, FfightjRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18646,7 +18646,7 @@ struct BurnDriver BurnDrvCpsFfightj1 = {
 	"ffightj1", "ffight", NULL, NULL, "1989",
 	"Final Fight (900112 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, Ffightj1RomInfo, Ffightj1RomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18656,7 +18656,7 @@ struct BurnDriver BurnDrvCpsFfightj2 = {
 	"ffightj2", "ffight", NULL, NULL, "1989",
 	"Final Fight (900305 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, Ffightj2RomInfo, Ffightj2RomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18664,6 +18664,16 @@ struct BurnDriver BurnDrvCpsFfightj2 = {
 
 struct BurnDriver BurnDrvCpsFfightj3 = {
 	"ffightj3", "ffight", NULL, NULL, "1989",
+	"Final Fight (900405 Japan)\0", NULL, "Capcom", "CPS1",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	NULL, Ffightj3RomInfo, Ffightj3RomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
+	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
+	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
+};
+
+struct BurnDriver BurnDrvCpsFfightj4 = {
+	"ffightj4", "ffight", NULL, NULL, "1989",
 	"Final Fight (900613 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
 	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
@@ -18676,7 +18686,7 @@ struct BurnDriver BurnDrvCpsFfightjh = {
 	"ffightjh", "ffight", NULL, NULL, "1989",
 	"Street Smart / Final Fight (Japan, hack)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FfightjhRomInfo, FfightjhRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18686,7 +18696,7 @@ struct BurnDriver BurnDrvCpsFfightbl = {
 	"ffightbl", "ffight", NULL, NULL, "1990",
 	"Final Fight (bootleg set 1 (with 2xYM2203 + 2xMSM5205), World)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FfightblRomInfo, FfightblRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	FfightblInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18706,7 +18716,7 @@ struct BurnDriver BurnDrvCpsFcrash = {
 	"fcrash", "ffight", NULL, NULL, "1990",
 	"Final Crash (bootleg (with 2xYM2203 + 2xMSM5205))\0", NULL, "Playmark", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, FcrashRomInfo, FcrashRomName, NULL, NULL, FfightInputInfo, FfightDIPInfo,
 	FcrashInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18716,7 +18726,7 @@ struct BurnDriver BurnDrvCpsForgottn = {
 	"forgottn", NULL, NULL, NULL, "1988",
 	"Forgotten Worlds (World, newer)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
 	NULL, ForgottnRomInfo, ForgottnRomName, NULL, NULL, ForgottnInputInfo, ForgottnDIPInfo,
 	ForgottnNewerInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18736,7 +18746,7 @@ struct BurnDriver BurnDrvCpsForgottnu = {
 	"forgottnu", "forgottn", NULL, NULL, "1988",
 	"Forgotten Worlds (US, B-Board 88621B-2, rev C)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
 	NULL, ForgottnuRomInfo, ForgottnuRomName, NULL, NULL, ForgottnInputInfo, ForgottnDIPInfo,
 	ForgottnAltGfxuInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18746,7 +18756,7 @@ struct BurnDriver BurnDrvCpsForgottnua = {
 	"forgottnua", "forgottn", NULL, NULL, "1988",
 	"Forgotten Worlds (US, B-Board 88618B-2, rev A)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
 	NULL, ForgottnuaRomInfo, ForgottnuaRomName, NULL, NULL, ForgottnInputInfo, ForgottnDIPInfo,
 	ForgottnInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18756,7 +18766,7 @@ struct BurnDriver BurnDrvCpsForgottnuaa = {
 	"forgottnuaa", "forgottn", NULL, NULL, "1988",
 	"Forgotten Worlds (US, B-Board 88618B-2, rev AA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
 	NULL, ForgottnuaaRomInfo, ForgottnuaaRomName, NULL, NULL, ForgottnInputInfo, ForgottnDIPInfo,
 	ForgottnInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18766,7 +18776,7 @@ struct BurnDriver BurnDrvCpsForgottnuc = {
 	"forgottnuc", "forgottn", NULL, NULL, "1988",
 	"Forgotten Worlds (US, B-Board 88618B-2, Rev C)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
 	NULL, ForgottnucRomInfo, ForgottnucRomName, NULL, NULL, ForgottnInputInfo, ForgottnDIPInfo,
 	ForgottnInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18776,7 +18786,7 @@ struct BurnDriver BurnDrvCpsForgottnue = {
 	"forgottnue", "forgottn", NULL, NULL, "1988",
 	"Forgotten Worlds (US, B-Board 88618B-2, Rev E)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
 	NULL, ForgottnueRomInfo, ForgottnueRomName, NULL, NULL, ForgottnInputInfo, ForgottnDIPInfo,
 	ForgottnInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18786,7 +18796,7 @@ struct BurnDriver BurnDrvCpsLostwrld = {
 	"lostwrld", "forgottn", NULL, NULL, "1988",
 	"Lost Worlds (Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
  	NULL, LostwrldRomInfo, LostwrldRomName, NULL, NULL, ForgottnInputInfo, ForgottnDIPInfo,
 	ForgottnInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18796,7 +18806,7 @@ struct BurnDriver BurnDrvCpsLostwrldo = {
 	"lostwrldo", "forgottn", NULL, NULL, "1988",
 	"Lost Worlds (Japan Old ver.)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_HORSHOOT, 0,
  	NULL, LostwrldoRomInfo, LostwrldoRomName, NULL, NULL, ForgottnInputInfo, ForgottnDIPInfo,
 	ForgottnInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18816,7 +18826,7 @@ struct BurnDriver BurnDrvCpsGhouls = {
 	"ghouls", NULL, NULL, NULL, "1988",
 	"Ghouls'n Ghosts (World)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, GhoulsRomInfo, GhoulsRomName, NULL, NULL, GhoulsInputInfo, GhoulsDIPInfo,
 	GhoulsInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18826,7 +18836,7 @@ struct BurnDriver BurnDrvCpsGhoulsu = {
 	"ghoulsu", "ghouls", NULL, NULL, "1988",
 	"Ghouls'n Ghosts (US)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, GhoulsuRomInfo, GhoulsuRomName, NULL, NULL, GhoulsInputInfo, GhoulsuDIPInfo,
 	GhoulsInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18836,7 +18846,7 @@ struct BurnDriver BurnDrvCpsDaimakai = {
 	"daimakai", "ghouls", NULL, NULL, "1988",
 	"Dai Makai-Mura (Japan)\0", NULL, "Capcom", "CPS1",
 	L"\u5927\u9B54\u754C\u6751\0Dai Makai-Mura (Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, DaimakaiRomInfo, DaimakaiRomName, NULL, NULL, GhoulsInputInfo, DaimakaiDIPInfo,
 	DaimakaiInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18846,7 +18856,7 @@ struct BurnDriver BurnDrvCpsDaimakair = {
 	"daimakair", "ghouls", NULL, NULL, "1988",
 	"Dai Makai-Mura (Japan Resale Ver.)\0", NULL, "Capcom", "CPS1",
 	L"\u5927\u9B54\u754C\u6751\0Dai Makai-Mura (Japan Resale Ver.)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, DaimakairRomInfo, DaimakairRomName, NULL, NULL, GhoulsInputInfo, DaimakaiDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18866,7 +18876,7 @@ struct BurnDriver BurnDrvCpsKnights = {
 	"knights", NULL, NULL, NULL, "1991",
 	"Knights of the Round (911127 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KnightsRomInfo, KnightsRomName, NULL, NULL, KnightsInputInfo, KnightsDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18876,7 +18886,7 @@ struct BurnDriver BurnDrvCpsKnightsu = {
 	"knightsu", "knights", NULL, NULL, "1991",
 	"Knights of the Round (911127 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KnightsuRomInfo, KnightsuRomName, NULL, NULL, KnightsInputInfo, KnightsDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18886,7 +18896,7 @@ struct BurnDriver BurnDrvCpsKnightsj = {
 	"knightsj", "knights", NULL, NULL, "1991",
 	"Knights of the Round (911127 Japan, B-Board 91634B-2)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KnightsjRomInfo, KnightsjRomName, NULL, NULL, KnightsInputInfo, KnightsDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18896,7 +18906,7 @@ struct BurnDriver BurnDrvCpsKnightsja = {
 	"knightsja", "knights", NULL, NULL, "1991",
 	"Knights of the Round (911127 Japan, B-Board 89625B-1)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KnightsjaRomInfo, KnightsjaRomName, NULL, NULL, KnightsInputInfo, KnightsDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18906,7 +18916,7 @@ struct BurnDriver BurnDrvCpsKnightsb = {
 	"knightsb", "knights", NULL, NULL, "1991",
 	"Knights of the Round (bootleg set 1 (with YM2151 + 2xMSM5205), 911127 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KnightsbRomInfo, KnightsbRomName, NULL, NULL, KnightsInputInfo, KnightsDIPInfo,
 	KnightsbInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18966,7 +18976,7 @@ struct BurnDriver BurnDrvCpsKod = {
 	"kod", NULL, NULL, NULL, "1991",
 	"The King of Dragons (910805 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KodRomInfo, KodRomName, NULL, NULL, KodInputInfo, KodDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18976,7 +18986,7 @@ struct BurnDriver BurnDrvCpsKodr1 = {
 	"kodr1", "kod", NULL, NULL, "1991",
 	"The King of Dragons (910711 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, Kodr1RomInfo, Kodr1RomName, NULL, NULL, KodInputInfo, Kodr1DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18986,7 +18996,7 @@ struct BurnDriver BurnDrvCpsKodu = {
 	"kodu", "kod", NULL, NULL, "1991",
 	"The King of Dragons (US 910910)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KoduRomInfo, KoduRomName, NULL, NULL, KodInputInfo, KodDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -18996,7 +19006,7 @@ struct BurnDriver BurnDrvCpsKodj = {
 	"kodj", "kod", NULL, NULL, "1991",
 	"The King of Dragons (Japan 910805, B-Board 90629B-3)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KodjRomInfo, KodjRomName, NULL, NULL, KodInputInfo, KodDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19006,7 +19016,7 @@ struct BurnDriver BurnDrvCpsKodja = {
 	"kodja", "kod", NULL, NULL, "1991",
 	"The King of Dragons (Japan 910805, B-Board 89625B-1)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KodjaRomInfo, KodjaRomName, NULL, NULL, KodInputInfo, KodDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19016,7 +19026,7 @@ struct BurnDriver BurnDrvCpsKodb = {
 	"kodb", "kod", NULL, NULL, "1991",
 	"The King of Dragons (bootleg, 910731 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, KodbRomInfo, KodbRomName, NULL, NULL, KodInputInfo, KodDIPInfo,
 	KodbInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19046,7 +19056,7 @@ struct BurnDriver BurnDrvCpsMegaman = {
 	"megaman", NULL, NULL, NULL, "1995",
 	"Mega Man - the power battle (951006 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
 	NULL, MegamanRomInfo, MegamanRomName, NULL, NULL, MegamanInputInfo, MegamanDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19056,7 +19066,7 @@ struct BurnDriver BurnDrvCpsMegamana = {
 	"megamana", "megaman", NULL, NULL, "1995",
 	"Mega Man - the power battle (951006 Asia)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
 	NULL, MegamanaRomInfo, MegamanaRomName, NULL, NULL, MegamanInputInfo, MegamanDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19066,7 +19076,7 @@ struct BurnDriver BurnDrvCpsRockmanj = {
 	"rockmanj", "megaman", NULL, NULL, "1995",
 	"Rockman - the power battle (950922 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
 	NULL, RockmanjRomInfo, RockmanjRomName, NULL, NULL, MegamanInputInfo, RockmanjDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19076,7 +19086,7 @@ struct BurnDriver BurnDrvCpsMercs = {
 	"mercs", NULL, NULL, NULL, "1990",
 	"Mercs (900302 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL, 3, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, MercsRomInfo, MercsRomName, NULL, NULL, MercsInputInfo, MercsDIPInfo,
 	MercsInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -19086,7 +19096,7 @@ struct BurnDriver BurnDrvCpsMercsu = {
 	"mercsu", "mercs", NULL, NULL, "1990",
 	"Mercs (900608 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 3, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, MercsuRomInfo, MercsuRomName, NULL, NULL, MercsInputInfo, MercsDIPInfo,
 	MercsInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -19096,7 +19106,7 @@ struct BurnDriver BurnDrvCpsMercsur1 = {
 	"mercsur1", "mercs", NULL, NULL, "1990",
 	"Mercs (900302 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 3, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, Mercsur1RomInfo, Mercsur1RomName, NULL, NULL, MercsInputInfo, MercsDIPInfo,
 	MercsInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -19106,7 +19116,7 @@ struct BurnDriver BurnDrvCpsMercsj = {
 	"mercsj", "mercs", NULL, NULL, "1990",
 	"Senjo no Ookami II (Ookami 2 900302 Japan)\0", NULL, "Capcom", "CPS1",
 	L"\u6226\u5834\u306E\u72FC II\0Senjo no Ookami II (Ookami 2 900302 Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 3, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, MercsjRomInfo, MercsjRomName, NULL, NULL, MercsInputInfo, MercsDIPInfo,
 	MercsInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -19116,7 +19126,7 @@ struct BurnDriver BurnDrvCpsMsword = {
 	"msword", NULL, NULL, NULL, "1990",
 	"Magic Sword - heroic fantasy (25.07.1990 other country)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, MswordRomInfo, MswordRomName, NULL, NULL, MswordInputInfo, MswordDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19126,7 +19136,7 @@ struct BurnDriver BurnDrvCpsMswordr1 = {
 	"mswordr1", "msword", NULL, NULL, "1990",
 	"Magic Sword - heroic fantasy (23.06.1990 other country)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, Mswordr1RomInfo, Mswordr1RomName, NULL, NULL, MswordInputInfo, MswordDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19136,7 +19146,7 @@ struct BurnDriver BurnDrvCpsMswordj = {
 	"mswordj", "msword", NULL, NULL, "1990",
 	"Magic Sword (23.06.1990 Japan)\0", NULL, "Capcom", "CPS1",
 	L"Magic Sword (23.06.1990 Japan)\0Magic Sword\u30DE\u30B8\u30C3\u30AF\uFF65\u30BD\u30FC\u30C9\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, MswordjRomInfo, MswordjRomName, NULL, NULL, MswordInputInfo, MswordDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19146,7 +19156,7 @@ struct BurnDriver BurnDrvCpsMswordu = {
 	"mswordu", "msword", NULL, NULL, "1990",
 	"Magic Sword - heroic fantasy (25.07.1990 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, MsworduRomInfo, MsworduRomName, NULL, NULL, MswordInputInfo, MswordDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19156,7 +19166,7 @@ struct BurnDriver BurnDrvCpsMtwins = {
 	"mtwins", NULL, NULL, NULL, "1990",
 	"Mega Twins (chiki chiki boys 900619 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, MtwinsRomInfo, MtwinsRomName, NULL, NULL, MtwinsInputInfo, MtwinsDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19166,7 +19176,7 @@ struct BurnDriver BurnDrvCpsChikij = {
 	"chikij", "mtwins", NULL, NULL, "1990",
 	"Chiki Chiki Boys (900619 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, ChikijRomInfo, ChikijRomName, NULL, NULL, MtwinsInputInfo, MtwinsDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19176,7 +19186,7 @@ struct BurnDriver BurnDrvCpsNemo = {
 	"nemo", NULL, NULL, NULL, "1990",
 	"Nemo (90 11 30 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, NemoRomInfo, NemoRomName, NULL, NULL, NemoInputInfo, NemoDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19186,7 +19196,7 @@ struct BurnDriver BurnDrvCpsNemor1 = {
 	"nemor1", "nemo", NULL, NULL, "1990",
 	"Nemo (90 11 09 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, Nemor1RomInfo, Nemor1RomName, NULL, NULL, NemoInputInfo, NemoDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19196,7 +19206,7 @@ struct BurnDriver BurnDrvCpsNemoj = {
 	"nemoj", "nemo", NULL, NULL, "1990",
 	"Nemo (90 11 20 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2 ,HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, NemojRomInfo, NemojRomName, NULL, NULL, NemoInputInfo, NemoDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19206,7 +19216,7 @@ struct BurnDriver BurnDrvCpsPang3 = {
 	"pang3", NULL, NULL, NULL, "1995",
 	"Pang! 3 (950601 Euro)\0", NULL, "Mitchell", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_PUZZLE, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_PUZZLE, 0,
 	NULL, Pang3RomInfo, Pang3RomName, NULL, NULL, Pang3InputInfo, Pang3DIPInfo,
 	Pang3Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19216,7 +19226,7 @@ struct BurnDriver BurnDrvCpsPang3r1 = {
 	"pang3r1", "pang3", NULL, NULL, "1995",
 	"Pang! 3 (950511 Euro)\0", NULL, "Mitchell", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_PUZZLE, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_PUZZLE, 0,
 	NULL, Pang3r1RomInfo, Pang3r1RomName, NULL, NULL, Pang3InputInfo, Pang3DIPInfo,
 	Pang3Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19236,7 +19246,7 @@ struct BurnDriver BurnDrvCpsPang3b = {
 	"pang3b", "pang3", NULL, NULL, "1995",
 	"Pang! 3 (bootleg set 1, 950511 Euro)\0", NULL, "Mitchell", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_PUZZLE, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_PUZZLE, 0,
 	NULL, Pang3bRomInfo, Pang3bRomName, NULL, NULL, Pang3InputInfo, Pang3DIPInfo,
 	Pang3bInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19266,7 +19276,7 @@ struct BurnDriver BurnDrvCpsPang3j = {
 	"pang3j", "pang3", NULL, NULL, "1995",
 	"Pang! 3: Kaitou Tachi no Karei na Gogo (950511 Japan)\0", NULL, "Mitchell", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_PUZZLE, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_GENERIC, GBF_PUZZLE, 0,
 	NULL, Pang3jRomInfo, Pang3jRomName, NULL, NULL, Pang3InputInfo, Pang3DIPInfo,
 	Pang3Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19276,7 +19286,7 @@ struct BurnDriver BurnDrvCpsPnickj = {
 	"pnickj", NULL, NULL, NULL, "1994",
 	"Pnickies (940608 Japan)\0", NULL, "Compile (Capcom license)", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_PUZZLE, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PUZZLE, 0,
 	NULL, PnickjRomInfo, PnickjRomName, NULL, NULL, PnickjInputInfo, PnickjDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19296,7 +19306,7 @@ struct BurnDriver BurnDrvCpsPunisher = {
 	"punisher", NULL, NULL, NULL, "1993",
 	"The Punisher (930422 etc)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, PunisherRomInfo, PunisherRomName, NULL, NULL, PunisherInputInfo, PunisherDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19306,7 +19316,7 @@ struct BurnDriver BurnDrvCpsPunisheru = {
 	"punisheru", "punisher", NULL, NULL, "1993",
 	"The Punisher (930422 USA)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, PunisheruRomInfo, PunisheruRomName, NULL, NULL, PunisherInputInfo, PunisherDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19316,7 +19326,7 @@ struct BurnDriver BurnDrvCpsPunisherj = {
 	"punisherj", "punisher", NULL, NULL, "1993",
 	"The Punisher (930422 Japan)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, PunisherjRomInfo, PunisherjRomName, NULL, NULL, PunisherInputInfo, PunisherDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19326,7 +19336,7 @@ struct BurnDriver BurnDrvCpsPunisherh = {
 	"punisherh", "punisher", NULL, NULL, "1993",
 	"The Punisher (930422 Hispanic)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, PunisherhRomInfo, PunisherhRomName, NULL, NULL, PunisherInputInfo, PunisherDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19366,7 +19376,7 @@ struct BurnDriver BurnDrvCpsPunisherbz = {
 	"punisherbz", "punisher", NULL, NULL, "2002",
 	"Biaofeng Zhanjing (Chinese bootleg)\0", NULL, "bootleg", "CPS1",
 	L"\uFEFF\u98C6\u98A8\u6230\u8B66\0The Punisher: Biaofeng Zhanjing (Chinese bootleg)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, PunisherbzRomInfo, PunisherbzRomName, NULL, NULL, PunisherbzInputInfo, PunisherbzDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19386,7 +19396,7 @@ struct BurnDriver BurnDrvCpsQad = {
 	"qad", NULL, NULL, NULL, "1992",
 	"Quiz & Dragons (capcom quiz game 920701 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_QUIZ, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_QUIZ, 0,
 	NULL, QadRomInfo, QadRomName, NULL, NULL, QadInputInfo, QadDIPInfo,
 	QadInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19396,7 +19406,7 @@ struct BurnDriver BurnDrvCpsQadjr = {
 	"qadjr", "qad", NULL, NULL, "1992",
 	"Quiz & Dragons (940921 Japan Resale Ver.)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_QUIZ, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_QUIZ, 0,
 	NULL, QadjrRomInfo, QadjrRomName, NULL, NULL, QadInputInfo, QadjrDIPInfo,
 	QadInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19406,7 +19416,7 @@ struct BurnDriver BurnDrvCpsQtono2j = {
 	"qtono2j", NULL, NULL, NULL, "1995",
 	"Quiz Tonosama no Yabou 2 Zenkoku-ban (tonosama 2 950123 Japan)\0", NULL, "Capcom", "CPS1",
 	L"\u30AF\u30A4\u30BA\u6BBF\u69D8\u306E\u91CE\u671B\uFF12 (\u3068\u306E\u3055\u307E\u306E\u3084\u307C\u3046 2)\0Quiz Tonosama no Yabou 2 Zenkoku-ban (tonosama 2 950123 Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_QUIZ, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_QUIZ, 0,
 	NULL, Qtono2jRomInfo, Qtono2jRomName, NULL, NULL, Qtono2jInputInfo, Qtono2jDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19416,7 +19426,7 @@ struct BurnDriver BurnDrvCpsSf2 = {
 	"sf2", NULL, NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910522 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2RomInfo, Sf2RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19426,7 +19436,7 @@ struct BurnDriver BurnDrvCpsSf2eb = {
 	"sf2eb", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910214 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ebRomInfo, Sf2ebRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19436,7 +19446,7 @@ struct BurnDriver BurnDrvCpsSf2ed = {
 	"sf2ed", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910318 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2edRomInfo, Sf2edRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19446,7 +19456,7 @@ struct BurnDriver BurnDrvCpsSf2ee = {
 	"sf2ee", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910228 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2eeRomInfo, Sf2eeRomName, NULL, NULL, Sf2ueInputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19456,7 +19466,7 @@ struct BurnDriver BurnDrvCpsSf2em = {
 	"sf2em", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910129 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2emRomInfo, Sf2emRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19466,7 +19476,7 @@ struct BurnDriver BurnDrvCpsSf2ebbl = {
 	"sf2ebbl", "sf2", NULL, NULL, "1992",
 	"Street Fighter II - The World Warrior (TAB Austria bootleg, 910214 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ebblRomInfo, Sf2ebblRomName, NULL, NULL, Sf2yycInputInfo, Sf2DIPInfo,
 	Sf2ebblInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19476,7 +19486,7 @@ struct BurnDriver BurnDrvCpsSf2ebbl2 = {
 	"sf2ebbl2", "sf2", NULL, NULL, "1992",
 	"Street Fighter II - The World Warrior (TAB Austria bootleg set 2, 910214 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ebbl2RomInfo, Sf2ebbl2RomName, NULL, NULL, Sf2yycInputInfo, Sf2DIPInfo,
 	Sf2ebbl2Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19486,7 +19496,7 @@ struct BurnDriver BurnDrvCpsSf2ebbl3 = {
 	"sf2ebbl3", "sf2", NULL, NULL, "1992",
 	"Street Fighter II - The World Warrior (TAB Austria bootleg set 3, 910214 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ebbl3RomInfo, Sf2ebbl3RomName, NULL, NULL, Sf2yycInputInfo, Sf2DIPInfo,
 	Sf2ebbl3Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19496,7 +19506,7 @@ struct BurnDriver BurnDrvCpsSf2stt = {
 	"sf2stt", "sf2", NULL, NULL, "1992",
 	"Street Fighter II - The World Warrior (STT, TAB Austria bootleg, 910214 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2sttRomInfo, Sf2sttRomName, NULL, NULL, Sf2yycInputInfo, Sf2DIPInfo,
 	Sf2sttInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19506,7 +19516,7 @@ struct BurnDriver BurnDrvCpsSf2ua = {
 	"sf2ua", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910206 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2uaRomInfo, Sf2uaRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19516,7 +19526,7 @@ struct BurnDriver BurnDrvCpsSf2ub = {
 	"sf2ub", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910214 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ubRomInfo, Sf2ubRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19526,7 +19536,7 @@ struct BurnDriver BurnDrvCpsSf2uc = {
 	"sf2uc", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910306 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ucRomInfo, Sf2ucRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19536,7 +19546,7 @@ struct BurnDriver BurnDrvCpsSf2ud = {
 	"sf2ud", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910318 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2udRomInfo, Sf2udRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19546,7 +19556,7 @@ struct BurnDriver BurnDrvCpsSf2ue = {
 	"sf2ue", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910228 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ueRomInfo, Sf2ueRomName, NULL, NULL, Sf2ueInputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19556,7 +19566,7 @@ struct BurnDriver BurnDrvCpsSf2uf = {
 	"sf2uf", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910411 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ufRomInfo, Sf2ufRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19566,7 +19576,7 @@ struct BurnDriver BurnDrvCpsSf2ug = {
 	"sf2ug", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910522 USA, rev G)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ugRomInfo, Sf2ugRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19576,7 +19586,7 @@ struct BurnDriver BurnDrvCpsSf2ui = {
 	"sf2ui", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910522 USA, rev I)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2uiRomInfo, Sf2uiRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19586,7 +19596,7 @@ struct BurnDriver BurnDrvCpsSf2uk = {
 	"sf2uk", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (911101 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ukRomInfo, Sf2ukRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19596,7 +19606,7 @@ struct BurnDriver BurnDrvCpsSf2j = {
 	"sf2j", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (911210 Japan, CPS-B-13)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2jRomInfo, Sf2jRomName, NULL, NULL, Sf2InputInfo, Sf2jDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19606,7 +19616,7 @@ struct BurnDriver BurnDrvCpsSf2j17 = {
 	"sf2j17", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (911210 Japan, CPS-B-17)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2j17RomInfo, Sf2j17RomName, NULL, NULL, Sf2InputInfo, Sf2jDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19616,7 +19626,7 @@ struct BurnDriver BurnDrvCpsSf2ja = {
 	"sf2ja", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910214 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2jaRomInfo, Sf2jaRomName, NULL, NULL, Sf2InputInfo, Sf2jDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19626,7 +19636,7 @@ struct BurnDriver BurnDrvCpsSf2jc = {
 	"sf2jc", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910306 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2jcRomInfo, Sf2jcRomName, NULL, NULL, Sf2InputInfo, Sf2jDIPInfo,
 	Sf2jcInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19636,7 +19646,7 @@ struct BurnDriver BurnDrvCpsSf2jf = {
 	"sf2jf", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910411 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2jfRomInfo, Sf2jfRomName, NULL, NULL, Sf2InputInfo, Sf2jDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19646,7 +19656,7 @@ struct BurnDriver BurnDrvCpsSf2jh = {
 	"sf2jh", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (910522 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2jhRomInfo, Sf2jhRomName, NULL, NULL, Sf2InputInfo, Sf2jDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19656,7 +19666,7 @@ struct BurnDriver BurnDrvCpsSf2jl = {
 	"sf2jl", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (920312 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2jlRomInfo, Sf2jlRomName, NULL, NULL, Sf2InputInfo, Sf2jDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19676,7 +19686,7 @@ struct BurnDriver BurnDrvCpsSf2qp1 = {
 	"sf2qp1", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (Quicken Pt-I bootleg, 910214 USA)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2qp1RomInfo, Sf2qp1RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2qp1Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19686,7 +19696,7 @@ struct BurnDriver BurnDrvCpsSf2qp2 = {
 	"sf2qp2", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (Quicken bootleg, 910522 USA)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2qp2RomInfo, Sf2qp2RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2qp1Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19696,7 +19706,7 @@ struct BurnDriver BurnDrvCpsSf2thndr = {
 	"sf2thndr", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (Thunder Edition bootleg, 910214 etc, set 1)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2thndrRomInfo, Sf2thndrRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2thndrInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19706,7 +19716,7 @@ struct BurnDriver BurnDrvCpsSf2thndr2 = {
 	"sf2thndr2", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (Thunder Edition bootleg, 910214 etc, set 2)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2thndr2RomInfo, Sf2thndr2RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2thndrInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19716,7 +19726,7 @@ struct BurnDriver BurnDrvCpsSf2b = {
 	"sf2b", "sf2", NULL, NULL, "1992",
 	"Street Fighter II - The World Warrior (bootleg, 910214 etc, set 1  (with YM2151 + 2xMSM5205))\0", "row scroll issues", "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2bRomInfo, Sf2bRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2bInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19726,7 +19736,7 @@ struct BurnDriver BurnDrvCpsSf2b2 = {
 	"sf2b2", "sf2", NULL, NULL, "1992",
 	"Street Fighter II - The World Warrior (bootleg, 910214 etc, set 2)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2b2RomInfo, Sf2b2RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2mdtbInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19756,7 +19766,7 @@ struct BurnDriver BurnDrvCpsSf2rules = {
 	"sf2rules", "sf2", NULL, NULL, "1991",
 	"Street Fighter II - The World Warrior (bootleg with rules screen, 910214 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2rulesRomInfo, Sf2rulesRomName, NULL, NULL, Sf2yycInputInfo, Sf2DIPInfo,
 	Sf2rulesInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19766,7 +19776,7 @@ struct BurnDriver BurnDrvCpsSf2ce = {
 	"sf2ce", NULL, NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920513 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ceRomInfo, Sf2ceRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19776,7 +19786,7 @@ struct BurnDriver BurnDrvCpsSf2ceea = {
 	"sf2ceea", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920313 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ceeaRomInfo, Sf2ceeaRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19786,7 +19796,7 @@ struct BurnDriver BurnDrvCpsSf2ceja = {
 	"sf2ceja", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920322 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2cejaRomInfo, Sf2cejaRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19796,7 +19806,7 @@ struct BurnDriver BurnDrvCpsSf2cejb = {
 	"sf2cejb", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920513 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2cejbRomInfo, Sf2cejbRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19806,7 +19816,7 @@ struct BurnDriver BurnDrvCpsSf2cejc = {
 	"sf2cejc", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920803 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2cejcRomInfo, Sf2cejcRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19816,7 +19826,7 @@ struct BurnDriver BurnDrvCpsSf2ceua = {
 	"sf2ceua", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920313 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ceuaRomInfo, Sf2ceuaRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19826,7 +19836,7 @@ struct BurnDriver BurnDrvCpsSf2ceub = {
 	"sf2ceub", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920513 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ceubRomInfo, Sf2ceubRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19836,7 +19846,7 @@ struct BurnDriver BurnDrvCpsSf2ceuc = {
 	"sf2ceuc", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920803 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ceucRomInfo, Sf2ceucRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19846,7 +19856,7 @@ struct BurnDriver BurnDrvCpsSf2cet = {
 	"sf2cet", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (street fighter 2' 920313 Taiwan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2cetRomInfo, Sf2cetRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19856,7 +19866,7 @@ struct BurnDriver BurnDrvCpsSf2acc = {
 	"sf2acc", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Accelerator! bootleg set 1, 920313 USA)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2accRomInfo, Sf2accRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19866,7 +19876,7 @@ struct BurnDriver BurnDrvCpsSf2acca = {
 	"sf2acca", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Accelerator! bootleg set 2, 920310 Accelerator!)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2accaRomInfo, Sf2accaRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19876,7 +19886,7 @@ struct BurnDriver BurnDrvCpsSf2accp2 = {
 	"sf2accp2", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Accelerator Pt.II bootleg, 920313 Testron)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2accp2RomInfo, Sf2accp2RomName, NULL, NULL, Sf2InputInfo, Sf2accp2DIPInfo,
 	Sf2accp2Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19886,7 +19896,7 @@ struct BurnDriver BurnDrvCpsSf2dkot2 = {
 	"sf2dkot2", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Double K.O. Turbo II bootleg, 902140 USA)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2dkot2RomInfo, Sf2dkot2RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2dkot2Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19896,7 +19906,7 @@ struct BurnDriver BurnDrvCpsSf2rb = {
 	"sf2rb", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Rainbow bootleg set 1, 920322 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2rbRomInfo, Sf2rbRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2rbInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19906,7 +19916,7 @@ struct BurnDriver BurnDrvCpsSf2rb2 = {
 	"sf2rb2", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Rainbow bootleg set 2, 920322 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2rb2RomInfo, Sf2rb2RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2rb2Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19916,7 +19926,7 @@ struct BurnDriver BurnDrvCpsSf2rb3 = {
 	"sf2rb3", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Rainbow bootleg set 3, 920322 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2rb3RomInfo, Sf2rb3RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19956,7 +19966,7 @@ struct BurnDriver BurnDrvCpsSf2red = {
 	"sf2red", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Red Wave bootleg set 1, 920313 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2redRomInfo, Sf2redRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19976,7 +19986,7 @@ struct BurnDriver BurnDrvCpsSf2v004 = {
 	"sf2v004", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (V004 bootleg set 1, 102092 USA)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2v004RomInfo, Sf2v004RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -19996,7 +20006,7 @@ struct BurnDriver BurnDrvCpsSf2v0043 = {
 	"sf2v0043", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (V004 bootleg set 3, 920313 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2v0043RomInfo, Sf2v0043RomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20006,7 +20016,7 @@ struct BurnDriver BurnDrvCpsSf2dongb = {
 	"sf2dongb", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II': Champion Edition (Dongfang Bubai protection bootleg, etc 920313)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2dongbRomInfo, Sf2dongbRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2dongbInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20016,7 +20026,7 @@ struct BurnDriver BurnDrvCpsSf2bhh = {
 	"sf2bhh", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Hungh-Hsi bootleg, 920313 Taiwan)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2bhhRomInfo, Sf2bhhRomName, NULL, NULL, Sf2InputInfo, Sf2bhhDIPInfo,
 	Sf2bhhInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20026,7 +20036,7 @@ struct BurnDriver BurnDrvCpsSf2hf = {
 	"sf2hf", NULL, NULL, NULL, "1992",
 	"Street Fighter II' - Hyper Fighting (street fighter 2' T 921209 ETC)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2hfRomInfo, Sf2hfRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20036,7 +20046,7 @@ struct BurnDriver BurnDrvCpsSf2hfu = {
 	"sf2hfu", "sf2hf", NULL, NULL, "1992",
 	"Street Fighter II' - Hyper Fighting (street fighter 2' T 921209 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2hfuRomInfo, Sf2hfuRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20046,7 +20056,7 @@ struct BurnDriver BurnDrvCpsSf2hfj = {
 	"sf2hfj", "sf2hf", NULL, NULL, "1992",
 	"Street Fighter II' Turbo - Hyper Fighting (street fighter 2' T 921209 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2hfjRomInfo, Sf2hfjRomName, NULL, NULL, Sf2InputInfo, Sf2jDIPInfo,
 	Sf2ceInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20086,7 +20096,7 @@ struct BurnDriver BurnDrvCpsSf2yyc = {
 	"sf2yyc", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (YYC bootleg set 1, 920313 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2yycRomInfo, Sf2yycRomName, NULL, NULL, Sf2yycInputInfo, Sf2DIPInfo,
 	Sf2yycInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20106,7 +20116,7 @@ struct BurnDriver BurnDrvCpsSf2koryu = {
 	"sf2koryu", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Xiang Long (bootleg set 1, 811102 001)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2koryuRomInfo, Sf2koryuRomName, NULL, NULL, Sf2yycInputInfo, Sf2DIPInfo,
 	Sf2koryuInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20126,7 +20136,7 @@ struct BurnDriver BurnDrvCpsSf2koryu3 = {
 	"sf2koryu3", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Xiang Long (bootleg set 3, 811102 001)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG,2,HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2koryu3RomInfo, Sf2koryu3RomName, NULL, NULL, Sf2yycInputInfo, Sf2DIPInfo,
 	Sf2koryu2Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20136,7 +20146,7 @@ struct BurnDriver BurnDrvCpsSf2amf = {
 	"sf2amf", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II - Champion Edition (Alpha Magic-F bootleg set 1, 920313 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2amfRomInfo, Sf2amfRomName, NULL, NULL, Sf2yycInputInfo, Sf2amfDIPInfo,
 	Sf2amfInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20146,7 +20156,7 @@ struct BurnDriver BurnDrvCpsSf2amf2 = {
 	"sf2amf2", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II - Champion Edition (Alpha Magic-F bootleg set 2, 920313 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2amf2RomInfo, Sf2amf2RomName, NULL, NULL, Sf2yycInputInfo, Sf2amfDIPInfo,
 	Sf2amf2Init, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20246,7 +20256,7 @@ struct BurnDriver BurnDrvCpsSf2mdt = {
 	"sf2mdt", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Magic Delta Turbo (bootleg set 1 (with YM2151 + 2xMSM5205), 920313 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2mdtRomInfo, Sf2mdtRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2mdtInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20256,7 +20266,7 @@ struct BurnDriver BurnDrvCpsSf2mdta = {
 	"sf2mdta", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Magic Delta Turbo (bootleg set 2 (with YM2151 + 2xMSM5205), 920313 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2mdtaRomInfo, Sf2mdtaRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2mdtaInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20266,7 +20276,7 @@ struct BurnDriver BurnDrvCpsSf2mdtb = {
 	"sf2mdtb", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Magic Delta Turbo (bootleg set 3 (with YM2151 + 2xMSM5205), 920313 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2mdtbRomInfo, Sf2mdtbRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2mdtbInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20286,7 +20296,7 @@ struct BurnDriver BurnDrvCpsSf2ceb = {
 	"sf2ceb", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II': Champion Edition (Playmark bootleg)\0", NULL, "bootleg (Playmark)", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2cebRomInfo, Sf2cebRomName, NULL, NULL, Sf2InputInfo, Sf2DIPInfo,
 	Sf2mdtaInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20366,7 +20376,7 @@ struct BurnDriver BurnDrvCpsSf2ceupl = {
 	"sf2ceupl", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (UPL bootleg)\0", NULL, "bootleg (UPL)", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
 	NULL, Sf2ceuplRomInfo, Sf2ceuplRomName, NULL, NULL, Sf2yycInputInfo, Sf2jDIPInfo,
 	Sf2cejablInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20472,6 +20482,16 @@ struct BurnDriver BurnDrvCpsSf2ceucbl = {
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
 };
 
+struct BurnDriver BurnDrvCpsSf2level = {
+	"sf2level", "sf2ce", NULL, NULL, "1992",
+	"Street Fighter II' - Champion Edition (Level Select bootleg, 920322  USA)\0", NULL, "bootleg", "CPS1",
+	NULL, NULL, NULL, NULL,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
+	NULL, Sf2levelRomInfo, Sf2levelRomName, NULL, NULL, Sf2ceuablInputInfo, Sf2levelDIPInfo,
+	Sf2ceuablInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
+	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
+};
+
 struct BurnDriver BurnDrvCpsSf2tlona = {
 	"sf2tlona", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Tu Long bootleg set 1, 811102 001)\0", NULL, "bootleg", "CPS1",
@@ -20536,7 +20556,7 @@ struct BurnDriver BurnDrvCpsSlammast = {
 	"slammast", NULL, NULL, NULL, "1993",
 	"Saturday Night Slam Masters (Slam Masters 930713 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
 	NULL, SlammastRomInfo, SlammastRomName, NULL, NULL, SlammastInputInfo, SlammastDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20546,7 +20566,7 @@ struct BurnDriver BurnDrvCpsSlammastu = {
 	"slammastu", "slammast", NULL, NULL, "1993",
 	"Saturday Night Slam Masters (slam masters 930713 USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
 	NULL, SlammastuRomInfo, SlammastuRomName, NULL, NULL, SlammastInputInfo, SlammastDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20556,7 +20576,7 @@ struct BurnDriver BurnDrvCpsMbomberj = {
 	"mbomberj", "slammast", NULL, NULL, "1993",
 	"Muscle Bomber - the body explosion (930713 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
 	NULL, MbomberjRomInfo, MbomberjRomName, NULL, NULL, SlammastInputInfo, SlammastDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20566,7 +20586,7 @@ struct BurnDriver BurnDrvCpsMbombrd = {
 	"mbombrd", NULL, NULL, NULL, "1993",
 	"Muscle Bomber Duo - ultimate team battle (931206 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
 	NULL, MbombrdRomInfo, MbombrdRomName, NULL, NULL, SlammastInputInfo, SlammastDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20576,7 +20596,7 @@ struct BurnDriver BurnDrvCpsMbombrdj = {
 	"mbombrdj", "mbombrd", NULL, NULL, "1993",
 	"Muscle Bomber Duo - heat up warriors (931206 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 4, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, 0,
 	NULL, MbombrdjRomInfo, MbombrdjRomName, NULL, NULL, SlammastInputInfo, SlammastDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20596,7 +20616,7 @@ struct BurnDriver BurnDrvCpsStrider = {
 	"strider", NULL, NULL, NULL, "1989",
 	"Strider (US set 1)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, StriderRomInfo, StriderRomName, NULL, NULL, StriderInputInfo, StriderDIPInfo,
 	StriderInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20606,7 +20626,7 @@ struct BurnDriver BurnDrvCpsStriderua = {
 	"striderua", "strider", NULL, NULL, "1989",
 	"Strider (US set 2)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE,2,HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, StrideruaRomInfo, StrideruaRomName, NULL, NULL, StriderInputInfo, StrideruaDIPInfo,
 	StriderInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20616,7 +20636,7 @@ struct BurnDriver BurnDrvCpsStrideruc = {
 	"strideruc", "strider", NULL, NULL, "1989",
 	"Strider (US, Street Fighter II conversion)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE,2,HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, StriderucRomInfo, StriderucRomName, NULL, NULL, StriderInputInfo, StrideruaDIPInfo,
 	StriderInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20636,7 +20656,7 @@ struct BurnDriver BurnDrvCpsStriderj = {
 	"striderj", "strider", NULL, NULL, "1989",
 	"Strider Hiryu (Japan)\0", NULL, "Capcom", "CPS1",
 	L"\u30B9\u30C8\u30E9\u30A4\u30C0\u30FC\u98DB\u7ADC\0Strider Hiryu (Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, StriderjRomInfo, StriderjRomName, NULL, NULL, StriderInputInfo, StriderDIPInfo,
 	StriderjInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20646,7 +20666,7 @@ struct BurnDriver BurnDrvCpsUnsquad = {
 	"unsquad", NULL, NULL, NULL, "1989",
 	"U.N. Squadron (US)\0", NULL, "Daipro / Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, UnsquadRomInfo, UnsquadRomName, NULL, NULL, UnsquadInputInfo, UnsquadDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20656,7 +20676,7 @@ struct BurnDriver BurnDrvCpsArea88 = {
 	"area88", "unsquad", NULL, NULL, "1989",
 	"Area 88 (Japan)\0", NULL, "Daipro / Capcom", "CPS1",
 	L"\u30A8\u30EA\u30A2\uFF18\uFF18\0Area 88 (Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, Area88RomInfo, Area88RomName, NULL, NULL, UnsquadInputInfo, UnsquadDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20666,7 +20686,7 @@ struct BurnDriver BurnDrvCpsArea88r = {
 	"area88r", "unsquad", NULL, NULL, "1989",
 	"Area 88 (Japan Resale ver.)\0", NULL, "Daipro / Capcom", "CPS1",
 	L"\u30A8\u30EA\u30A2\uFF18\uFF18\0Area 88 (Japan Resale ver.)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_HORSHOOT, 0,
 	NULL, Area88rRomInfo, Area88rRomName, NULL, NULL, UnsquadInputInfo, UnsquadDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20676,7 +20696,7 @@ struct BurnDriver BurnDrvCpsVarth = {
 	"varth", NULL, NULL, NULL, "1992",
 	"Varth - operation thunderstorm (920714 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, VarthRomInfo, VarthRomName, NULL, NULL, VarthInputInfo, VarthDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -20686,7 +20706,7 @@ struct BurnDriver BurnDrvCpsVarthr1 = {
 	"varthr1", "varth", NULL, NULL, "1992",
 	"Varth - operation thunderstorm (920612 etc)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, Varthr1RomInfo, Varthr1RomName, NULL, NULL, VarthInputInfo, VarthDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -20696,7 +20716,7 @@ struct BurnDriver BurnDrvCpsVarthj = {
 	"varthj", "varth", NULL, NULL, "1992",
 	"Varth - operation thunderstorm (920714 Japan)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 2 ,HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, VarthjRomInfo, VarthjRomName, NULL, NULL, VarthInputInfo, VarthDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -20706,7 +20726,7 @@ struct BurnDriver BurnDrvCpsVarthjr = {
 	"varthjr", "varth", NULL, NULL, "1992",
 	"Varth - operation thunderstorm (920714 Japan Resale Ver.)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 2 ,HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, VarthjrRomInfo, VarthjrRomName, NULL, NULL, VarthInputInfo, VarthDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -20716,7 +20736,7 @@ struct BurnDriver BurnDrvCpsVarthu = {
 	"varthu", "varth", NULL, NULL, "1992",
 	"Varth - operation thunderstorm (920612 USA)\0", NULL, "Capcom (Romstar license)", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, VarthuRomInfo, VarthuRomName, NULL, NULL, VarthInputInfo, VarthDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -20726,7 +20746,7 @@ struct BurnDriver BurnDrvCpsVarthb = {
 	"varthb", "varth", NULL, NULL, "1992",
 	"Varth - operation thunderstorm (bootleg, 920612 etc)\0", NULL, "bootleg", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_ORIENTATION_VERTICAL | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_VERSHOOT, 0,
 	NULL, VarthbRomInfo, VarthbRomName, NULL, NULL, VarthInputInfo, VarthDIPInfo,
 	VarthbInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 224, 384, 3, 4
@@ -20736,7 +20756,7 @@ struct BurnDriver BurnDrvCpsWillow = {
 	"willow", NULL, NULL, NULL, "1989",
 	"Willow (World)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, WillowRomInfo, WillowRomName, NULL, NULL, WillowInputInfo, WillowDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20746,7 +20766,7 @@ struct BurnDriver BurnDrvCpsWillowu = {
 	"willowu", "willow", NULL, NULL, "1989",
 	"Willow (USA)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, WillowuRomInfo, WillowuRomName, NULL, NULL, WillowInputInfo, WillowDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20756,7 +20776,7 @@ struct BurnDriver BurnDrvCpsWillowuo = {
 	"willowuo", "willow", NULL, NULL, "1989",
 	"Willow (USA Old Ver.)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, WillowuoRomInfo, WillowuoRomName, NULL, NULL, WillowInputInfo, WillowDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20766,7 +20786,7 @@ struct BurnDriver BurnDrvCpsWillowj = {
 	"willowj", "willow", NULL, NULL, "1989",
 	"Willow (Japan, Japanese)\0", NULL, "Capcom", "CPS1",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 2, HARDWARE_CAPCOM_CPS1, GBF_PLATFORM, 0,
 	NULL, WillowjRomInfo, WillowjRomName, NULL, NULL, WillowInputInfo, WillowDIPInfo,
 	DrvInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20776,7 +20796,7 @@ struct BurnDriver BurnDrvCpsWof = {
 	"wof", NULL, NULL, NULL, "1992",
 	"Warriors of Fate (921031 etc)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, WofRomInfo, WofRomName, NULL, NULL, WofInputInfo, WofDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20786,7 +20806,7 @@ struct BurnDriver BurnDrvCpsWofr1 = {
 	"wofr1", "wof", NULL, NULL, "1992",
 	"Warriors of Fate (921002 etc)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, Wofr1RomInfo, Wofr1RomName, NULL, NULL, WofInputInfo, WofDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20796,7 +20816,7 @@ struct BurnDriver BurnDrvCpsWofu = {
 	"wofu", "wof", NULL, NULL, "1992",
 	"Warriors of Fate (921031 USA)\0", NULL, "Capcom", "CPS1 / QSound",
 	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, WofuRomInfo, WofuRomName, NULL, NULL, WofInputInfo, WofDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20806,7 +20826,7 @@ struct BurnDriver BurnDrvCpsWofj = {
 	"wofj", "wof", NULL, NULL, "1992",
 	"Tenchi wo Kurau II - Sekiheki no Tatakai (921031 Japan)\0", NULL, "Capcom", "CPS1 / QSound",
 	L"\u5929\u5730\u3092\u55B0\u3089\u3046 II - \u8D64\u58C1\u306E\u6226\u3044\0Tenchi wo Kurau II - Sekiheki no Tatakai (921031 Japan)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, WofjRomInfo, WofjRomName, NULL, NULL, WofInputInfo, WofDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20816,7 +20836,7 @@ struct BurnDriver BurnDrvCpsWofa = {
 	"wofa", "wof", NULL, NULL, "1992",
 	"Sangokushi II (921005 Asia)\0", NULL, "Capcom", "CPS1 / QSound",
 	L"\u4E09\u56FD\u5FD7 II\0Sangokushi II (921005 Asia)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1_QSOUND, GBF_SCRFIGHT, 0,
 	NULL, WofaRomInfo, WofaRomName, NULL, NULL, WofInputInfo, WofDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
@@ -20846,7 +20866,7 @@ struct BurnDriver BurnDrvCpsWofhfh = {
 	"wofhfh", "wof", NULL, NULL, "1992",
 	"Sangokushi II: Huo Fenghuang (Chinese bootleg, 921005 Asia)\0", NULL, "bootleg", "CPS1",
 	L"\u4E09\u56FD\u5FD7 II: \u706B\u9CF3\u51F0\0Sangokushi II: Huo Feng Huang (Chinese bootleg, 921005 Asia)\0", NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
+	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG | BDF_HISCORE_SUPPORTED, 3, HARDWARE_CAPCOM_CPS1, GBF_SCRFIGHT, 0,
 	NULL, WofhfhRomInfo, WofhfhRomName, NULL, NULL, WofhfhInputInfo, WofhfhDIPInfo,
 	TwelveMhzInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
