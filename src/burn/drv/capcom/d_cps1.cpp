@@ -20482,16 +20482,6 @@ struct BurnDriver BurnDrvCpsSf2ceucbl = {
 	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
 };
 
-struct BurnDriver BurnDrvCpsSf2level = {
-	"sf2level", "sf2ce", NULL, NULL, "1992",
-	"Street Fighter II' - Champion Edition (Level Select bootleg, 920322  USA)\0", NULL, "bootleg", "CPS1",
-	NULL, NULL, NULL, NULL,
-	BDF_GAME_WORKING | BDF_CLONE | BDF_BOOTLEG, 2, HARDWARE_CAPCOM_CPS1, GBF_VSFIGHT, FBF_SF,
-	NULL, Sf2levelRomInfo, Sf2levelRomName, NULL, NULL, Sf2ceuablInputInfo, Sf2levelDIPInfo,
-	Sf2ceuablInit, DrvExit, Cps1Frame, CpsRedraw, CpsAreaScan,
-	&CpsRecalcPal, 0x1000, 384, 224, 4, 3
-};
-
 struct BurnDriver BurnDrvCpsSf2tlona = {
 	"sf2tlona", "sf2ce", NULL, NULL, "1992",
 	"Street Fighter II' - Champion Edition (Tu Long bootleg set 1, 811102 001)\0", NULL, "bootleg", "CPS1",
